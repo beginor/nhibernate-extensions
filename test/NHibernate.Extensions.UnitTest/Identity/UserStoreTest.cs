@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 using Xunit;
 using Microsoft.Extensions.Logging;
 using NHibernate.Cfg;
-using NHibernate.AspNetCore.Identity;
+using NHibernate.Extensions.AspNetCore.Identity;
 using NHibernate.Extensions.NetCore;
 using NHibernate.Linq;
 
-namespace NHibernate.Extensions.UnitTest {
+namespace NHibernate.Extensions.UnitTest.Identity {
 
     public class UserStoreTest : IDisposable {
 

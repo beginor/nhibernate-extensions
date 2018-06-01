@@ -5,10 +5,10 @@ using Xunit;
 using Microsoft.Extensions.Logging;
 using NHibernate;
 using NHibernate.Cfg;
-using NHibernate.AspNetCore.Identity;
+using NHibernate.Extensions.AspNetCore.Identity;
 using NHibernate.Extensions.NetCore;
 
-namespace UnitTest {
+namespace NHibernate.Extensions.UnitTest.Identity {
 
     public class ConfigTest : IDisposable {
 
@@ -21,7 +21,7 @@ namespace UnitTest {
                 includeScopes: false
             );
             loggerFactory.UseAsNHibernateLoggerFactory();
-            // 
+            //
             var cfg = new Configuration();
             var file = Path.Combine(
                 AppDomain.CurrentDomain.BaseDirectory,

@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 using Xunit;
 using Microsoft.Extensions.Logging;
 using NHibernate.Cfg;
-using NHibernate.AspNetCore.Identity;
+using NHibernate.Extensions.AspNetCore.Identity;
 using NHibernate.Extensions.NetCore;
 using NHibernate.Linq;
 using System.Threading;
 
-namespace UnitTest {
+namespace NHibernate.Extensions.UnitTest.Identity {
 
     public class RoleStoreTest : IDisposable {
 
@@ -68,19 +68,19 @@ namespace UnitTest {
             Assert.Equal(normalizedName, role.NormalizedName);
 
             var claim = new Claim("test", "test");
-            
+
             await store.AddClaimAsync(role, claim, CancellationToken.None);
-            
+
             var roleClaims = await store.GetClaimsAsync(role, CancellationToken.None);
             Assert.NotNull(roleClaims);
             Assert.True(roleClaims.Count > 0);
 
             await store.RemoveClaimAsync(role, claim, CancellationToken.None);
-            
+
             roleClaims = await store.GetClaimsAsync(role, CancellationToken.None);
             Assert.NotNull(roleClaims);
             Assert.True(roleClaims.Count == 0);
-            
+
             result = await store.DeleteAsync(role, CancellationToken.None);
             Assert.True(result.Succeeded);
         }
