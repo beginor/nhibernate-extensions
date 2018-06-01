@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<hibernate-mapping
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns="urn:nhibernate-mapping-2.2"
+    namespace="NHibernate.Extensions.UnitTest.NpgSql.Data"
+    assembly="NHibernate.Extensions.UnitTest.NpgSql"
+    >
+
+    <typedef name="json" class="NHibernate.Extensions.NpgSql.JsonType, NHibernate.Extensions.NpgSql" />
+    <typedef name="jsonb" class="NHibernate.Extensions.NpgSql.JsonbType, NHibernate.Extensions.NpgSql" />
+    <typedef name="stringArray" class="NHibernate.Extensions.NpgSql.StringArrayType, NHibernate.Extensions.NpgSql" />
+    <typedef name="int16Array" class="NHibernate.Extensions.NpgSql.Int16ArrayType, NHibernate.Extensions.NpgSql" />
+    <typedef name="int32Array" class="NHibernate.Extensions.NpgSql.Int32ArrayType, NHibernate.Extensions.NpgSql" />
+    <typedef name="int64Array" class="NHibernate.Extensions.NpgSql.Int64ArrayType, NHibernate.Extensions.NpgSql" />
+    <typedef name="floatArray" class="NHibernate.Extensions.NpgSql.FloatArrayType, NHibernate.Extensions.NpgSql" />
+    <typedef name="doubleArray" class="NHibernate.Extensions.NpgSql.DoubleArrayType, NHibernate.Extensions.NpgSql" />
+    <typedef name="booleanArray" class="NHibernate.Extensions.NpgSql.BooleanArrayType, NHibernate.Extensions.NpgSql" />
+
+    <class name="TestEntity" table="test_table" schema="public">
+        <id name="Id" column="id" type="int">
+            <generator class="sequence">
+                <param name="sequence">public.test_table_id_seq</param>
+            </generator>
+        </id>
+        <property name="Name" column="name" type="string" length="32" />
+        <property name="Tags" column="tags" type="stringArray" length="32" />
+        <property name="JsonField" column="json_field" type="json" />
+        <property name="JsonbField" column="jsonb_field" type="jsonb" />
+        <property name="UpdateTime" column="update_time" type="datetime" />
+        <property name="Int16Arr" column="int16_arr" type="int16Array" />
+        <property name="Int32Arr" column="int32_arr" type="int32Array" />
+        <property name="Int64Arr" column="int64_arr" type="int64Array" />
+        <property name="FloatArr" column="real_arr" type="floatArray" />
+        <property name="DoubleArr" column="double_arr" type="doubleArray" />
+        <property name="BooleanArr" column="bool_arr" type="booleanArray" />
+    </class>
+
+</hibernate-mapping>
