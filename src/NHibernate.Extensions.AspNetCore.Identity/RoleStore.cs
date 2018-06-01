@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using NHibernate.Linq;
 
-namespace NHibernate.AspNetCore.Identity {
+namespace NHibernate.Extensions.AspNetCore.Identity {
     
     public class RoleStore
         : IQueryableRoleStore<IdentityRole>, IRoleClaimStore<IdentityRole> {

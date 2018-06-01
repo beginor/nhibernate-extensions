@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Identity;
 
-namespace NHibernate.AspNetCore.Identity {
+namespace NHibernate.Extensions.AspNetCore.Identity {
 
     public class IdentityUser : IdentityUser<string> {
 
@@ -32,7 +32,7 @@ namespace NHibernate.AspNetCore.Identity {
     public class IdentityUserClaim : IdentityUserClaim<string> { }
 
     public class IdentityUserRole : IdentityUserRole<string> {
-        
+
         protected bool Equals(IdentityUserRole other) {
             return RoleId == other.RoleId
                 && UserId == other.UserId;
@@ -92,7 +92,7 @@ namespace NHibernate.AspNetCore.Identity {
         }
 
     }
-    
+
     public class IdentityUserToken : IdentityUserToken<string> {
 
         protected bool Equals(IdentityUserToken other) {
@@ -124,7 +124,7 @@ namespace NHibernate.AspNetCore.Identity {
             }
         }
     }
-    
+
     public class IdentityRoleClaim : IdentityRoleClaim<string> { }
 
 }
