@@ -26,5 +26,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\NHibernate.Extensions.AspNetCore.Identity\NHibernate.Extensions.AspNetCore.Identity.csproj" />
     <ProjectReference Include="..\..\src\NHibernate.Extensions.NetCore\NHibernate.Extensions.NetCore.csproj" />
+    <ProjectReference Include="..\..\src\NHibernate.Extensions.NpgSql\NHibernate.Extensions.NpgSql.csproj" />
   </ItemGroup>
 </Project>

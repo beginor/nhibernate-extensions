@@ -4,7 +4,7 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns="urn:nhibernate-mapping-2.2"
     namespace="NHibernate.Extensions.UnitTest.NpgSql.Data"
-    assembly="NHibernate.Extensions.UnitTest.NpgSql"
+    assembly="NHibernate.Extensions.UnitTest"
     >
 
     <typedef name="json" class="NHibernate.Extensions.NpgSql.JsonType, NHibernate.Extensions.NpgSql" />

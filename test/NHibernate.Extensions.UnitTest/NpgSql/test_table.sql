@@ -4,7 +4,7 @@
 
 CREATE TABLE public.test_table
 (
-    id integer NOT NULL DEFAULT nextval('test_table_id_seq'::regclass),
+    id serial NOT NULL,
     name character varying(32) COLLATE pg_catalog."default" NOT NULL,
     tags character varying(32)[] COLLATE pg_catalog."default",
     json_field json,

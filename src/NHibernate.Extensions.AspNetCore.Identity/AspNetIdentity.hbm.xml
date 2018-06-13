@@ -2,7 +2,9 @@
 <hibernate-mapping
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    xmlns="urn:nhibernate-mapping-2.2">
+    xmlns="urn:nhibernate-mapping-2.2"
+    namespace="NHibernate.Extensions.AspNetCore.Identity"
+    assembly="NHibernate.Extensions.AspNetCore.Identity">
 
     <class name="NHibernate.Extensions.AspNetCore.Identity.IdentityRole,NHibernate.Extensions.AspNetCore.Identity" schema="public" table="aspnet_roles">
         <id name="Id" column="id" type="String" length="32">
@@ -70,7 +72,7 @@
             <key-property name="RoleId" column="role_id" type="string" length="32" />
         </composite-id>
     </class>
-    
+
     <class name="NHibernate.Extensions.AspNetCore.Identity.IdentityUserToken,NHibernate.Extensions.AspNetCore.Identity" table="aspnet_user_tokens" schema="public">
         <composite-id>
             <key-property name="UserId" column="user_id" type="string" length="32" />
