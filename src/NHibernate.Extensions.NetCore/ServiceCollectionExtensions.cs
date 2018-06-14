@@ -31,7 +31,7 @@ namespace NHibernate.Extensions.NetCore {
             }
             var cfg = new Configuration();
             cfg.Configure(path);
-            AddHibernate(services, path);
+            AddHibernate(services, cfg);
         }
 
         public static void AddHibernate(
