@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>aspnet-NHibernate.Extensions.WebTest-2248A449-FB12-43B9-B501-6761982E7A88</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Npgsql" Version="4.0.0" />
+    <PackageReference Include="NHibernate" Version="5.1.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\NHibernate.Extensions.AspNetCore.Identity\NHibernate.Extensions.AspNetCore.Identity.csproj" />
+    <ProjectReference Include="..\..\src\NHibernate.Extensions.NetCore\NHibernate.Extensions.NetCore.csproj" />
+    <ProjectReference Include="..\..\src\NHibernate.Extensions.NpgSql\NHibernate.Extensions.NpgSql.csproj" />
+    <ProjectReference Include="..\NHibernate.Extensions.UnitTest\NHibernate.Extensions.UnitTest.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\NHibernate.Extensions.UnitTest\hibernate.config">
+      <Link>hibernate.config</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>
