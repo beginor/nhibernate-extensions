@@ -31,7 +31,13 @@ namespace NHibernate.Extensions.NetCore {
                 default(EventId),
                 state,
                 exception,
-                (s, ex) => string.Format(s.Format, s.Args)
+                (s, ex) => {
+                    var message = s.ToString();
+                    if (ex != null) {
+                        message += ex.ToString();
+                    }
+                    return message;
+                }
             );
         }
     }
