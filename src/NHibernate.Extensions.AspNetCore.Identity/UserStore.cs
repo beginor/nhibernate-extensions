@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using NHibernate.Linq;
 
-namespace NHibernate.Extensions.AspNetCore.Identity {
+namespace NHibernate.Extensions.AspNetCore.Identity
+{
 
     public class UserStore :
         UserStoreBase<IdentityUser, IdentityRole, string, IdentityUserClaim, IdentityUserRole, IdentityUserLogin, IdentityUserToken, IdentityRoleClaim>,
@@ -588,128 +589,6 @@ namespace NHibernate.Extensions.AspNetCore.Identity {
                 await Session.FlushAsync(cancellationToken);
                 Session.Clear();
             }
-        }
-
-    }
-
-    public class UserOnlyStore
-        : UserStoreBase<IdentityUser, string, IdentityUserClaim, IdentityUserLogin, IdentityUserToken>, IUserLoginStore<IdentityUser>, IUserStore<IdentityUser>, IDisposable, IUserClaimStore<IdentityUser>, IUserPasswordStore<IdentityUser>, IUserSecurityStampStore<IdentityUser>, IUserEmailStore<IdentityUser>, IUserLockoutStore<IdentityUser>, IUserPhoneNumberStore<IdentityUser>, IQueryableUserStore<IdentityUser>, IUserTwoFactorStore<IdentityUser>, IUserAuthenticationTokenStore<IdentityUser>, IUserAuthenticatorKeyStore<IdentityUser>, IUserTwoFactorRecoveryCodeStore<IdentityUser>, IProtectedUserStore<IdentityUser> {
-
-        public UserOnlyStore(IdentityErrorDescriber describer) : base(describer) { }
-
-        public override async Task<IdentityResult> CreateAsync(
-            IdentityUser user,
-            CancellationToken cancellationToken = new CancellationToken()) {
-            throw new NotImplementedException();
-        }
-
-        public override async Task<IdentityResult> UpdateAsync(
-            IdentityUser user,
-            CancellationToken cancellationToken = new CancellationToken()) {
-            throw new NotImplementedException();
-        }
-
-        public override async Task<IdentityResult> DeleteAsync(
-            IdentityUser user,
-            CancellationToken cancellationToken = new CancellationToken()) {
-            throw new NotImplementedException();
-        }
-
-        public override async Task<IdentityUser> FindByIdAsync(
-            string userId,
-            CancellationToken cancellationToken = new CancellationToken()) {
-            throw new NotImplementedException();
-        }
-
-        public override async Task<IdentityUser> FindByNameAsync(
-            string normalizedUserName,
-            CancellationToken cancellationToken = new CancellationToken()) {
-            throw new NotImplementedException();
-        }
-
-        protected override async Task<IdentityUser> FindUserAsync(string userId, CancellationToken cancellationToken) {
-            throw new NotImplementedException();
-        }
-
-        protected override async Task<IdentityUserLogin> FindUserLoginAsync(
-            string userId, string loginProvider, string providerKey,
-            CancellationToken cancellationToken) {
-            throw new NotImplementedException();
-        }
-
-        protected override async Task<IdentityUserLogin> FindUserLoginAsync(
-            string loginProvider, string providerKey,
-            CancellationToken cancellationToken) {
-            throw new NotImplementedException();
-        }
-
-        public override async Task<IList<Claim>> GetClaimsAsync(
-            IdentityUser user,
-            CancellationToken cancellationToken = new CancellationToken()) {
-            throw new NotImplementedException();
-        }
-
-        public override async Task AddClaimsAsync(
-            IdentityUser user, IEnumerable<Claim> claims,
-            CancellationToken cancellationToken = new CancellationToken()) {
-            throw new NotImplementedException();
-        }
-
-        public override async Task ReplaceClaimAsync(
-            IdentityUser user, Claim claim, Claim newClaim,
-            CancellationToken cancellationToken = new CancellationToken()) {
-            throw new NotImplementedException();
-        }
-
-        public override async Task RemoveClaimsAsync(
-            IdentityUser user, IEnumerable<Claim> claims,
-            CancellationToken cancellationToken = new CancellationToken()) {
-            throw new NotImplementedException();
-        }
-
-        public override async Task<IList<IdentityUser>> GetUsersForClaimAsync(
-            Claim claim, CancellationToken cancellationToken = new CancellationToken()) {
-            throw new NotImplementedException();
-        }
-
-        protected override async Task<IdentityUserToken> FindTokenAsync(
-            IdentityUser user, string loginProvider, string name,
-            CancellationToken cancellationToken) {
-            throw new NotImplementedException();
-        }
-
-        protected override async Task AddUserTokenAsync(IdentityUserToken token) {
-            throw new NotImplementedException();
-        }
-
-        protected override async Task RemoveUserTokenAsync(IdentityUserToken token) {
-            throw new NotImplementedException();
-        }
-
-        public override IQueryable<IdentityUser> Users => throw new NotImplementedException();
-
-        public override async Task AddLoginAsync(
-            IdentityUser user, UserLoginInfo login,
-            CancellationToken cancellationToken = new CancellationToken()) {
-            throw new NotImplementedException();
-        }
-
-        public override async Task RemoveLoginAsync(
-            IdentityUser user, string loginProvider, string providerKey,
-            CancellationToken cancellationToken = new CancellationToken()) {
-            throw new NotImplementedException();
-        }
-
-        public override async Task<IList<UserLoginInfo>> GetLoginsAsync(
-            IdentityUser user,
-            CancellationToken cancellationToken = new CancellationToken()) {
-            throw new NotImplementedException();
-        }
-
-        public override async Task<IdentityUser> FindByEmailAsync(
-            string normalizedEmail,
-            CancellationToken cancellationToken = new CancellationToken()) {
-            throw new NotImplementedException();
         }
 
     }
