@@ -1,6 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
 using NHibernate;
+using NHibernate.Extensions.AspNetCore.Identity;
 
 namespace NHibernate.Extensions.WebTest.Controllers {
 
@@ -21,8 +22,8 @@ namespace NHibernate.Extensions.WebTest.Controllers {
 
         [HttpGet("")]
         public ActionResult GetAll() {
-            Console.WriteLine(session);
-            return Ok("Hello, world!");
+            var users = session.Query<IdentityUser>();
+            return Ok(users);
         }
 
     }
