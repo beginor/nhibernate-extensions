@@ -58,7 +58,7 @@ namespace NHibernate.Extensions.WebTest {
             IHostingEnvironment env,
             Microsoft.Extensions.Logging.ILoggerFactory loggerFactory
         ) {
-            loggerFactory.UseAsNHibernateLoggerFactory();
+            loggerFactory.UseAsHibernateLoggerFactory();
 
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();

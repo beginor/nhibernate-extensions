@@ -36,7 +36,7 @@ public void Configure(
     Microsoft.Extensions.Logging.ILoggerFactory loggerFactory
 ) {
     // Use loggerFactory as NHibernate logger factory.
-    loggerFactory.UseAsNHibernateLoggerFactory();
+    loggerFactory.UseAsHibernateLoggerFactory();
     /* other code goes here */
 }
 ```

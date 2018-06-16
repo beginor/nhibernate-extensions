@@ -22,7 +22,7 @@ namespace NHibernate.Extensions.UnitTest.Identity {
                 minLevel: LogLevel.Error,
                 includeScopes: false
             );
-            loggerFactory.UseAsNHibernateLoggerFactory();
+            loggerFactory.UseAsHibernateLoggerFactory();
             var cfg = new Configuration();
             var file = Path.Combine(
                 AppDomain.CurrentDomain.BaseDirectory,
