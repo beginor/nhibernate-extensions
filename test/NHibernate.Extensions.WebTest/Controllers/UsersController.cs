@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using NHibernate;
 using NHibernate.Extensions.AspNetCore.Identity;
@@ -6,11 +6,11 @@ using NHibernate.Extensions.AspNetCore.Identity;
 namespace NHibernate.Extensions.WebTest.Controllers {
 
     [Route("api/[controller]")]
-    public class SamplesController : Controller {
+    public class UsersController : Controller {
 
         private ISession session;
 
-        public SamplesController(ISession session) {
+        public UsersController(ISession session) {
             this.session = session;
         }
 
