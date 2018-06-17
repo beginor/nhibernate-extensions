@@ -2,12 +2,24 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>beginor</Authors>
+    <Description>Extended PostgreSQL driver for NHibernate, with support of json and array types.</Description>
+    <PackageId>NHibernate.Extensions.NpgSql</PackageId>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Owners>beginor</Owners>
+    <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions</PackageProjectUrl>
+    <Title>NHibernate.Extensions.NpgSql</Title>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <PackOnBuild>true</PackOnBuild>
+  </PropertyGroup>
+ 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="NHibernate" Version="5.1.2" />
     <PackageReference Include="Npgsql" Version="4.0.0" />
+    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.0" />
   </ItemGroup>
 
 </Project>
