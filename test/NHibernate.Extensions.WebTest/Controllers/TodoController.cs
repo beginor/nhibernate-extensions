@@ -35,28 +35,35 @@ namespace NHibernate.Extensions.WebTest.Controllers {
         }
 
         [HttpGet("")]
-        public IActionResult GetAll() {
-            return Ok(items);
+        [ProducesResponseType(200)]
+        public ActionResult<IList<ToDoItemModel>> GetAll() {
+            return new ObjectResult(items);
         }
 
         [HttpGet("{id:int}")]
-        public IActionResult GetById(int id) {
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        public ActionResult<ToDoItemModel> GetById(int id) {
             var item = items.FirstOrDefault(i => i.Id == id);
             if (item == null) {
                 return NotFound();
             }
-            return Ok(item);
+            return item;
         }
 
         [HttpPost("")]
-        public IActionResult Save([FromBody]ToDoItemModel item) {
+        public ActionResult<ToDoItemModel> Save([FromBody]ToDoItemModel item) {
             item.Id = items.Max(i => i.Id) + 1;
             items.Add(item);
-            return Ok(item);
+            // return CreatedAtAction(nameof(GetById), new { id = item.Id }, item);
+            return item;
+            // return Ok(item);
         }
 
         [HttpPut("{id:int}")]
-        public IActionResult Update(int id, [FromBody]ToDoItemModel item) {
+        [ProducesResponseType(404)]
+        [ProducesResponseType(200)]
+        public ActionResult<ToDoItemModel> Update(int id, [FromBody]ToDoItemModel item) {
             var todo = items.FirstOrDefault(i => i.Id == id);
             if (todo == null) {
                 return NotFound();
@@ -65,10 +72,11 @@ namespace NHibernate.Extensions.WebTest.Controllers {
             todo.Description = item.Description;
             todo.Completed = item.Completed;
             //
-            return Ok(todo);
+            return todo;
         }
 
         [HttpDelete("{id:int}")]
+        [ProducesResponseType(204)]
         public IActionResult Delete(int id) {
             var item = items.FirstOrDefault(i => i.Id == id);
             if (item != null) {
