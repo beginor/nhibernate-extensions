@@ -15,7 +15,7 @@ namespace NHibernate.Extensions.UnitTest.NpgSql.Data {
 
         public virtual JToken JsonbField { get; set; }
 
-        public virtual DateTime UpdateTime { get; set; }
+        public virtual DateTime? UpdateTime { get; set; }
 
         public virtual short[] Int16Arr { get; set; }
 

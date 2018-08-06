@@ -27,7 +27,7 @@ namespace NHibernate.Extensions.UnitTest.NpgSql {
         }
 
         [Fact]
-        public async Task CanDoCrud() {
+        public void CanDoCrud() {
             using (var session = factory.OpenSession()) {
                 var entity = new TestEntity {
                     Name = "Test 1",
@@ -42,8 +42,8 @@ namespace NHibernate.Extensions.UnitTest.NpgSql {
                     DoubleArr = new [] { 1.1, 2.2, 3.3 },
                     BooleanArr = new [] { true, false }
                 };
-                await session.SaveAsync(entity);
-                await session.FlushAsync();
+                session.Save(entity);
+                session.Flush();
                 session.Clear();
 
                 Assert.True(entity.Id > 0);
@@ -53,16 +53,16 @@ namespace NHibernate.Extensions.UnitTest.NpgSql {
 
             using (var session = factory.OpenSession()) {
                 var query = session.Query<TestEntity>();
-                var entities = await query.ToListAsync();
+                var entities = query.ToList();
                 Assert.NotNull(entities);
                 Console.WriteLine($"Entity count: {entities.Count}");
 
                 using (var tx = session.BeginTransaction()) {
                     foreach (var e in entities) {
                         Console.WriteLine(JsonConvert.SerializeObject(e));
-                        await session.DeleteAsync(e);
+                        session.Delete(e);
                     }
-                    await tx.CommitAsync();
+                    tx.Commit();
                 }
             }
         }

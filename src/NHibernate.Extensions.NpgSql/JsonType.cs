@@ -52,9 +52,16 @@ namespace NHibernate.Extensions.NpgSql {
             return x == null ? 0 : x.GetHashCode();
         }
 
-        public object NullSafeGet(DbDataReader rs, string[] names, ISessionImplementor session, object owner) {
+        public object NullSafeGet(
+            DbDataReader rs,
+            string[] names,
+            ISessionImplementor session,
+            object owner
+        ) {
             if (names.Length != 1) {
-                throw new InvalidOperationException("Only expecting one column...");
+                throw new InvalidOperationException(
+                    "Only expecting one column..."
+                );
             }
             if (rs[names[0]] is string val) {
                 return JToken.Parse(val);
@@ -62,7 +69,12 @@ namespace NHibernate.Extensions.NpgSql {
             return null;
         }
 
-        public void NullSafeSet(DbCommand cmd, object value, int index, ISessionImplementor session) {
+        public void NullSafeSet(
+            DbCommand cmd,
+            object value,
+            int index,
+            ISessionImplementor session
+        ) {
             var parameter = (NpgsqlParameter)cmd.Parameters[index];
             parameter.Value = value ?? DBNull.Value;
         }
