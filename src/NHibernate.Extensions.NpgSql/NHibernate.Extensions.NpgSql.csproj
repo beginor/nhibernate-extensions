@@ -4,13 +4,16 @@
     <Authors>beginor</Authors>
     <Description>Extended PostgreSQL driver for NHibernate, with support of json and array types.</Description>
     <PackageId>NHibernate.Extensions.NpgSql</PackageId>
-    <PackageVersion>1.0.0</PackageVersion>
+    <PackageVersion>1.1.0</PackageVersion>
     <Owners>beginor</Owners>
     <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions</PackageProjectUrl>
     <Title>NHibernate.Extensions.NpgSql</Title>
+    <PackageReleaseNotes>Update Npgsql to 4.x, Can use JToken as property.</PackageReleaseNotes>
+    <PackageTags>nhibernate postgresql npgsql</PackageTags>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <PackOnBuild>true</PackOnBuild>
+    <DebugType></DebugType>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
