@@ -1,18 +1,19 @@
 ﻿using System;
+using Newtonsoft.Json.Linq;
 
 namespace NHibernate.Extensions.UnitTest.NpgSql.Data {
 
     public class TestEntity {
 
-        public virtual int Id { get; set; }
+        public virtual long Id { get; set; }
 
         public virtual string Name { get; set; }
 
         public virtual string[] Tags { get; set; }
 
-        public virtual string JsonField { get; set; }
+        public virtual JToken JsonField { get; set; }
 
-        public virtual string JsonbField { get; set; }
+        public virtual JToken JsonbField { get; set; }
 
         public virtual DateTime UpdateTime { get; set; }
 

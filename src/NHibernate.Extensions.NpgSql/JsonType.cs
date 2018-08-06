@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.Common;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using NHibernate.Engine;
 using NHibernate.SqlTypes;
 using NHibernate.UserTypes;
@@ -13,19 +14,15 @@ namespace NHibernate.Extensions.NpgSql {
     public class JsonType : IUserType {
 
         public virtual SqlType[] SqlTypes => new SqlType[] {
-            new NpgSqlType(DbType.String, NpgsqlDbType.Json)
+            new NpgSqlType(DbType.Object, NpgsqlDbType.Json)
         };
 
-        public System.Type ReturnedType => typeof(string);
+        public System.Type ReturnedType => typeof(JToken);
 
         public bool IsMutable => true;
 
         public object Assemble(object cached, object owner) {
-            var str = cached as string;
-            if (string.IsNullOrWhiteSpace(str)) {
-                return null;
-            }
-            return str;
+            return cached;
         }
 
         public object DeepCopy(object value) {
@@ -38,9 +35,6 @@ namespace NHibernate.Extensions.NpgSql {
         }
 
         public object Disassemble(object value) {
-            if (value == null) {
-                return null;
-            }
             return value;
         }
 
@@ -51,35 +45,26 @@ namespace NHibernate.Extensions.NpgSql {
             if (x == null || y == null) {
                 return false;
             }
-            return ((string)x).Equals((string)y);
+            return ((JToken)x).Equals((JToken)y);
         }
 
         public int GetHashCode(object x) {
-            if (x == null) {
-                return 0;
-            }
-            return x.GetHashCode();
+            return x == null ? 0 : x.GetHashCode();
         }
 
         public object NullSafeGet(DbDataReader rs, string[] names, ISessionImplementor session, object owner) {
             if (names.Length != 1) {
                 throw new InvalidOperationException("Only expecting one column...");
             }
-            var val = rs[names[0]] as string;
-            if (!string.IsNullOrWhiteSpace(val)) {
-                return val;
+            if (rs[names[0]] is string val) {
+                return JToken.Parse(val);
             }
             return null;
         }
 
         public void NullSafeSet(DbCommand cmd, object value, int index, ISessionImplementor session) {
             var parameter = (NpgsqlParameter)cmd.Parameters[index];
-            if (value == null) {
-                parameter.Value = DBNull.Value;
-            }
-            else {
-                parameter.Value = value;
-            }
+            parameter.Value = value ?? DBNull.Value;
         }
 
         public object Replace(object original, object target, object owner) {

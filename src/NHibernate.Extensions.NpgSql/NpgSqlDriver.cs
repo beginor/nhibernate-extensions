@@ -12,11 +12,11 @@ namespace NHibernate.Extensions.NpgSql {
             string name,
             SqlType sqlType
         ) {
-            if (sqlType is NpgSqlType && dbParam is NpgsqlParameter) {
+            if (sqlType is NpgSqlType type && dbParam is NpgsqlParameter parameter) {
                 this.InitializeParameter(
-                    dbParam as NpgsqlParameter,
+                    parameter,
                     name,
-                    sqlType as NpgSqlType
+                    type
                 );
             }
             else {

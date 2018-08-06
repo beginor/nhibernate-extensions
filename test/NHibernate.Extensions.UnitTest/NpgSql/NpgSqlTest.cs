@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Linq;
-using NHibernate;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using NHibernate.Cfg;
 using NHibernate.Linq;
 using NHibernate.Extensions.UnitTest.NpgSql.Data;
+using Npgsql;
 using Xunit;
 
 namespace NHibernate.Extensions.UnitTest.NpgSql {
@@ -13,6 +16,7 @@ namespace NHibernate.Extensions.UnitTest.NpgSql {
         private ISessionFactory factory;
 
         public NpgSqlTest() {
+            NpgsqlConnection.GlobalTypeMapper.UseJsonNet();
             var configuration = new Configuration();
             var configFile = System.IO.Path.Combine(
                 AppDomain.CurrentDomain.BaseDirectory,
@@ -23,40 +27,43 @@ namespace NHibernate.Extensions.UnitTest.NpgSql {
         }
 
         [Fact]
-        public void CanDoCrud() {
+        public async Task CanDoCrud() {
             using (var session = factory.OpenSession()) {
                 var entity = new TestEntity {
                     Name = "Test 1",
-                    Tags = new string[] { "hello", "world" },
-                    JsonField = "{ \"val\": 1 }",
-                    JsonbField = "{ \"val\": 1 }",
+                    Tags = new [] { "hello", "world" },
+                    JsonField = JToken.Parse("{ \"val\": 1 }"),
+                    JsonbField = JToken.Parse("{ \"val\": 1 }"),
                     UpdateTime = DateTime.Now,
                     Int16Arr = new short[] { 1, 2, 3 },
-                    Int32Arr = new int[] { 1, 2, 3 },
-                    Int64Arr = new long[] { 1L, 2L, 3L },
-                    FloatArr = new float[] { 1.1F, 2.2F, 3.3F },
-                    DoubleArr = new double[] { 1.1, 2.2, 3.3 },
-                    BooleanArr = new bool[] { true, false }
+                    Int32Arr = new [] { 1, 2, 3 },
+                    Int64Arr = new [] { 1L, 2L, 3L },
+                    FloatArr = new [] { 1.1F, 2.2F, 3.3F },
+                    DoubleArr = new [] { 1.1, 2.2, 3.3 },
+                    BooleanArr = new [] { true, false }
                 };
-
-                session.Save(entity);
-                session.Flush();
+                await session.SaveAsync(entity);
+                await session.FlushAsync();
                 session.Clear();
 
-                Assert.True(entity.Id == 0);
+                Assert.True(entity.Id > 0);
 
                 Console.WriteLine($"entity id: {entity.Id}");
+            }
 
+            using (var session = factory.OpenSession()) {
                 var query = session.Query<TestEntity>();
-                var entities = query.ToList();
+                var entities = await query.ToListAsync();
                 Assert.NotNull(entities);
+                Console.WriteLine($"Entity count: {entities.Count}");
 
-                foreach (var e in entities) {
-                    session.Delete(e);
+                using (var tx = session.BeginTransaction()) {
+                    foreach (var e in entities) {
+                        Console.WriteLine(JsonConvert.SerializeObject(e));
+                        await session.DeleteAsync(e);
+                    }
+                    await tx.CommitAsync();
                 }
-
-                session.Flush();
-
             }
         }
 

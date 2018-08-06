@@ -20,8 +20,7 @@ namespace NHibernate.Extensions.NpgSql {
         }
 
         public object DeepCopy(object value) {
-            var arr = value as T[];
-            if (arr == null) {
+            if (!(value is T[] arr)) {
                 return null;
             }
             var result = new T[arr.Length];
@@ -44,10 +43,7 @@ namespace NHibernate.Extensions.NpgSql {
         }
 
         public int GetHashCode(object x) {
-            if (x == null) {
-                return 0;
-            }
-            return x.GetHashCode();
+            return x == null ? 0 : x.GetHashCode();
         }
 
         public object NullSafeGet(
@@ -76,8 +72,7 @@ namespace NHibernate.Extensions.NpgSql {
             }
             else {
                 parameter.NpgsqlDbType = GetNpgSqlType().NpgDbType;
-                var arr = value as T[];
-                if (arr == null) {
+                if (!(value is T[] arr)) {
                     throw new InvalidOperationException(
                         $"\"{parameter.ParameterName}\" is not {typeof(T)}[]"
                     );
