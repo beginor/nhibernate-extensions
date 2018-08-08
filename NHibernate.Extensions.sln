@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHibernate.Extensions.UnitT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHibernate.Extensions.NpgSql", "src\NHibernate.Extensions.NpgSql\NHibernate.Extensions.NpgSql.csproj", "{C430CBEB-91D2-4545-9E15-7B30AD813C55}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHibernate.NetCore", "src\NHibernate.NetCore\NHibernate.NetCore.csproj", "{1E7730FE-B3DE-43FF-B1CC-586FEF398DDC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,9 +50,22 @@ Global
 		{C430CBEB-91D2-4545-9E15-7B30AD813C55}.Release|x64.Build.0 = Release|Any CPU
 		{C430CBEB-91D2-4545-9E15-7B30AD813C55}.Release|x86.ActiveCfg = Release|Any CPU
 		{C430CBEB-91D2-4545-9E15-7B30AD813C55}.Release|x86.Build.0 = Release|Any CPU
+		{1E7730FE-B3DE-43FF-B1CC-586FEF398DDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E7730FE-B3DE-43FF-B1CC-586FEF398DDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E7730FE-B3DE-43FF-B1CC-586FEF398DDC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1E7730FE-B3DE-43FF-B1CC-586FEF398DDC}.Debug|x64.Build.0 = Debug|Any CPU
+		{1E7730FE-B3DE-43FF-B1CC-586FEF398DDC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1E7730FE-B3DE-43FF-B1CC-586FEF398DDC}.Debug|x86.Build.0 = Debug|Any CPU
+		{1E7730FE-B3DE-43FF-B1CC-586FEF398DDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E7730FE-B3DE-43FF-B1CC-586FEF398DDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E7730FE-B3DE-43FF-B1CC-586FEF398DDC}.Release|x64.ActiveCfg = Release|Any CPU
+		{1E7730FE-B3DE-43FF-B1CC-586FEF398DDC}.Release|x64.Build.0 = Release|Any CPU
+		{1E7730FE-B3DE-43FF-B1CC-586FEF398DDC}.Release|x86.ActiveCfg = Release|Any CPU
+		{1E7730FE-B3DE-43FF-B1CC-586FEF398DDC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{72569E3D-D5E0-499A-A651-1A78FE974C29} = {B30E6FFF-68ED-4746-A246-68D55CD0D909}
 		{C430CBEB-91D2-4545-9E15-7B30AD813C55} = {286A1873-D7B4-4EF8-80F8-AC250207FFBA}
+		{1E7730FE-B3DE-43FF-B1CC-586FEF398DDC} = {286A1873-D7B4-4EF8-80F8-AC250207FFBA}
 	EndGlobalSection
 EndGlobal
