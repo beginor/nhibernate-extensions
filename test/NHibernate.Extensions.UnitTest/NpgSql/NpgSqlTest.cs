@@ -5,26 +5,14 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NHibernate.Cfg;
 using NHibernate.Linq;
+using NHibernate.Mapping.Attributes;
 using NHibernate.Extensions.UnitTest.NpgSql.Data;
 using Npgsql;
 using Xunit;
 
 namespace NHibernate.Extensions.UnitTest.NpgSql {
 
-    public class NpgSqlTest {
-
-        private ISessionFactory factory;
-
-        public NpgSqlTest() {
-            NpgsqlConnection.GlobalTypeMapper.UseJsonNet();
-            var configuration = new Configuration();
-            var configFile = System.IO.Path.Combine(
-                AppDomain.CurrentDomain.BaseDirectory,
-                "hibernate.config"
-            );
-            configuration.Configure(configFile);
-            factory = configuration.BuildSessionFactory();
-        }
+    public class NpgSqlTest : BaseTest {
 
         [Fact]
         public void CanDoCrud() {
