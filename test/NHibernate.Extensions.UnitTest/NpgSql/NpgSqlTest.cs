@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using NHibernate.Cfg;
-using NHibernate.Linq;
-using NHibernate.Mapping.Attributes;
 using NHibernate.Extensions.UnitTest.NpgSql.Data;
-using Npgsql;
 using Xunit;
 
 namespace NHibernate.Extensions.UnitTest.NpgSql {

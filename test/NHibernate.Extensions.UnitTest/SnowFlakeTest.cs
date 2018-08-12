@@ -11,12 +11,24 @@ namespace NHibernate.Extensions.UnitTest {
         [Fact]
         public void _01_CanQuerySnowFlakeId() {
             using (var session = factory.OpenSession()) {
-                var flakes = session.Query<SnowFlakeTestEntity>()
+                var entities = session.Query<SnowFlakeTestEntity>()
                     .ToList();
-                foreach (var f in flakes) {
-                    Assert.True(f.Id > 0);
-                    Console.WriteLine(JsonConvert.SerializeObject(f));
+                foreach (var entity in entities) {
+                    Assert.True(entity.Id > 0);
+                    Console.WriteLine(JsonConvert.SerializeObject(entity));
                 }
+            }
+        }
+
+        [Fact]
+        public void _02_CanInsertSnowFlakeId() {
+            using (var session = factory.OpenSession()) {
+                var entity = new SnowFlakeTestEntity {
+                    Name = Guid.NewGuid().ToString("N")
+                };
+                session.Save(entity);
+                Assert.True(entity.Id > 0);
+                Console.WriteLine($"Id: {entity.Id}");
             }
         }
     }
