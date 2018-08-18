@@ -9,10 +9,10 @@
 
   <class name="SnowFlakeTestEntity" table="snow_flake_test" schema="public">
     <id name="Id" column="id" type="long">
-      <generator class="trigger-identity">
-      </generator>
+      <generator class="trigger-identity" />
     </id>
     <property name="Name" column="name" type="string" length="32" />
   </class>
+
 </hibernate-mapping>
 
