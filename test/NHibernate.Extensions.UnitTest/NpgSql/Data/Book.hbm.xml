@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<hibernate-mapping
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns="urn:nhibernate-mapping-2.2"
+  namespace="NHibernate.Extensions.UnitTest.NpgSql.Data"
+  assembly="NHibernate.Extensions.UnitTest"
+>
+
+  <class name="Book" table="books" schema="public">
+    <id name="BookId" column="bookid" type="int">
+      <generator class="native" />
+    </id>
+    <property name="Title" column="title" type="string" />
+    <many-to-one name="Author" column="authorid"  fetch="join" cascade="all" />
+  </class>
+
+  <sql-query name="name_test_01">
+    <return class="Book"/>
+    select * from public.books;
+  </sql-query>
+
+  <sql-query name="name_test_02">
+    <return class="Book"/>
+    select * from public.books
+    where public.books.authorid = :authorid;
+  </sql-query>
+
+  <sql-query name="name_test_03">
+    <return-scalar column="books_count" type="long" />
+    select count(0) as books_count from public.books;
+  </sql-query>
+
+  <sql-query name="name_test_04">
+    <return-scalar column="books_count" type="long" />
+    select count(0) as books_count from public.books
+    where public.books.authorid = :authorid;
+  </sql-query>
+
+  <sql-query name="name_test_05">
+    select * from public.books;
+  </sql-query>
+
+</hibernate-mapping>
