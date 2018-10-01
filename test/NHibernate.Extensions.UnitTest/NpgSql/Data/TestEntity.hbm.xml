@@ -9,7 +9,7 @@
 
   <typedef name="json" class="NHibernate.Extensions.NpgSql.JsonType, NHibernate.Extensions.NpgSql" />
   <typedef name="jsonb" class="NHibernate.Extensions.NpgSql.JsonbType, NHibernate.Extensions.NpgSql" />
-  <typedef name="stringArray" class="NHibernate.Extensions.NpgSql.StringArrayType, NHibernate.Extensions.NpgSql" />
+  <typedef name="stringArray" class="NHibernate.Extensions.NpgSql.ArrayType`1[[System.String]], NHibernate.Extensions.NpgSql" />
   <typedef name="int16Array" class="NHibernate.Extensions.NpgSql.Int16ArrayType, NHibernate.Extensions.NpgSql" />
   <typedef name="int32Array" class="NHibernate.Extensions.NpgSql.Int32ArrayType, NHibernate.Extensions.NpgSql" />
   <typedef name="int64Array" class="NHibernate.Extensions.NpgSql.Int64ArrayType, NHibernate.Extensions.NpgSql" />
