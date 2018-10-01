@@ -3,7 +3,6 @@ using System.IO;
 using NHibernate.Cfg;
 using NHibernate.Mapping.Attributes;
 using Npgsql;
-using Xunit;
 
 namespace NHibernate.Extensions.UnitTest {
 
@@ -26,7 +25,7 @@ namespace NHibernate.Extensions.UnitTest {
 //
 //            var err = serializer.Error.ToString();
 //
-//            Assert.Empty(err);
+//            Assert.IsEmpty(err);
 //
 //            var reader = new StreamReader(stream);
 //            var xml = reader.ReadToEnd();

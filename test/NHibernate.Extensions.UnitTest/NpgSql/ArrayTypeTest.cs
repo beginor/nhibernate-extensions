@@ -3,13 +3,13 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NHibernate.Extensions.UnitTest.NpgSql.Data;
-using Xunit;
+using NUnit.Framework;
 
 namespace NHibernate.Extensions.UnitTest.NpgSql {
 
     public class ArrayTypeTest : BaseTest {
 
-        [Fact]
+        [Test]
         public void CanDoCrud() {
             using (var session = factory.OpenSession()) {
                 var entity = new TestEntity {

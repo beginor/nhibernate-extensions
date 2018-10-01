@@ -3,13 +3,13 @@ using NHibernate;
 using NHibernate.Linq;
 using NHibernate.Extensions.UnitTest.NpgSql.Data;
 
-using Xunit;
+using NUnit.Framework;
 
 namespace NHibernate.Extensions.UnitTest {
 
     public class NameQueryTest : BaseTest {
 
-        [Fact]
+        [Test]
         public void _01_CanQueryClass() {
             using (var session = factory.OpenSession()) {
                 var query = session.GetNamedQuery("name_test_01");
@@ -19,7 +19,7 @@ namespace NHibernate.Extensions.UnitTest {
             }
         }
 
-        [Fact]
+        [Test]
         public void _02_CanQueryClassWithParam() {
             using (var session = factory.OpenSession()) {
                 var query = session.GetNamedQuery("name_test_02");
@@ -29,7 +29,7 @@ namespace NHibernate.Extensions.UnitTest {
             }
         }
 
-        [Fact]
+        [Test]
         public void _03_CanQueryScalar() {
             using (var session = factory.OpenSession()) {
                 var query = session.GetNamedQuery("name_test_03");
@@ -38,7 +38,7 @@ namespace NHibernate.Extensions.UnitTest {
             }
         }
 
-        [Fact]
+        [Test]
         public void _04_CanQueryScalarWithParam() {
             using (var session = factory.OpenSession()) {
                 var query = session.GetNamedQuery("name_test_04");
@@ -50,7 +50,7 @@ namespace NHibernate.Extensions.UnitTest {
             }
         }
 
-        [Fact]
+        [Test]
         public void _05_CanQueryDynamicColumns() {
             using (var session = factory.OpenSession()) {
                 var query = session.GetNamedQuery("name_test_05");

@@ -2,13 +2,14 @@ using System;
 using System.IO;
 using NHibernate.Extensions.UnitTest.NpgSql.Data;
 using NHibernate.Mapping.Attributes;
-using Xunit;
+using NUnit.Framework;
 
 namespace NHibernate.Extensions.UnitTest {
 
+    [TestFixture]
     public class AttrMapTest {
 
-        [Fact]
+        [Test]
         public void _01_CanSerializeXmlMap() {
             var serializer = HbmSerializer.Default;
             var stream = serializer.Serialize(
@@ -17,7 +18,7 @@ namespace NHibernate.Extensions.UnitTest {
 
             var err = serializer.Error.ToString();
 
-            Assert.Empty(err);
+            Assert.IsEmpty(err);
 
             var reader = new StreamReader(stream);
             var xml = reader.ReadToEnd();

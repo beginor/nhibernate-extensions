@@ -1,14 +1,13 @@
 using System;
 using System.Linq;
 using NHibernate.Extensions.UnitTest.NpgSql.Data;
-using NHibernate.Linq;
-using Xunit;
+using NUnit.Framework;
 
 namespace NHibernate.Extensions.UnitTest {
 
     public class QueryTest : BaseTest {
 
-        [Fact]
+        [Test]
         public void _01_CanQueryManyToOne() {
             using (var session = factory.OpenSession()) {
                 var query = session.Query<Book>().Select(b => b.Author);
@@ -17,7 +16,7 @@ namespace NHibernate.Extensions.UnitTest {
             }
         }
 
-        [Fact]
+        [Test]
         public void _02_CanQueryOneToMany() {
             using (var session = factory.OpenSession()) {
                 var query = session.Query<Author>().Select(a => new {
@@ -29,7 +28,7 @@ namespace NHibernate.Extensions.UnitTest {
             }
         }
 
-        [Fact]
+        [Test]
         public void _03_CanQueryReference() {
             using (var session = factory.OpenSession()) {
                 var query = from book in session.Query<Book>()

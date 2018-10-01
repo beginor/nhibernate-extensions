@@ -2,13 +2,13 @@ using System;
 using System.Linq;
 using Newtonsoft.Json;
 using NHibernate.Extensions.UnitTest.NpgSql.Data;
-using Xunit;
+using NUnit.Framework;
 
 namespace NHibernate.Extensions.UnitTest {
 
     public class SnowFlakeTest : BaseTest {
 
-        [Fact]
+        [Test]
         public void _01_CanQuerySnowFlakeId() {
             using (var session = factory.OpenSession()) {
                 var entities = session.Query<SnowFlakeTestEntity>()
@@ -20,7 +20,7 @@ namespace NHibernate.Extensions.UnitTest {
             }
         }
 
-        [Fact]
+        [Test]
         public void _02_CanInsertSnowFlakeId() {
             using (var session = factory.OpenSession()) {
                 var entity = new SnowFlakeTestEntity {
