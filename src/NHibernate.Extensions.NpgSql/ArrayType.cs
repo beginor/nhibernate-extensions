@@ -1,13 +1,32 @@
 ﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using NHibernate.Engine;
 using NHibernate.SqlTypes;
 using NHibernate.UserTypes;
 using Npgsql;
+using NpgsqlTypes;
 
 namespace NHibernate.Extensions.NpgSql {
 
-    public abstract class ArrayType<T> : IUserType {
+    public class ArrayType<T> : IUserType {
+
+        private static readonly IDictionary<System.Type, NpgsqlDbType> typeDict
+            = new ConcurrentDictionary<System.Type, NpgsqlDbType> {
+                [typeof(bool)] = NpgsqlDbType.Boolean,
+                [typeof(short)] = NpgsqlDbType.Smallint,
+                [typeof(int)] = NpgsqlDbType.Integer,
+                [typeof(long)] = NpgsqlDbType.Bigint,
+                [typeof(float)] = NpgsqlDbType.Real,
+                [typeof(double)] = NpgsqlDbType.Double,
+                [typeof(decimal)] = NpgsqlDbType.Numeric,
+                [typeof(string)] = NpgsqlDbType.Varchar,
+                [typeof(DateTime)] = NpgsqlDbType.Timestamp,
+                [typeof(DateTimeOffset)] = NpgsqlDbType.TimestampTz,
+                [typeof(TimeSpan)] = NpgsqlDbType.Time
+            };
 
         public SqlType[] SqlTypes => new SqlType[] { GetNpgSqlType() };
 
@@ -85,7 +104,16 @@ namespace NHibernate.Extensions.NpgSql {
             return original;
         }
 
-        protected abstract NpgSqlType GetNpgSqlType();
+        protected virtual NpgSqlType GetNpgSqlType() {
+            var type = typeof(T);
+            if (!typeDict.ContainsKey(type)) {
+                throw new NotSupportedException($"Unknown type {typeof(T)}");
+            }
+            return new NpgSqlType(
+                DbType.Object,
+                NpgsqlDbType.Array | typeDict[type]
+            );
+        }
     }
 
 }

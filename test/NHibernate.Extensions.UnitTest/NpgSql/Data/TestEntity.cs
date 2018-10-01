@@ -16,7 +16,7 @@ namespace NHibernate.Extensions.UnitTest.NpgSql.Data {
         [Property(Column = "name", Type = "string", Length = 32)]
         public virtual string Name { get; set; }
 
-        [Property(Column = "tags", TypeType = typeof(StringArrayType))]
+        [Property(Column = "tags", TypeType = typeof(ArrayType<string>))]
         public virtual string[] Tags { get; set; }
 
         [Property(Column = "json_field", TypeType = typeof(JsonType))]
@@ -28,7 +28,7 @@ namespace NHibernate.Extensions.UnitTest.NpgSql.Data {
         [Property(Column = "update_time", Type = "datetime")]
         public virtual DateTime? UpdateTime { get; set; }
 
-        [Property(Column = "int16_arr", TypeType = typeof(Int16ArrayType))]
+        [Property(Column = "int16_arr", TypeType = typeof(ArrayType<short>))]
         public virtual short[] Int16Arr { get; set; }
 
         [Property(Column = "int32_arr", TypeType = typeof(Int32ArrayType))]

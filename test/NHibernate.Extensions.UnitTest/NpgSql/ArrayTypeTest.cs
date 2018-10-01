@@ -7,7 +7,7 @@ using Xunit;
 
 namespace NHibernate.Extensions.UnitTest.NpgSql {
 
-    public class NpgSqlTest : BaseTest {
+    public class ArrayTypeTest : BaseTest {
 
         [Fact]
         public void CanDoCrud() {

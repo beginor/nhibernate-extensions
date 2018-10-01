@@ -14,7 +14,7 @@ namespace NHibernate.Extensions.UnitTest {
         public BaseTest() {
             NpgsqlConnection.GlobalTypeMapper.UseJsonNet();
             var configuration = new Configuration();
-            var configFile = System.IO.Path.Combine(
+            var configFile = Path.Combine(
                 AppDomain.CurrentDomain.BaseDirectory,
                 "hibernate.config"
             );
