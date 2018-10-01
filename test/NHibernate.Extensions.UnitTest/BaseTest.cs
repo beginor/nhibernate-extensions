@@ -1,6 +1,9 @@
 using System;
+using System.IO;
 using NHibernate.Cfg;
+using NHibernate.Mapping.Attributes;
 using Npgsql;
+using Xunit;
 
 namespace NHibernate.Extensions.UnitTest {
 
@@ -16,12 +19,19 @@ namespace NHibernate.Extensions.UnitTest {
                 "hibernate.config"
             );
             configuration.Configure(configFile);
-            // HbmSerializer.Default.Validate = true;
-            // configuration.AddInputStream(
-            //     HbmSerializer.Default.Serialize(
-            //         typeof(SnowFlakeTestEntity).Assembly
-            //     )
-            // );
+//            var serializer = HbmSerializer.Default;
+//            var stream = serializer.Serialize(
+//                typeof(BaseTest).Assembly
+//            );
+//
+//            var err = serializer.Error.ToString();
+//
+//            Assert.Empty(err);
+//
+//            var reader = new StreamReader(stream);
+//            var xml = reader.ReadToEnd();
+//            configuration.AddXml(xml);
+
             factory = configuration.BuildSessionFactory();
         }
 

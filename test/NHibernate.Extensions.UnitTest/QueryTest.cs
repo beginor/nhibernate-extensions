@@ -32,17 +32,14 @@ namespace NHibernate.Extensions.UnitTest {
         [Fact]
         public void _03_CanQueryReference() {
             using (var session = factory.OpenSession()) {
-                var query = from i in (from book in session.Query<Book>()
-                    group book by book.Author
-                    into g
+                var query = from book in session.Query<Book>()
                     select new {
-                        Key = g.Key,
-                        Count = g.Count()
-                    }).ToList()
-                    select i.Key;
+                        BookId = book.BookId,
+                        AuthorId = book.Author.AuthorId
+                    };
                 var data = query.ToList();
                 foreach (var d in data) {
-                    Console.WriteLine($"{d.AuthorId}, {d.Name}");
+                    Console.WriteLine($"{d.AuthorId}, {d.BookId}");
                 }
             }
         }
