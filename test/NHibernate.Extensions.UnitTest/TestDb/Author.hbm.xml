@@ -3,13 +3,13 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
   xmlns="urn:nhibernate-mapping-2.2"
-  namespace="NHibernate.Extensions.UnitTest.NpgSql.Data"
+  namespace="NHibernate.Extensions.UnitTest.TestDb"
   assembly="NHibernate.Extensions.UnitTest"
 >
 
   <class name="Author" table="authors" schema="public">
     <id name="AuthorId" column="authorid" type="int">
-      <generator class="native" />
+      <generator class="sequence" />
     </id>
     <property name="Name" column="name" type="string" />
     <bag name="Books" table="books" inverse="true">

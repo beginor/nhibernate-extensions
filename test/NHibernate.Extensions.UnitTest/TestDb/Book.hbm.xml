@@ -3,13 +3,13 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
   xmlns="urn:nhibernate-mapping-2.2"
-  namespace="NHibernate.Extensions.UnitTest.NpgSql.Data"
+  namespace="NHibernate.Extensions.UnitTest.TestDb"
   assembly="NHibernate.Extensions.UnitTest"
 >
 
   <class name="Book" table="books" schema="public">
     <id name="BookId" column="bookid" type="int">
-      <generator class="native" />
+      <generator class="sequence" />
     </id>
     <property name="Title" column="title" type="string" />
     <many-to-one name="Author" column="authorid"  fetch="join" cascade="all" />

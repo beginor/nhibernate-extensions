@@ -3,7 +3,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
   xmlns="urn:nhibernate-mapping-2.2"
-  namespace="NHibernate.Extensions.UnitTest.NpgSql.Data"
+  namespace="NHibernate.Extensions.UnitTest.TestDb"
   assembly="NHibernate.Extensions.UnitTest"
   >
 

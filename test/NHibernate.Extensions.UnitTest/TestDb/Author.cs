@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using NHibernate.Mapping.Attributes;
 
-namespace NHibernate.Extensions.UnitTest.NpgSql.Data {
+namespace NHibernate.Extensions.UnitTest.TestDb {
 
     [Class(Table = "authors", Schema = "public")]
     public class Author {

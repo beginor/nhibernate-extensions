@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using Newtonsoft.Json;
-using NHibernate.Extensions.UnitTest.NpgSql.Data;
+using NHibernate.Extensions.UnitTest.TestDb;
 using NUnit.Framework;
 
 namespace NHibernate.Extensions.UnitTest {

@@ -3,7 +3,7 @@ using NHibernate.Extensions.NpgSql;
 using NHibernate.Mapping.Attributes;
 using Newtonsoft.Json.Linq;
 
-namespace NHibernate.Extensions.UnitTest.NpgSql.Data {
+namespace NHibernate.Extensions.UnitTest.TestDb {
 
     [Class(Table = "test_table", Schema = "public")]
     public class TestEntity {

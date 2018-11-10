@@ -2,7 +2,7 @@ using System;
 using NHibernate.Mapping.Attributes;
 
 
-namespace NHibernate.Extensions.UnitTest.NpgSql.Data {
+namespace NHibernate.Extensions.UnitTest.TestDb {
 
     [Class(Table = "snow_flake_test", Schema = "public")]
     public class SnowFlakeTestEntity {

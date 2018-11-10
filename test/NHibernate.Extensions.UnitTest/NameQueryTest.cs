@@ -1,7 +1,7 @@
 using System.Linq;
 using NHibernate;
 using NHibernate.Linq;
-using NHibernate.Extensions.UnitTest.NpgSql.Data;
+using NHibernate.Extensions.UnitTest.TestDb;
 
 using NUnit.Framework;
 

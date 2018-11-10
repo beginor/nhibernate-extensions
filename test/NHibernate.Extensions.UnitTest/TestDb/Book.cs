@@ -1,7 +1,7 @@
 using NHibernate.Mapping.Attributes;
 using MFetchMode = NHibernate.Mapping.Attributes.FetchMode;
 
-namespace NHibernate.Extensions.UnitTest.NpgSql.Data {
+namespace NHibernate.Extensions.UnitTest.TestDb {
 
     [Class(Table = "books", Schema = "public")]
     public class Book {
