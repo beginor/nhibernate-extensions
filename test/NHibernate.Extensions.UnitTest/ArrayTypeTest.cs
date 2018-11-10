@@ -11,7 +11,7 @@ namespace NHibernate.Extensions.UnitTest.NpgSql {
 
         [Test]
         public void CanDoCrud() {
-            using (var session = factory.OpenSession()) {
+            using (var session = TestDbSessionFactory.OpenSession()) {
                 var entity = new TestEntity {
                     Name = "Test 1",
                     Tags = new [] { "hello", "world" },
@@ -34,7 +34,7 @@ namespace NHibernate.Extensions.UnitTest.NpgSql {
                 Console.WriteLine($"entity id: {entity.Id}");
             }
 
-            using (var session = factory.OpenSession()) {
+            using (var session = TestDbSessionFactory.OpenSession()) {
                 var query = session.Query<TestEntity>();
                 var entities = query.ToList();
                 Assert.NotNull(entities);

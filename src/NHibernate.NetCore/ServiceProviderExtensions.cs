@@ -5,14 +5,14 @@ namespace NHibernate.NetCore {
 
     public static class ServiceProviderExtensions {
 
-        public static ISessionFactory ResolveSessionFactory(
+        public static ISessionFactory GetSessionFactory(
             this IServiceProvider serviceProvider
         ) {
             var cfg = serviceProvider.GetService<IConfigurationProvider>();
             return cfg.GetSessionFactory();
         }
 
-        public static ISessionFactory ResolveSessionFactory(
+        public static ISessionFactory GetSessionFactory(
             this IServiceProvider serviceProvider,
             string key
         ) {

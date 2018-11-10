@@ -1,37 +1,41 @@
 using System;
 using System.IO;
+using Microsoft.Extensions.DependencyInjection;
 using NHibernate.Cfg;
+using NHibernate.NetCore;
 using NHibernate.Mapping.Attributes;
 using Npgsql;
+using NUnit.Framework;
 
 namespace NHibernate.Extensions.UnitTest {
 
     public abstract class BaseTest {
 
-        protected ISessionFactory factory { get; private set; }
+        protected IServiceProvider ServiceProvider { get; private set; }
 
-        public BaseTest() {
+        protected ISessionFactory TestDbSessionFactory => ServiceProvider.GetSessionFactory();
+
+        protected ISessionFactory DvdRentalSessionFactory => ServiceProvider.GetSessionFactory("dvd_rental");
+
+        [OneTimeSetUp]
+        public void OneTimeSetUp() {
+            // global setup
             NpgsqlConnection.GlobalTypeMapper.UseJsonNet();
-            var configuration = new Configuration();
-            var configFile = Path.Combine(
+            var services = new ServiceCollection();
+            // add default config
+            var defaultConfigFile = Path.Combine(
                 AppDomain.CurrentDomain.BaseDirectory,
                 "hibernate.config"
             );
-            configuration.Configure(configFile);
-//            var serializer = HbmSerializer.Default;
-//            var stream = serializer.Serialize(
-//                typeof(BaseTest).Assembly
-//            );
-//
-//            var err = serializer.Error.ToString();
-//
-//            Assert.IsEmpty(err);
-//
-//            var reader = new StreamReader(stream);
-//            var xml = reader.ReadToEnd();
-//            configuration.AddXml(xml);
-
-            factory = configuration.BuildSessionFactory();
+            services.AddHibernate(defaultConfigFile);
+            // add dvd_rental
+            var dvdRental = Path.Combine(
+                AppDomain.CurrentDomain.BaseDirectory,
+                "dvd_rental.config"
+            );
+            services.AddHibernate("dvd_rental", dvdRental);
+            // build service provider
+            ServiceProvider = services.BuildServiceProvider();
         }
 
     }

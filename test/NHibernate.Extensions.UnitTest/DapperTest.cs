@@ -22,7 +22,7 @@ namespace NHibernate.Extensions.UnitTest {
 
         [SetUp]
         public void SetUp() {
-            session = factory.OpenSession();
+            session = TestDbSessionFactory.OpenSession();
         }
 
         [TearDown]
@@ -31,7 +31,7 @@ namespace NHibernate.Extensions.UnitTest {
 
         [Test]
         public void CanQueryAuthors() {
-            using (var session = factory.OpenSession()) {
+            using (var session = TestDbSessionFactory.OpenSession()) {
                 var conn = session.Connection;
                 var authors = conn.Query<AuthorEntity>(
                     "select * from public.authors"

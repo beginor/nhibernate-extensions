@@ -33,7 +33,7 @@ namespace NHibernate.NetCore {
 
         public ISessionFactory GetSessionFactory(string key) {
             return sessionFactories.GetOrAdd(
-                DefaultSessionFactoryKey,
+                key,
                 k => {
                     var cfg = configurations[key];
                     if (cfg == null) {

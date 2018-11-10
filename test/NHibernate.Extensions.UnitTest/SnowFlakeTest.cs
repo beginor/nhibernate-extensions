@@ -10,7 +10,7 @@ namespace NHibernate.Extensions.UnitTest {
 
         [Test]
         public void _01_CanQuerySnowFlakeId() {
-            using (var session = factory.OpenSession()) {
+            using (var session = TestDbSessionFactory.OpenSession()) {
                 var entities = session.Query<SnowFlakeTestEntity>()
                     .ToList();
                 foreach (var entity in entities) {
@@ -22,7 +22,7 @@ namespace NHibernate.Extensions.UnitTest {
 
         [Test]
         public void _02_CanInsertSnowFlakeId() {
-            using (var session = factory.OpenSession()) {
+            using (var session = TestDbSessionFactory.OpenSession()) {
                 var entity = new SnowFlakeTestEntity {
                     Name = Guid.NewGuid().ToString("N")
                 };

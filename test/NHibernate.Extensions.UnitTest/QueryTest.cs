@@ -9,7 +9,7 @@ namespace NHibernate.Extensions.UnitTest {
 
         [Test]
         public void _01_CanQueryManyToOne() {
-            using (var session = factory.OpenSession()) {
+            using (var session = TestDbSessionFactory.OpenSession()) {
                 var query = session.Query<Book>().Select(b => b.Author);
                 var data = query.ToList();
                 Console.WriteLine(data.Count);
@@ -18,7 +18,7 @@ namespace NHibernate.Extensions.UnitTest {
 
         [Test]
         public void _02_CanQueryOneToMany() {
-            using (var session = factory.OpenSession()) {
+            using (var session = TestDbSessionFactory.OpenSession()) {
                 var query = session.Query<Author>().Select(a => new {
                     a.Name,
                     BookCount = a.Books.Count()
@@ -30,7 +30,7 @@ namespace NHibernate.Extensions.UnitTest {
 
         [Test]
         public void _03_CanQueryReference() {
-            using (var session = factory.OpenSession()) {
+            using (var session = TestDbSessionFactory.OpenSession()) {
                 var query = from book in session.Query<Book>()
                     select new {
                         BookId = book.BookId,

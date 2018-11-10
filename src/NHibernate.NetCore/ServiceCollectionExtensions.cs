@@ -8,8 +8,7 @@ namespace NHibernate.NetCore {
 
     public static class ServiceCollectionExtensions {
 
-        private static IConfigurationProvider configProvider
-            = new ConfigurationProvider();
+        private static IConfigurationProvider configProvider;
 
         public static void AddHibernate(
             this IServiceCollection services
@@ -103,13 +102,9 @@ namespace NHibernate.NetCore {
         private static void AddConfigurationProvider(
             this IServiceCollection services
         ) {
-            var descriptor = new ServiceDescriptor(
-                serviceType: typeof(IConfigurationProvider),
-                instance: configProvider
-            );
-            // descriptor.Lifetime = ServiceLifetime.Singleton;
-            if (!services.Contains(descriptor)) {
-                services.Add(descriptor);
+            if (configProvider == null) {
+                configProvider = new ConfigurationProvider();
+                services.AddSingleton(configProvider);
             }
         }
 
