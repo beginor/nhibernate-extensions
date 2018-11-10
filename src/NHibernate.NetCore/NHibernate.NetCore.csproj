@@ -4,12 +4,12 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>beginor</Authors>
     <Description>Extensions for NHibernate when used in dotnet core.
-For examples, visit https://github.com/nhibernate/NHibernate.AspNetCore.Identity/tree/master/test/WebTest</Description>
+For examples, visit https://github.com/beginor/nhibernate-extensions/blob/master/test/NHibernate.Extensions.UnitTest/BaseTest.cs</Description>
     <PackageId>NHibernate.NetCore</PackageId>
-    <PackageVersion>1.1.0</PackageVersion>
+    <PackageVersion>1.1.1</PackageVersion>
     <Owners>beginor</Owners>
     <Title>NHibernate.NetCore</Title>
-    <PackageProjectUrl>https://github.com/nhibernate/NHibernate.AspNetCore.Identity</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions</PackageProjectUrl>
     <PackageReleaseNotes>Add support for multiple nhibernate config.</PackageReleaseNotes>
   </PropertyGroup>
 
