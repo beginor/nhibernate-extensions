@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 
 namespace NHibernate.NetCore {
 
-    public class NetCoreLoggerFactory : INHibernateLoggerFactory {
+    public class NetCoreLoggerFactory : IDisposable, INHibernateLoggerFactory {
 
         private Microsoft.Extensions.Logging.ILoggerFactory loggerFactory;
 
@@ -11,6 +11,10 @@ namespace NHibernate.NetCore {
             Microsoft.Extensions.Logging.ILoggerFactory loggerFactory
         ) {
             this.loggerFactory = loggerFactory;
+        }
+
+        public void Dispose() {
+            loggerFactory?.Dispose();
         }
 
         public INHibernateLogger LoggerFor(string keyName) {

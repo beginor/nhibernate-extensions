@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 
 namespace NHibernate.NetCore {
 
-    public class NetCoreLogger : INHibernateLogger {
+    public class NetCoreLogger : IDisposable, INHibernateLogger {
 
         private ILogger logger;
 
@@ -11,6 +11,10 @@ namespace NHibernate.NetCore {
             ILogger logger
         ) {
             this.logger = logger;
+        }
+
+        public void Dispose() {
+            logger = null;
         }
 
         public bool IsEnabled(NHibernateLogLevel logLevel) {
