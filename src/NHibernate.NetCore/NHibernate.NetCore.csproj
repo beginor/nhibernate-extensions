@@ -12,7 +12,6 @@ For examples, visit https://github.com/beginor/nhibernate-extensions/blob/master
     <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions</PackageProjectUrl>
     <PackageReleaseNotes>- update NHibernate to 5.2.1 and other package updates;
 - NetCoreLoggerFactory and NetCoreLogger implments IDisposible interface.</PackageReleaseNotes>
-    <PackOnBuild>true</PackOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
