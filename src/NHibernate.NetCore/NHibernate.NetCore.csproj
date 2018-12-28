@@ -6,11 +6,13 @@
     <Description>Extensions for NHibernate when used in dotnet core.
 For examples, visit https://github.com/beginor/nhibernate-extensions/blob/master/test/NHibernate.Extensions.UnitTest/BaseTest.cs</Description>
     <PackageId>NHibernate.NetCore</PackageId>
-    <PackageVersion>1.1.1</PackageVersion>
+    <PackageVersion>1.1.2</PackageVersion>
     <Owners>beginor</Owners>
     <Title>NHibernate.NetCore</Title>
     <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions</PackageProjectUrl>
-    <PackageReleaseNotes>Add support for multiple nhibernate config.</PackageReleaseNotes>
+    <PackageReleaseNotes>- update NHibernate to 5.2.1 and other package updates;
+- NetCoreLoggerFactory and NetCoreLogger implments IDisposible interface.</PackageReleaseNotes>
+    <PackOnBuild>true</PackOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
@@ -20,8 +22,8 @@ For examples, visit https://github.com/beginor/nhibernate-extensions/blob/master
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging" Version="2.2.0" />
     <PackageReference Include="NHibernate" Version="5.2.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.1" />
-    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
+    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.2" />
   </ItemGroup>
 
 </Project>
