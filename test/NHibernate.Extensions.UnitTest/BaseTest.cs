@@ -23,7 +23,7 @@ namespace NHibernate.Extensions.UnitTest {
         protected ISessionFactory DvdRentalSessionFactory => ServiceProvider.GetSessionFactory("dvd_rental");
 
         [OneTimeSetUp]
-        public void OneTimeSetUp() {
+        public virtual void OneTimeSetUp() {
             // global setup
             NpgsqlConnection.GlobalTypeMapper.UseJsonNet();
             var services = new ServiceCollection();

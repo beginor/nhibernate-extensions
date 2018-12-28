@@ -5,9 +5,15 @@ using Newtonsoft.Json.Linq;
 using NHibernate.Extensions.UnitTest.TestDb;
 using NUnit.Framework;
 
-namespace NHibernate.Extensions.UnitTest.NpgSql {
+namespace NHibernate.Extensions.UnitTest {
 
+    [TestFixture]
     public class ArrayTypeTest : BaseTest {
+
+        [OneTimeSetUp]
+        public override void OneTimeSetUp() {
+            base.OneTimeSetUp();
+        }
 
         [Test]
         public void CanDoCrud() {

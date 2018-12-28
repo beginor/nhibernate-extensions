@@ -10,6 +10,11 @@ namespace NHibernate.Extensions.UnitTest {
     [TestFixture]
     public class DvdRentalTest : BaseTest {
 
+        [OneTimeSetUp]
+        public override void OneTimeSetUp() {
+            base.OneTimeSetUp();
+        }
+
         private ISession OpenSession() {
             return DvdRentalSessionFactory.OpenSession();
         }

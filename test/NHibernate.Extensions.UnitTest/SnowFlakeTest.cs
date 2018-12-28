@@ -6,7 +6,13 @@ using NUnit.Framework;
 
 namespace NHibernate.Extensions.UnitTest {
 
+    [TestFixture]
     public class SnowFlakeTest : BaseTest {
+
+        [OneTimeSetUp]
+        public override void OneTimeSetUp() {
+            base.OneTimeSetUp();
+        }
 
         [Test]
         public void _01_CanQuerySnowFlakeId() {

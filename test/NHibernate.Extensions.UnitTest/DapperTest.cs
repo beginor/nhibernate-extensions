@@ -10,25 +10,14 @@ namespace NHibernate.Extensions.UnitTest {
     [TestFixture]
     public class DapperTest : BaseTest {
 
-        private ISession session;
-
         [OneTimeSetUp]
-        public new void OneTimeSetUp() {
+        public override void OneTimeSetUp() {
             base.OneTimeSetUp();
             Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
         }
 
         [OneTimeTearDown]
         public void OneTimeTearDown() {
-        }
-
-        [SetUp]
-        public void SetUp() {
-            session = TestDbSessionFactory.OpenSession();
-        }
-
-        [TearDown]
-        public void TearDown() {
         }
 
         [Test]
