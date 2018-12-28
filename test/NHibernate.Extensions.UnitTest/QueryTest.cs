@@ -20,8 +20,8 @@ namespace NHibernate.Extensions.UnitTest {
         public void _02_CanQueryOneToMany() {
             using (var session = TestDbSessionFactory.OpenSession()) {
                 var query = session.Query<Author>().Select(a => new {
-                    a.Name,
-                    BookCount = a.Books.Count()
+                    Author = a,
+                    Books = a.Books
                 });
                 var data = query.ToList();
                 Console.WriteLine(data.Count);
@@ -39,6 +39,32 @@ namespace NHibernate.Extensions.UnitTest {
                 var data = query.ToList();
                 foreach (var d in data) {
                     Console.WriteLine($"{d.AuthorId}, {d.BookId}");
+                }
+            }
+        }
+
+        [Test]
+        public void _04_CanSaveOneToMany() {
+            using (var session = TestDbSessionFactory.OpenSession()) {
+                using (var tx = session.BeginTransaction()) {
+                    try {
+                        var author = new Author();
+                        author.Name = "beginor";
+                        session.Save(author);
+                        var book = new Book();
+                        book.Title = "learning nhibernate";
+                        book.Author = author;
+                        session.Save(book);
+                        session.Flush();
+
+                        session.Delete(book);
+                        session.Delete(author);
+                        tx.Commit();
+                    }
+                    catch (Exception) {
+                        tx.Rollback();
+                        throw;
+                    }
                 }
             }
         }

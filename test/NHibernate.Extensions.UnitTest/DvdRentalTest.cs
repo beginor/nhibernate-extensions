@@ -19,21 +19,21 @@ namespace NHibernate.Extensions.UnitTest {
             Assert.IsNotNull(DvdRentalSessionFactory);
             Assert.IsNotNull(TestDbSessionFactory);
 
-            var session1 = DvdRentalSessionFactory.OpenSession();
-            var connStr = session1.Connection.ConnectionString;
+            var dvdRentalSession = DvdRentalSessionFactory.OpenSession();
+            var connStr = dvdRentalSession.Connection.ConnectionString;
             Console.WriteLine(connStr);
-            session1.Close();
+            dvdRentalSession.Close();
 
-            var session2 = TestDbSessionFactory.OpenSession();
-            var connStr2 = session2.Connection.ConnectionString;
+            var testDbSession = TestDbSessionFactory.OpenSession();
+            var connStr2 = testDbSession.Connection.ConnectionString;
             Console.WriteLine(connStr2);
-            session2.Close();
+            testDbSession.Close();
 
             Assert.AreNotEqual(connStr, connStr2);
         }
 
         [Test]
-        public void _02_CanQueryAuthors() {
+        public void _02_CanQueryActors() {
             var factory = DvdRentalSessionFactory;
             using (var session = factory.OpenSession()) {
                 var actors = session.Query<Actor>().ToList();

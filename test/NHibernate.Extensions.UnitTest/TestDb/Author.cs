@@ -16,7 +16,7 @@ namespace NHibernate.Extensions.UnitTest.TestDb {
         [Bag(Table = "books", Inverse = true)]
         [Key(Column = "authorid")]
         [OneToMany(ClassType = typeof(Book))]
-        public virtual ICollection<Book> Books { get; set; }
+        public virtual ICollection<Book> Books { get; set; } = new List<Book>();
 
     }
 

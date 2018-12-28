@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Dapper;
 using Newtonsoft.Json.Linq;
+using Npgsql;
 using NUnit.Framework;
 
 namespace NHibernate.Extensions.UnitTest {
@@ -12,7 +13,8 @@ namespace NHibernate.Extensions.UnitTest {
         private ISession session;
 
         [OneTimeSetUp]
-        public void OneTimeSetUp() {
+        public new void OneTimeSetUp() {
+            base.OneTimeSetUp();
             Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
         }
 
