@@ -1,4 +1,5 @@
 using System;
+using System.Data;
 using System.Linq;
 using Dapper;
 using Newtonsoft.Json.Linq;
@@ -39,6 +40,26 @@ namespace NHibernate.Extensions.UnitTest {
             }
         }
 
+        [Test]
+        public void CanUseTypeHandler() {
+            using (var session = TestDbSessionFactory.OpenSession()) {
+                var conn = session.Connection;
+                Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
+                SqlMapper.AddTypeHandler(new DateTimeHandler());
+                var entity = conn.Query<TestTableEntity>(
+                    "select * from public.test_table order by update_time limit 1"
+                ).FirstOrDefault();
+                Assert.NotNull(entity);
+
+                var updated = conn.Execute(
+                    "update public.test_table set update_time = @updateTime where id = @id",
+                    new { id = entity.Id, updateTime = DateTime.Now }
+                );
+                Assert.AreEqual(1, updated);
+
+            }
+        }
+
     }
 
     public class AuthorEntity {
@@ -65,5 +86,20 @@ namespace NHibernate.Extensions.UnitTest {
         public virtual float[] FloatArr { get; set; }
         public virtual double[] DoubleArr { get; set; }
         public virtual bool[] BooleanArr { get; set; }
+    }
+
+    public class DateTimeHandler : Dapper.SqlMapper.TypeHandler<DateTime> {
+
+        public override void SetValue(IDbDataParameter parameter, DateTime value) {
+            Console.WriteLine("set value!");
+            parameter.Value = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
+
+        public override DateTime Parse(object value) {
+            Console.WriteLine("parse!");
+            var localTime = (DateTime) value;
+            return DateTime.SpecifyKind(localTime, DateTimeKind.Utc);
+        }
+
     }
 }

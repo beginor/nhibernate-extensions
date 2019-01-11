@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<hibernate-mapping
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns="urn:nhibernate-mapping-2.2"
+  namespace="NHibernate.Extensions.UnitTest.TestDb"
+  assembly="NHibernate.Extensions.UnitTest"
+>
+
+  <class name="VersionTable" table="version_table" schema="public">
+    <id name="Id" column="id" type="long" generator="trigger-identity"/>
+    <version name="Version" column="version" type="int" />
+    <property name="Name" column="name" type="string" length="32" />
+    <property name="Description" column="description" type="string" length="64" />
+  </class>
+
+</hibernate-mapping>
+
