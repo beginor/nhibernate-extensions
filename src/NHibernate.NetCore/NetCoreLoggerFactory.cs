@@ -1,20 +1,32 @@
 ﻿using System;
 using Microsoft.Extensions.Logging;
+using MsILoggerFactory = Microsoft.Extensions.Logging.ILoggerFactory;
 
 namespace NHibernate.NetCore {
 
     public class NetCoreLoggerFactory : IDisposable, INHibernateLoggerFactory {
 
-        private Microsoft.Extensions.Logging.ILoggerFactory loggerFactory;
+        private MsILoggerFactory loggerFactory;
 
         public NetCoreLoggerFactory(
-            Microsoft.Extensions.Logging.ILoggerFactory loggerFactory
+            MsILoggerFactory loggerFactory
         ) {
             this.loggerFactory = loggerFactory;
         }
 
+        ~NetCoreLoggerFactory() {
+            this.Disposing(false);
+        }
+
         public void Dispose() {
-            loggerFactory?.Dispose();
+            Disposing(true);
+        }
+
+        protected virtual void Disposing(bool disposing) {
+            if (disposing) {
+                loggerFactory?.Dispose();
+                loggerFactory = null;
+            }
         }
 
         public INHibernateLogger LoggerFor(string keyName) {
@@ -26,6 +38,7 @@ namespace NHibernate.NetCore {
             var logger = loggerFactory.CreateLogger(type);
             return new NetCoreLogger(logger);
         }
+
     }
 
 }
