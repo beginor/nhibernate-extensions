@@ -13,8 +13,18 @@ namespace NHibernate.NetCore {
             this.logger = logger;
         }
 
+        ~NetCoreLogger() {
+            Dispose(false);
+        }
+
         public void Dispose() {
-            logger = null;
+            Dispose(true);
+        }
+
+        protected virtual void Dispose(bool disposing) {
+            if (disposing) {
+                logger = null;
+            }
         }
 
         public bool IsEnabled(NHibernateLogLevel logLevel) {

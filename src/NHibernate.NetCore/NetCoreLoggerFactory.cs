@@ -15,14 +15,14 @@ namespace NHibernate.NetCore {
         }
 
         ~NetCoreLoggerFactory() {
-            this.Disposing(false);
+            Dispose(false);
         }
 
         public void Dispose() {
-            Disposing(true);
+            Dispose(true);
         }
 
-        protected virtual void Disposing(bool disposing) {
+        protected virtual void Dispose(bool disposing) {
             if (disposing) {
                 loggerFactory?.Dispose();
                 loggerFactory = null;
