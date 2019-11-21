@@ -18,9 +18,6 @@
     <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
   </ItemGroup>
   <ItemGroup>
-    <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\src\NHibernate.Extensions.NpgSql\NHibernate.Extensions.NpgSql.csproj" />
     <ProjectReference Include="..\..\src\NHibernate.NetCore\NHibernate.NetCore.csproj" />
   </ItemGroup>
