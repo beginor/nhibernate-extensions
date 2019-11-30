@@ -15,7 +15,10 @@ Extended PostgreSQL driver for NHibernate, with support of:
 Extensions for NHibernate when used in dotnet core:
 
 - Use `Microsoft.Extensions.Logging.ILoggerFactory` as NHibernate's logger factory;
-- Service Collection Extension of `AddHibernate` method for integration with `IServiceProvider`,
+- Service Collection Extension of `AddHibernate` method for integration with `IServiceProvider`;
+- `OrderBy(string propertyName)`, `OrderByDescending(string propertyName)` and
+  `AddOrderBy(string propertyName, bool isAsc)` extension methods to `IQueryable<T>`, 
+  make fun with dynamic order by.
 
 Example usage:
 
