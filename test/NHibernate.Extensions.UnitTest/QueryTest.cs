@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using NHibernate.Extensions.UnitTest.TestDb;
+using NHibernate.NetCore;
 using NUnit.Framework;
 
 namespace NHibernate.Extensions.UnitTest {
@@ -72,6 +73,21 @@ namespace NHibernate.Extensions.UnitTest {
                         throw;
                     }
                 }
+            }
+        }
+
+        [Test]
+        public void _05_CanAddOrderBy() {
+            using (var session = TestDbSessionFactory.OpenSession()) {
+                var queryAsc = session.Query<Book>()
+                    .AddOrderBy(propertyName: "Title", isAsc: true);
+                var dataAsc = queryAsc.ToList();
+                Console.WriteLine(dataAsc.Count);
+                //
+                var queryDesc = session.Query<Book>()
+                    .AddOrderBy(propertyName: "Title", isAsc: false);
+                var dataDesc = queryDesc.ToList();
+                Console.WriteLine(dataDesc.Count);
             }
         }
 
