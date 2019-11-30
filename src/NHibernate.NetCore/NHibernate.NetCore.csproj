@@ -6,11 +6,11 @@
     <Description>Extensions for NHibernate when used in dotnet core.
 For examples, visit https://github.com/beginor/nhibernate-extensions/blob/master/test/NHibernate.Extensions.UnitTest/BaseTest.cs</Description>
     <PackageId>NHibernate.NetCore</PackageId>
-    <PackageVersion>3.0.0</PackageVersion>
+    <PackageVersion>3.1.0</PackageVersion>
     <Owners>beginor</Owners>
     <Title>NHibernate.NetCore</Title>
     <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions</PackageProjectUrl>
-    <PackageReleaseNotes>Update package references, add initial support for .net core 3.0.</PackageReleaseNotes>
+    <PackageReleaseNotes>`AddOrderBy(string propertyName, bool isAsc)` extension methods to `IQueryable&lt;T&gt;`, make fun with dynamic order by.</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
