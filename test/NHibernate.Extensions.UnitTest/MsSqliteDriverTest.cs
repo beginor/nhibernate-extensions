@@ -59,6 +59,19 @@ namespace NHibernate.Extensions.UnitTest {
             }
         }
 
+        [Test]
+        public void _02_CanSaveDelete() {
+            using (var session = sessionFactory.OpenSession()) {
+                var author = new Author {
+                    Name = "Unit Test"
+                };
+                session.Save(author);
+                session.Flush();
+                Assert.Greater(author.AuthorId, 0);
+                session.Delete(author);
+            }
+        }
+
     }
 
     public class AuthorMappingSqlite : ClassMapping<Author> {
