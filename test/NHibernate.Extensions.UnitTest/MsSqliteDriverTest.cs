@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using System.Linq;
 using Microsoft.Data.Sqlite;
 using NHibernate.Cfg;
 using NHibernate.Extensions.UnitTest.TestDb;
@@ -15,24 +16,24 @@ namespace NHibernate.Extensions.UnitTest {
         private ISessionFactory sessionFactory;
 
         public MsSqliteDriverTest() {
-            // try {
-            //     var configuration = new Configuration();
-            //     configuration.Configure("hibernate.sqlite.config");
-            //     var mapper = new ModelMapper();
-            //     mapper.AddMapping<AuthorMappingSqlite>();
-            //     var mapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
-            //     configuration.AddMapping(mapping);
-            //     sessionFactory = configuration.BuildSessionFactory();
-            // }
-            // catch (Exception ex) {
-            //     Console.WriteLine(ex);
-            // }
+            try {
+                var configuration = new Configuration();
+                configuration.Configure("hibernate.sqlite.config");
+                var mapper = new ModelMapper();
+                mapper.AddMapping<AuthorMappingSqlite>();
+                var mapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
+                configuration.AddMapping(mapping);
+                sessionFactory = configuration.BuildSessionFactory();
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex);
+            }
         }
 
         [Test]
         public void _00_CanQuerySqlite() {
             var builder = new SqliteConnectionStringBuilder();
-            builder.DataSource = "/Users/zhang/Projects/nhibernate/nhibernate-extensions/test/NHibernate.Extensions.UnitTest/test_db.db3";
+            builder.DataSource = "./test_db.db3";
             builder.ForeignKeys = true;
             var connStr = builder.ToString();
             var conn = new SqliteConnection(connStr);
@@ -48,6 +49,14 @@ namespace NHibernate.Extensions.UnitTest {
         [Test]
         public void _01_CanBuildSessionFactory() {
             Assert.IsNotNull(sessionFactory);
+            using (var session = sessionFactory.OpenSession()) {
+                var authors = session.Query<Author>()
+                    .Where(a => a.AuthorId > 0)
+                    .ToList();
+                Assert.IsNotEmpty(authors);
+                var count = session.Query<Author>().LongCount(a => a.AuthorId > 0);
+                Assert.GreaterOrEqual(count, 0);
+            }
         }
 
     }
@@ -55,7 +64,7 @@ namespace NHibernate.Extensions.UnitTest {
     public class AuthorMappingSqlite : ClassMapping<Author> {
 
         public AuthorMappingSqlite() {
-            Schema("main");
+            // Schema("main");
             Table("authors");
             Id(e => e.AuthorId, m => {
                 m.Column("id");
