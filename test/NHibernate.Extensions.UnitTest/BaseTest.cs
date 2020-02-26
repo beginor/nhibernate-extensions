@@ -1,14 +1,11 @@
 using System;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
-using NHibernate.Cfg;
 using NHibernate.Extensions.UnitTest.DvdRental;
 using NHibernate.Extensions.UnitTest.TestDb;
 using NHibernate.Linq;
 using NHibernate.NetCore;
-using NHibernate.Mapping.Attributes;
 using Npgsql;
 using NUnit.Framework;
 
