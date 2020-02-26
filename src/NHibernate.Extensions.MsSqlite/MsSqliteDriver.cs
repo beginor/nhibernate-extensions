@@ -7,9 +7,11 @@ namespace NHibernate.Extensions.MsSqlite {
     /// NHibernate driver for the Microsoft.Data.Sqlite.Core data provider for .NET.
     /// </summary>
     /// <remarks>
-    /// In order to use this driver, you must have the nuget package <a href="https://www.nuget.org/packages/Microsoft.Data.Sqlite.Core/">Microsoft.Data.Sqlite.Core</a>
-    /// and <a href="https://www.nuget.org/packages/SQLitePCLRaw.bundle_e_sqlite3/">SQLitePCLRaw.bundle_e_sqlite3</a> installed for NHibernate to load.
-    /// ```
+    /// In order to use this driver, you must have the nuget package
+    /// <a href="https://www.nuget.org/packages/Microsoft.Data.Sqlite.Core/">
+    /// Microsoft.Data.Sqlite.Core</a> and
+    /// <a href="https://www.nuget.org/packages/SQLitePCLRaw.bundle_e_sqlite3/">
+    /// SQLitePCLRaw.bundle_e_sqlite3</a> installed for NHibernate to load.
     /// </remarks>
     public class MsSqliteDriver : ReflectionBasedDriver {
 
@@ -21,7 +23,6 @@ namespace NHibernate.Extensions.MsSqlite {
         ) { }
 
         public override IResultSetsCommand GetResultSetsCommand(ISessionImplementor session) {
-            NHibernate.Driver.SQLite20Driver d;
             return new BasicResultSetsCommand(session);
         }
 
