@@ -16,18 +16,13 @@ namespace NHibernate.Extensions.UnitTest {
         private ISessionFactory sessionFactory;
 
         public MsSqliteDriverTest() {
-            try {
-                var configuration = new Configuration();
-                configuration.Configure("hibernate.sqlite.config");
-                var mapper = new ModelMapper();
-                mapper.AddMapping<AuthorMappingSqlite>();
-                var mapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
-                configuration.AddMapping(mapping);
-                sessionFactory = configuration.BuildSessionFactory();
-            }
-            catch (Exception ex) {
-                Console.WriteLine(ex);
-            }
+            var configuration = new Configuration();
+            configuration.Configure("hibernate.sqlite.config");
+            var mapper = new ModelMapper();
+            mapper.AddMapping<AuthorMappingSqlite>();
+            var mapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
+            configuration.AddMapping(mapping);
+            sessionFactory = configuration.BuildSessionFactory();
         }
 
         [Test]
@@ -69,6 +64,7 @@ namespace NHibernate.Extensions.UnitTest {
                 session.Flush();
                 Assert.Greater(author.AuthorId, 0);
                 session.Delete(author);
+                session.Flush();
             }
         }
 

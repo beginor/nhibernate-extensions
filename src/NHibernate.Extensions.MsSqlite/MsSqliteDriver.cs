@@ -1,44 +1,27 @@
-﻿using System;
-using System.Data;
-using System.Data.Common;
-using NHibernate.Driver;
+﻿using NHibernate.Driver;
 using NHibernate.Engine;
 
 namespace NHibernate.Extensions.MsSqlite {
 
+    /// <summary>
+    /// NHibernate driver for the Microsoft.Data.Sqlite.Core data provider for .NET.
+    /// </summary>
+    /// <remarks>
+    /// In order to use this driver, you must have the nuget package <a href="https://www.nuget.org/packages/Microsoft.Data.Sqlite.Core/">Microsoft.Data.Sqlite.Core</a>
+    /// and <a href="https://www.nuget.org/packages/SQLitePCLRaw.bundle_e_sqlite3/">SQLitePCLRaw.bundle_e_sqlite3</a> installed for NHibernate to load.
+    /// ```
+    /// </remarks>
     public class MsSqliteDriver : ReflectionBasedDriver {
 
         public MsSqliteDriver() : base(
-            "Microsoft.Data.Sqlite",
+            "Microsoft.Data.Sqlite.Core",
             "Microsoft.Data.Sqlite",
             "Microsoft.Data.Sqlite.SqliteConnection",
             "Microsoft.Data.Sqlite.SqliteCommand"
-        ) {}
-
-        public override DbConnection CreateConnection() {
-            var connection = base.CreateConnection();
-            connection.StateChange += OnConnectionStateChange;
-            return connection;
-        }
-
-        private static void OnConnectionStateChange(
-            object sender,
-            StateChangeEventArgs e
-        ) {
-            if ((e.OriginalState == ConnectionState.Broken || e.OriginalState == ConnectionState.Closed || e.OriginalState == ConnectionState.Connecting) &&
-                e.CurrentState == ConnectionState.Open
-            ) {
-                var connection = (DbConnection)sender;
-                using (var command = connection.CreateCommand()) {
-                    // Activated foreign keys if supported by SQLite.
-                    // Unknown pragmas are ignored.
-                    command.CommandText = "PRAGMA foreign_keys = ON";
-                    command.ExecuteNonQuery();
-                }
-            }
-        }
+        ) { }
 
         public override IResultSetsCommand GetResultSetsCommand(ISessionImplementor session) {
+            NHibernate.Driver.SQLite20Driver d;
             return new BasicResultSetsCommand(session);
         }
 
