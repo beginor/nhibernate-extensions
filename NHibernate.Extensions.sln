@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHibernate.Extensions.NpgSq
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHibernate.NetCore", "src\NHibernate.NetCore\NHibernate.NetCore.csproj", "{1E7730FE-B3DE-43FF-B1CC-586FEF398DDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHibernate.Extensions.MsSqlite", "src\NHibernate.Extensions.MsSqlite\NHibernate.Extensions.MsSqlite.csproj", "{8D8D3FBF-AA0D-4358-A077-FA4381457B93}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHibernate.Extensions.Sqlite", "src\NHibernate.Extensions.Sqlite\NHibernate.Extensions.Sqlite.csproj", "{8D8D3FBF-AA0D-4358-A077-FA4381457B93}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
