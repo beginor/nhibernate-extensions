@@ -10,6 +10,14 @@ Extended PostgreSQL driver for NHibernate, with support of:
 - Array type of `boolean`, `double`, `float (real)`, `int`, `short (small int)`,
   `long (big int)` and `string (character)`；
 
+## NHibernate.Extensions.Sqlite
+
+NHibernate driver for the Microsoft.Data.Sqlite.Core data provider for .NET.
+
+In order to use this driver, you must have the nuget package [Microsoft.Data.Sqlite.Core](https://www.nuget.org/packages/Microsoft.Data.Sqlite.Core/) and [SQLitePCLRaw.bundle_e_sqlite3](https://www.nuget.org/packages/SQLitePCLRaw.bundle_e_sqlite3/) installed for NHibernate to load.
+
+It's a .NET Standard 2.0 Driver, Can run on any platform that dotnet core support.
+
 ## NHibernate.NetCore
 
 Extensions for NHibernate when used in dotnet core:
