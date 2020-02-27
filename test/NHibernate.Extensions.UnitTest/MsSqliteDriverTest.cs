@@ -6,6 +6,7 @@ using NHibernate.Cfg;
 using NHibernate.Extensions.UnitTest.TestDb;
 using NHibernate.Mapping.ByCode;
 using NHibernate.Mapping.ByCode.Conformist;
+using NHibernate.Tool.hbm2ddl;
 using NUnit.Framework;
 
 namespace NHibernate.Extensions.UnitTest {
@@ -16,13 +17,18 @@ namespace NHibernate.Extensions.UnitTest {
         private ISessionFactory sessionFactory;
 
         public MsSqliteDriverTest() {
+            var configuration = CreateConfiguration();
+            sessionFactory = configuration.BuildSessionFactory();
+        }
+
+        private static Configuration CreateConfiguration() {
             var configuration = new Configuration();
             configuration.Configure("hibernate.sqlite.config");
             var mapper = new ModelMapper();
             mapper.AddMapping<AuthorMappingSqlite>();
             var mapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
             configuration.AddMapping(mapping);
-            sessionFactory = configuration.BuildSessionFactory();
+            return configuration;
         }
 
         [Test]
@@ -66,6 +72,12 @@ namespace NHibernate.Extensions.UnitTest {
                 session.Delete(author);
                 session.Flush();
             }
+        }
+
+        [Test]
+        public void _03_CanDoschemaExport() {
+            var exporter = new SchemaExport(CreateConfiguration());
+            exporter.Execute(true, false, false);
         }
 
     }
