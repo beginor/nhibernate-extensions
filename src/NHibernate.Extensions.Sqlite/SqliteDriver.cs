@@ -1,7 +1,7 @@
 ﻿using NHibernate.Driver;
 using NHibernate.Engine;
 
-namespace NHibernate.Extensions.MsSqlite {
+namespace NHibernate.Extensions.Sqlite {
 
     /// <summary>
     /// NHibernate driver for the Microsoft.Data.Sqlite.Core data provider for .NET.
@@ -13,9 +13,9 @@ namespace NHibernate.Extensions.MsSqlite {
     /// <a href="https://www.nuget.org/packages/SQLitePCLRaw.bundle_e_sqlite3/">
     /// SQLitePCLRaw.bundle_e_sqlite3</a> installed for NHibernate to load.
     /// </remarks>
-    public class MsSqliteDriver : ReflectionBasedDriver {
+    public class SqliteDriver : ReflectionBasedDriver {
 
-        public MsSqliteDriver() : base(
+        public SqliteDriver() : base(
             "Microsoft.Data.Sqlite.Core",
             "Microsoft.Data.Sqlite",
             "Microsoft.Data.Sqlite.SqliteConnection",

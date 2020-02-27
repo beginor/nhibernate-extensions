@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageVersion>2.0.0</PackageVersion>
+    <Title>NHibernate.Extensions.Sqlite</Title>
+    <Authors>beginor</Authors>
+    <Description>NHibernate Sqlite Driver with Microsoft.Data.Sqlite.Core</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NHibernate" Version="5.2.7" />
+  </ItemGroup>
+
+</Project>
