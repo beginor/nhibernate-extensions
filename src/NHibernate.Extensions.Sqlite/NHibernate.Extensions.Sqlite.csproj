@@ -2,17 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageVersion>2.0.0</PackageVersion>
+    <PackageVersion>2.0.1</PackageVersion>
     <Title>NHibernate.Extensions.Sqlite</Title>
-    <PackageReleaseNotes>Initial release, since it is a .NET Standard 2.0 library, so the version starts with 2.0.0 .</PackageReleaseNotes>
+    <PackageReleaseNotes>Update package metadata.</PackageReleaseNotes>
     <Authors>beginor</Authors>
-    <Description>NHibernate Sqlite Driver with Microsoft.Data.Sqlite.Core.
-      In order to use this driver, you must have the nuget package
-      [Microsoft.Data.Sqlite.Core](https://www.nuget.org/packages/Microsoft.Data.Sqlite.Core/)
-      and [SQLitePCLRaw.bundle_e_sqlite3](https://www.nuget.org/packages/SQLitePCLRaw.bundle_e_sqlite3/)
-      installed for NHibernate to load.
-      It's a .NET Standard 2.0 Driver, Can run on any platform that dotnet core support.
+    <Description>NHibernate Sqlite Driver with Microsoft.Data.Sqlite.Core. In order to use this driver, you must have the nuget package [Microsoft.Data.Sqlite.Core](https://www.nuget.org/packages/Microsoft.Data.Sqlite.Core/) and [SQLitePCLRaw.bundle_e_sqlite3](https://www.nuget.org/packages/SQLitePCLRaw.bundle_e_sqlite3/) installed for NHibernate to load. It's a .NET Standard 2.0 Driver, Can run on any platform that dotnet core support.
     </Description>
+    <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/beginor/nhibernate-extensions/</RepositoryUrl>
+    <PackageTags>nhibernate, driver, sqlite, .net core, .net standard 2.0</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
