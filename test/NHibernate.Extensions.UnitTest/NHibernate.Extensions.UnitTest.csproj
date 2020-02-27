@@ -23,7 +23,7 @@
     <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\NHibernate.Extensions.MsSqlite\NHibernate.Extensions.MsSqlite.csproj" />
+    <ProjectReference Include="..\..\src\NHibernate.Extensions.Sqlite\NHibernate.Extensions.Sqlite.csproj" />
     <ProjectReference Include="..\..\src\NHibernate.Extensions.NpgSql\NHibernate.Extensions.NpgSql.csproj" />
     <ProjectReference Include="..\..\src\NHibernate.NetCore\NHibernate.NetCore.csproj" />
   </ItemGroup>

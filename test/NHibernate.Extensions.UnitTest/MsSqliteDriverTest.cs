@@ -7,16 +7,17 @@ using NHibernate.Extensions.UnitTest.TestDb;
 using NHibernate.Mapping.ByCode;
 using NHibernate.Mapping.ByCode.Conformist;
 using NHibernate.Tool.hbm2ddl;
+using NHibernate.Type;
 using NUnit.Framework;
 
 namespace NHibernate.Extensions.UnitTest {
 
     [TestFixture]
-    public class MsSqliteDriverTest {
+    public class SqliteDriverTest {
 
         private ISessionFactory sessionFactory;
 
-        public MsSqliteDriverTest() {
+        public SqliteDriverTest() {
             var configuration = CreateConfiguration();
             sessionFactory = configuration.BuildSessionFactory();
         }
@@ -26,6 +27,7 @@ namespace NHibernate.Extensions.UnitTest {
             configuration.Configure("hibernate.sqlite.config");
             var mapper = new ModelMapper();
             mapper.AddMapping<AuthorMappingSqlite>();
+            mapper.AddMapping<BookMappingSqlite>();
             var mapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
             configuration.AddMapping(mapping);
             return configuration;
@@ -97,6 +99,35 @@ namespace NHibernate.Extensions.UnitTest {
                 m.Type(NHibernateUtil.String);
                 m.Length(16);
                 m.NotNullable(true);
+            });
+            Bag(p => p.Books, map => {
+                map.Key(k => k.Column("author_id"));
+                map.Inverse(true);
+                map.Cascade(Cascade.DeleteOrphans);
+            }, c => {
+                c.OneToMany();
+            });
+        }
+
+    }
+
+    public class BookMappingSqlite : ClassMapping<Book> {
+
+        public BookMappingSqlite() {
+            Table("books");
+            Id(e => e.BookId, map => {
+                map.Column("id");
+                map.Type(NHibernateUtil.Int32);
+                map.Generator(Generators.Identity);
+            });
+            Property(p => p.Title, map => {
+                map.Column("title");
+                map.Type(NHibernateUtil.String);
+            });
+            ManyToOne(p => p.Author, map => {
+                map.Column("author_id");
+                map.Fetch(FetchKind.Join);
+                map.ForeignKey("fk_books_author_id");
             });
         }
 
