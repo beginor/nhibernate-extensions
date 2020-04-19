@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Text.Json;
 using NHibernate.Extensions.UnitTest.TestDb;
 using NUnit.Framework;
 
@@ -21,8 +20,8 @@ namespace NHibernate.Extensions.UnitTest {
                 var entity = new TestEntity {
                     Name = "Test 1",
                     Tags = new [] { "hello", "world" },
-                    JsonField = JToken.Parse("{ \"val\": 1 }"),
-                    JsonbField = JToken.Parse("{ \"val\": 1 }"),
+                    JsonField = JsonSerializer.Deserialize<JsonElement>("{ \"val\": 1 }"),
+                    JsonbField = JsonSerializer.Deserialize<JsonElement>("{ \"val\": 1 }"),
                     UpdateTime = DateTime.Now,
                     Int16Arr = new short[] { 1, 2, 3 },
                     Int32Arr = new [] { 1, 2, 3 },
@@ -48,7 +47,7 @@ namespace NHibernate.Extensions.UnitTest {
 
                 using (var tx = session.BeginTransaction()) {
                     foreach (var e in entities) {
-                        Console.WriteLine(JsonConvert.SerializeObject(e));
+                        Console.WriteLine(JsonSerializer.Serialize(e));
                         session.Delete(e);
                     }
                     tx.Commit();

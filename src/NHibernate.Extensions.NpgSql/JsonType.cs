@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.Common;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Text.Json;
 using NHibernate.Engine;
 using NHibernate.SqlTypes;
 using NHibernate.UserTypes;
@@ -11,13 +10,13 @@ using NpgsqlTypes;
 
 namespace NHibernate.Extensions.NpgSql {
 
-    public class JsonType : IUserType {
+    public class JsonType<T> : IUserType {
 
         public virtual SqlType[] SqlTypes => new SqlType[] {
             new NpgSqlType(DbType.Object, NpgsqlDbType.Json)
         };
 
-        public System.Type ReturnedType => typeof(JToken);
+        public System.Type ReturnedType => typeof(T);
 
         public bool IsMutable => true;
 
@@ -29,8 +28,8 @@ namespace NHibernate.Extensions.NpgSql {
             if (value == null) {
                 return null;
             }
-            var json = JsonConvert.SerializeObject(value);
-            var obj = JsonConvert.DeserializeObject(json, value.GetType());
+            var json = JsonSerializer.Serialize(value);
+            var obj = JsonSerializer.Deserialize(json, value.GetType());
             return obj;
         }
 
@@ -45,7 +44,7 @@ namespace NHibernate.Extensions.NpgSql {
             if (x == null || y == null) {
                 return false;
             }
-            return ((JToken)x).Equals((JToken)y);
+            return ((T)x).Equals((T)y);
         }
 
         public int GetHashCode(object x) {
@@ -64,7 +63,7 @@ namespace NHibernate.Extensions.NpgSql {
                 );
             }
             if (rs[names[0]] is string val) {
-                return JToken.Parse(val);
+                return JsonSerializer.Deserialize<T>(val);
             }
             return null;
         }
@@ -84,5 +83,17 @@ namespace NHibernate.Extensions.NpgSql {
         }
 
     }
+
+    public class JsonbType<T> : JsonType<T> {
+
+        public override SqlType[] SqlTypes => new SqlType[] {
+            new NpgSqlType(DbType.Binary, NpgsqlDbType.Jsonb)
+        };
+
+    }
+
+    public class JsonType : JsonType<JsonElement> { }
+
+    public class JsonbType : JsonbType<JsonElement> { }
 
 }

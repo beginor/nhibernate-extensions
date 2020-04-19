@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Text.Json;
 using NHibernate.Extensions.NpgSql;
 using NHibernate.Mapping.Attributes;
-using Newtonsoft.Json.Linq;
 
 namespace NHibernate.Extensions.UnitTest.TestDb {
 
@@ -10,7 +10,7 @@ namespace NHibernate.Extensions.UnitTest.TestDb {
 
         [Id(Name = nameof(Id), Column = "id", Type = "long")]
         [Generator(Class = "sequence")]
-        [Param(Name = "sequence", Content = "public.test_table_id_seq")]
+        [Param(Name = "sequence", Content = "public.test_id_seq")]
         public virtual long Id { get; set; }
 
         [Property(Column = "name", Type = "string", Length = 32)]
@@ -20,10 +20,10 @@ namespace NHibernate.Extensions.UnitTest.TestDb {
         public virtual string[] Tags { get; set; }
 
         [Property(Column = "json_field", TypeType = typeof(JsonType))]
-        public virtual JToken JsonField { get; set; }
+        public virtual JsonElement JsonField { get; set; }
 
         [Property(Column = "jsonb_field", TypeType = typeof(JsonbType))]
-        public virtual JToken JsonbField { get; set; }
+        public virtual JsonElement JsonbField { get; set; }
 
         [Property(Column = "update_time", Type = "datetime")]
         public virtual DateTime? UpdateTime { get; set; }

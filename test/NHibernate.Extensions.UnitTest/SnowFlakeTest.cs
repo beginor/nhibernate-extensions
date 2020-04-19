@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Text.Json;
 using NHibernate.Extensions.UnitTest.TestDb;
 using NUnit.Framework;
 
@@ -21,7 +21,7 @@ namespace NHibernate.Extensions.UnitTest {
                     .ToList();
                 foreach (var entity in entities) {
                     Assert.True(entity.Id > 0);
-                    Console.WriteLine(JsonConvert.SerializeObject(entity));
+                    Console.WriteLine(JsonSerializer.Serialize(entity));
                 }
             }
         }

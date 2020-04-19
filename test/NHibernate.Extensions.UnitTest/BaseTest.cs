@@ -22,7 +22,7 @@ namespace NHibernate.Extensions.UnitTest {
         [OneTimeSetUp]
         public virtual void OneTimeSetUp() {
             // global setup
-            NpgsqlConnection.GlobalTypeMapper.UseJsonNet();
+            // NpgsqlConnection.GlobalTypeMapper.UseJsonNet();
             var services = new ServiceCollection();
             // add default config
             var defaultConfigFile = Path.Combine(

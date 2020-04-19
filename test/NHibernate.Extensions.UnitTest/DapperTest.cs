@@ -2,7 +2,7 @@ using System;
 using System.Data;
 using System.Linq;
 using Dapper;
-using Newtonsoft.Json.Linq;
+using System.Text.Json;
 using Npgsql;
 using NUnit.Framework;
 
@@ -77,8 +77,8 @@ namespace NHibernate.Extensions.UnitTest {
         public virtual long Id { get; set; }
         public virtual string Name { get; set; }
         public virtual string[] Tags { get; set; }
-        public virtual JToken JsonField { get; set; }
-        public virtual JToken JsonbField { get; set; }
+        public virtual JsonElement JsonField { get; set; }
+        public virtual JsonElement JsonbField { get; set; }
         public virtual DateTime? UpdateTime { get; set; }
         public virtual short[] Int16Arr { get; set; }
         public virtual int[] Int32Arr { get; set; }

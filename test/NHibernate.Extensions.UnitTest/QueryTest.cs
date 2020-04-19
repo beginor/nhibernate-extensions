@@ -91,6 +91,10 @@ namespace NHibernate.Extensions.UnitTest {
             }
         }
 
+        [Test]
+        public void _06_CanReadJson() {
+        }
+
     }
 
 }
