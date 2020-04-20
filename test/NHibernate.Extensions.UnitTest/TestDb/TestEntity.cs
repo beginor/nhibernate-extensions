@@ -10,7 +10,7 @@ namespace NHibernate.Extensions.UnitTest.TestDb {
 
         [Id(Name = nameof(Id), Column = "id", Type = "long")]
         [Generator(Class = "sequence")]
-        [Param(Name = "sequence", Content = "public.test_id_seq")]
+        [Param(Name = "sequence", Content = "public.test_db_id_seq")]
         public virtual long Id { get; set; }
 
         [Property(Column = "name", Type = "string", Length = 32)]

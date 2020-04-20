@@ -15,7 +15,7 @@ namespace NHibernate.Extensions.UnitTest {
         }
 
         [Test]
-        public void CanDoCrud() {
+        public void _01_CanDoCrud() {
             using (var session = TestDbSessionFactory.OpenSession()) {
                 var entity = new TestEntity {
                     Name = "Test 1",
@@ -55,6 +55,28 @@ namespace NHibernate.Extensions.UnitTest {
             }
         }
 
+        [Test]
+        public void _02_CanSaveTypedJson() {
+            using var session = TestDbSessionFactory.OpenSession();
+            var json = new JsonValue {
+                Value = new ConnectionString {
+                    Server = "127.0.0.1",
+                    Port = 1433,
+                    Database = "northwind",
+                    Username = "sa",
+                    Password = "password"
+                }
+            };
+            session.Save(json);
+            session.Flush();
+            Assert.Greater(json.Id, 0);
+            Console.WriteLine(json.Id);
+            var val = session.Get<JsonValue>(json.Id);
+            Assert.NotNull(val);
+            Assert.AreEqual(json.Id, val.Id);
+            session.Delete(json);
+            session.Flush();
+        }
     }
 
 }
