@@ -95,6 +95,26 @@ namespace NHibernate.Extensions.UnitTest {
         public void _06_CanReadJson() {
         }
 
+        [Test]
+        public void _07_CanQueryMoniData() {
+            using (var session = TestDbSessionFactory.OpenSession()) {
+                var moniData = new MoniData {
+                    MoniTime = DateTime.Now,
+                    StationId = 1,
+                    ItemId = 1,
+                    Value = (decimal)0.003d,
+                    Description = "test"
+                };
+                session.Save(moniData);
+                session.Flush();
+                var query = session.Query<MoniData>();
+                var data = query.ToList();
+                Assert.True(data.Count > 0);
+                session.Delete(moniData);
+                session.Flush();
+            }
+        }
+
     }
 
 }
