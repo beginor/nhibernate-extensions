@@ -77,7 +77,7 @@ CREATE TABLE public.aspnet_users
     phone_number character varying(32) COLLATE pg_catalog."default",
     phone_number_confirmed boolean NOT NULL,
     lockout_enabled boolean NOT NULL,
-    lockout_end_unix_time_milliseconds bigint,
+    lockout_end_unix_time_seconds bigint,
     password_hash character varying(256) COLLATE pg_catalog."default",
     access_failed_count integer NOT NULL,
     security_stamp character varying(256) COLLATE pg_catalog."default",
