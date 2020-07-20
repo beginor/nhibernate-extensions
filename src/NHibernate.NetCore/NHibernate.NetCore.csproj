@@ -6,11 +6,11 @@
     <Description>Extensions for NHibernate when used in dotnet core.
 For examples, visit https://github.com/beginor/nhibernate-extensions/blob/master/test/NHibernate.Extensions.UnitTest/BaseTest.cs</Description>
     <PackageId>NHibernate.NetCore</PackageId>
-    <PackageVersion>3.1.3</PackageVersion>
+    <PackageVersion>3.1.4</PackageVersion>
     <Owners>beginor</Owners>
     <Title>NHibernate.NetCore</Title>
     <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions</PackageProjectUrl>
-    <PackageReleaseNotes>Update package references, remove build on pack .</PackageReleaseNotes>
+    <PackageReleaseNotes>Update package references (.net core 3.1.6, nhibernate 5.3.0) .</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
