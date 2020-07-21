@@ -25,15 +25,9 @@
     <ProjectReference Include="..\..\src\NHibernate.Extensions.NpgSql\NHibernate.Extensions.NpgSql.csproj" />
     <ProjectReference Include="..\..\src\NHibernate.NetCore\NHibernate.NetCore.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <None Remove="**/*.hbm.xml" />
-    <EmbeddedResource Include="**/*.hbm.xml" />
-  </ItemGroup>
+
   <ItemGroup>
     <None Update="hibernate.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="dvd_rental.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="appsettings.json">

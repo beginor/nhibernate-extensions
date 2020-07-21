@@ -8,9 +8,7 @@ namespace NHibernate.Extensions.UnitTest.TestDb {
     [Class(Table = "test_table", Schema = "public")]
     public class TestEntity {
 
-        [Id(Name = nameof(Id), Column = "id", Type = "long")]
-        [Generator(Class = "sequence")]
-        [Param(Name = "sequence", Content = "public.test_db_id_seq")]
+        [Id(Name = nameof(Id), Column = "id", Type = "long", Generator = "trigger-identity")]
         public virtual long Id { get; set; }
 
         [Property(Column = "name", Type = "string", Length = 32)]

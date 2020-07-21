@@ -10,9 +10,7 @@ namespace NHibernate.Extensions.UnitTest.TestDb {
     [Class(Schema = "public", Table = "json_values")]
     public class JsonValue {
 
-        [Id(Name = nameof(Id), Column = "id", Type = "long")]
-        [Generator(Class = "sequence")]
-        [Param(Name = "sequence", Content = "public.test_db_id_seq")]
+        [Id(Name = nameof(Id), Column = "id", Type = "long", Generator = "trigger-identity")]
         public virtual long Id { get; set; }
 
         [Property(Column = "value", TypeType = typeof(JsonbType<ConnectionString>))]

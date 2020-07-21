@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using NHibernate.Linq;
-using NHibernate.Extensions.UnitTest.DvdRental;
 using NHibernate.Extensions.UnitTest.TestDb;
 using NUnit.Framework;
 
@@ -16,15 +15,14 @@ namespace NHibernate.Extensions.UnitTest {
         }
 
         private ISession OpenSession() {
-            return DvdRentalSessionFactory.OpenSession();
+            return TestDbSessionFactory.OpenSession();
         }
 
         [Test]
         public void _01_CanSetupSessionFactory() {
-            Assert.IsNotNull(DvdRentalSessionFactory);
             Assert.IsNotNull(TestDbSessionFactory);
 
-            var dvdRentalSession = DvdRentalSessionFactory.OpenSession();
+            var dvdRentalSession = TestDbSessionFactory.OpenSession();
             var connStr = dvdRentalSession.Connection.ConnectionString;
             Console.WriteLine(connStr);
             dvdRentalSession.Close();
@@ -39,7 +37,7 @@ namespace NHibernate.Extensions.UnitTest {
 
         [Test]
         public void _02_CanQueryActors() {
-            var factory = DvdRentalSessionFactory;
+            var factory = TestDbSessionFactory;
             using (var session = factory.OpenSession()) {
                 var actors = session.Query<Actor>().ToList();
                 Assert.IsNotEmpty(actors);

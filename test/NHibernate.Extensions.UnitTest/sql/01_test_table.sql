@@ -6,7 +6,7 @@ CREATE TABLE public.test_table
 (
     id serial NOT NULL,
     name character varying(32) COLLATE pg_catalog."default" NOT NULL,
-    tags character varying(32)[] COLLATE pg_catalog."default",
+    tags character varying[] COLLATE pg_catalog."default",
     json_field json,
     jsonb_field jsonb,
     update_time timestamp without time zone,

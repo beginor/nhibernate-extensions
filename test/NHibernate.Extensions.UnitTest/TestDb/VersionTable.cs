@@ -18,7 +18,6 @@ namespace NHibernate.Extensions.UnitTest.TestDb {
         [Version(Column = "version", Type = "int")]
         public virtual int Version { get; set; }
 
-
     }
 
 }
