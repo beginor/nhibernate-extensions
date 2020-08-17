@@ -74,7 +74,7 @@ public class SamplesController : Controller {
     public async Task<IList<Sample>> GetAll() {
         try {
             using (var session = sessionFactory.OpenSession()) {
-                var result = await session.Query<Sample>().ToList();
+                var result = await session.Query<Sample>().ToListAsync();
                 return result;
             }
         }
@@ -106,7 +106,7 @@ public class SamplesController : Controller {
     [HttpGet("")]
     public async Task<IList<Sample>> GetAll() {
         try {
-            var result = await session.Query<Sample>().ToList();
+            var result = await session.Query<Sample>().ToListAsync();
             return result;
         }
         catch (Exception ex) {
