@@ -1,6 +1,6 @@
 #!/bin/bash -e
 dotnet pack src/NHibernate.NetCore/NHibernate.NetCore.csproj -c Release
-dotnet nuget push src/NHibernate.NetCore/bin/Release/NHibernate.NetCore.3.1.6.nupkg -s nuget.org -k $(cat ~/.nuget/key.txt)
+dotnet nuget push src/NHibernate.NetCore/bin/Release/NHibernate.NetCore.3.1.7.nupkg -s nuget.org -k $(cat ~/.nuget/key.txt)
 rm -rf src/NHibernate.NetCore/bin/Release
 
 dotnet pack src/NHibernate.Extensions.NpgSql/NHibernate.Extensions.NpgSql.csproj -c Release
