@@ -14,9 +14,9 @@ For examples, visit https://github.com/beginor/nhibernate-extensions/blob/master
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0-rc.1.20451.14" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0-rc.1.20451.14" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0-rc.1.20451.14" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0-rc.1.*" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0-rc.1.*" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0-rc.1.*" />
     <PackageReference Include="NHibernate" Version="5.3.3" />
   </ItemGroup>
 
