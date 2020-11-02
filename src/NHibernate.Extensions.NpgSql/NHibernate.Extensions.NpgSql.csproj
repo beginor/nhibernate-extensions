@@ -8,7 +8,7 @@
     <Owners>beginor</Owners>
     <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions</PackageProjectUrl>
     <Title>NHibernate.Extensions.NpgSql</Title>
-    <PackageReleaseNotes>Change target to .net 5.0; Update nhibernate to 5.3.3</PackageReleaseNotes>
+    <PackageReleaseNotes>Change target to .net 5.0 rc.2; Update nhibernate to 5.3.4</PackageReleaseNotes>
     <PackageTags>nhibernate postgresql npgsql</PackageTags>
   </PropertyGroup>
   <ItemGroup>

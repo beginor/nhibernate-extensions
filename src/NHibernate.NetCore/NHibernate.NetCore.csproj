@@ -10,7 +10,7 @@ For examples, visit https://github.com/beginor/nhibernate-extensions/blob/master
     <Owners>beginor</Owners>
     <Title>NHibernate.NetCore</Title>
     <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions</PackageProjectUrl>
-    <PackageReleaseNotes>Change target to .net 5.0 rc1, update package references;</PackageReleaseNotes>
+    <PackageReleaseNotes>Change target to .net 5.0 rc2, update package references;</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
