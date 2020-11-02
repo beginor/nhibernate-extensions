@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <PackageVersion>5.0.0-rc.1</PackageVersion>
+    <PackageVersion>5.0.0-rc.2</PackageVersion>
     <Title>NHibernate.Extensions.Sqlite</Title>
     <PackageReleaseNotes>Change target to .net 5.0 rc1; Update nhibernate to 5.3.3</PackageReleaseNotes>
     <Authors>beginor</Authors>
@@ -14,7 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NHibernate" Version="5.3.3" />
+    <PackageReference Include="NHibernate" Version="5.3.4" />
   </ItemGroup>
 
 </Project>
