@@ -4,11 +4,11 @@
     <Authors>beginor</Authors>
     <Description>Extended PostgreSQL driver for NHibernate, with support of json and array types.</Description>
     <PackageId>NHibernate.Extensions.NpgSql</PackageId>
-    <PackageVersion>5.0.0-rc.2</PackageVersion>
+    <PackageVersion>5.0.0</PackageVersion>
     <Owners>beginor</Owners>
     <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions</PackageProjectUrl>
     <Title>NHibernate.Extensions.NpgSql</Title>
-    <PackageReleaseNotes>Change target to .net 5.0 rc.2; Update nhibernate to 5.3.4</PackageReleaseNotes>
+    <PackageReleaseNotes>Change target to .net 5.0.0</PackageReleaseNotes>
     <PackageTags>nhibernate postgresql npgsql</PackageTags>
   </PropertyGroup>
   <ItemGroup>
