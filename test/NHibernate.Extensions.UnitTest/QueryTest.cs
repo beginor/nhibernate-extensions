@@ -77,25 +77,6 @@ namespace NHibernate.Extensions.UnitTest {
         }
 
         [Test]
-        public void _05_CanAddOrderBy() {
-            using (var session = TestDbSessionFactory.OpenSession()) {
-                var queryAsc = session.Query<Book>()
-                    .AddOrderBy(propertyName: "Title", isAsc: true);
-                var dataAsc = queryAsc.ToList();
-                Console.WriteLine(dataAsc.Count);
-                //
-                var queryDesc = session.Query<Book>()
-                    .AddOrderBy(propertyName: "Title", isAsc: false);
-                var dataDesc = queryDesc.ToList();
-                Console.WriteLine(dataDesc.Count);
-            }
-        }
-
-        [Test]
-        public void _06_CanReadJson() {
-        }
-
-        [Test]
         public void _07_CanQueryMoniData() {
             using (var session = TestDbSessionFactory.OpenSession()) {
                 var moniData = new MoniData {
