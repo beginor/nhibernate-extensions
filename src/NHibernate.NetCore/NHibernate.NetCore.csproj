@@ -1,16 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+  <Import Project="../package-version.props" />
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <Authors>beginor</Authors>
-    <Description>Extensions for NHibernate when used in dotnet core.
-For examples, visit https://github.com/beginor/nhibernate-extensions/blob/master/test/NHibernate.Extensions.UnitTest/BaseTest.cs</Description>
-    <PackageId>NHibernate.NetCore</PackageId>
-    <PackageVersion>5.0.1</PackageVersion>
-    <Owners>beginor</Owners>
     <Title>NHibernate.NetCore</Title>
+    <Authors>beginor</Authors>
+    <Description>Extensions for NHibernate when used in dotnet core. For examples, visit https://github.com/beginor/nhibernate-extensions/blob/master/test/NHibernate.Extensions.UnitTest/BaseTest.cs</Description>
+    <PackageId>NHibernate.NetCore</PackageId>
+    <PackageVersion>$(PackageVersion)</PackageVersion>
+    <PackageReleaseNotes>update references</PackageReleaseNotes>
+    <PackageTags>nhibernate, dotnet, dotnet core</PackageTags>
     <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions</PackageProjectUrl>
-    <PackageReleaseNotes>update nhibernate to 5.3.5</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

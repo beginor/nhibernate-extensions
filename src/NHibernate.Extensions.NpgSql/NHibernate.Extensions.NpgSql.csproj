@@ -1,18 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../package-version.props" />
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Title>NHibernate.Extensions.NpgSql</Title>
     <Authors>beginor</Authors>
     <Description>Extended PostgreSQL driver for NHibernate, with support of json and array types.</Description>
     <PackageId>NHibernate.Extensions.NpgSql</PackageId>
-    <PackageVersion>5.0.1</PackageVersion>
-    <Owners>beginor</Owners>
-    <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions</PackageProjectUrl>
-    <Title>NHibernate.Extensions.NpgSql</Title>
-    <PackageReleaseNotes>update nhibernate to 5.3.5</PackageReleaseNotes>
+    <PackageVersion>$(PackageVersion)</PackageVersion>
+    <PackageReleaseNotes>update references</PackageReleaseNotes>
     <PackageTags>nhibernate postgresql npgsql</PackageTags>
+    <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions</PackageProjectUrl>
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="NHibernate" Version="5.3.5" />
     <PackageReference Include="Npgsql" Version="5.0.1.1" />
   </ItemGroup>
+
 </Project>
