@@ -4,3 +4,4 @@
 obj
 bin
 *.user
+.DS_Store
