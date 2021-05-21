@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{286A1873-D7B4-4EF8-80F8-AC250207FFBA}"
+ProjectSection(SolutionItems) = preProject
+	src\package-version.props = src\package-version.props
+EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B30E6FFF-68ED-4746-A246-68D55CD0D909}"
 EndProject
@@ -14,6 +17,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHibernate.NetCore", "src\NHibernate.NetCore\NHibernate.NetCore.csproj", "{1E7730FE-B3DE-43FF-B1CC-586FEF398DDC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHibernate.Extensions.Sqlite", "src\NHibernate.Extensions.Sqlite\NHibernate.Extensions.Sqlite.csproj", "{8D8D3FBF-AA0D-4358-A077-FA4381457B93}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{83219FDD-E37F-455C-9214-3EDA3F867057}"
+ProjectSection(SolutionItems) = preProject
+	README.md = README.md
+	push-package.sh = push-package.sh
+EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
