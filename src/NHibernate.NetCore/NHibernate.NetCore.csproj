@@ -16,7 +16,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
-    <PackageReference Include="NHibernate" Version="5.3.8" />
+    <PackageReference Include="NHibernate" Version="5.3.9" />
   </ItemGroup>
 
 </Project>

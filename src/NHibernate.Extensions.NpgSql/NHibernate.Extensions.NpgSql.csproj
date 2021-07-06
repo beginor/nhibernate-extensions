@@ -13,8 +13,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NHibernate" Version="5.3.8" />
-    <PackageReference Include="Npgsql" Version="5.0.5" />
+    <PackageReference Include="NHibernate" Version="5.3.9" />
+    <PackageReference Include="Npgsql" Version="5.0.7" />
   </ItemGroup>
 
 </Project>
