@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="../package-version.props" />
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Title>NHibernate.Extensions.NpgSql</Title>
     <Authors>beginor</Authors>
     <Description>Extended PostgreSQL driver for NHibernate, with support of json and array types.</Description>
@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="NHibernate" Version="5.3.10" />
-    <PackageReference Include="Npgsql" Version="5.0.10" />
+    <PackageReference Include="Npgsql" Version="6.0.0" />
   </ItemGroup>
 
 </Project>
