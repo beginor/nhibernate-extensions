@@ -9,111 +9,109 @@ using NHibernate.UserTypes;
 using Npgsql;
 using NpgsqlTypes;
 
-namespace NHibernate.Extensions.NpgSql {
+namespace NHibernate.Extensions.NpgSql;
 
-    public class ArrayType<T> : IUserType {
+public class ArrayType<T> : IUserType {
 
-        private static readonly IDictionary<System.Type, NpgsqlDbType> typeDict
-            = new ConcurrentDictionary<System.Type, NpgsqlDbType> {
-                [typeof(bool)] = NpgsqlDbType.Boolean,
-                [typeof(short)] = NpgsqlDbType.Smallint,
-                [typeof(int)] = NpgsqlDbType.Integer,
-                [typeof(long)] = NpgsqlDbType.Bigint,
-                [typeof(float)] = NpgsqlDbType.Real,
-                [typeof(double)] = NpgsqlDbType.Double,
-                [typeof(decimal)] = NpgsqlDbType.Numeric,
-                [typeof(string)] = NpgsqlDbType.Varchar,
-                [typeof(DateTime)] = NpgsqlDbType.Timestamp,
-                [typeof(DateTimeOffset)] = NpgsqlDbType.TimestampTz,
-                [typeof(TimeSpan)] = NpgsqlDbType.Time
-            };
+    private static readonly IDictionary<System.Type, NpgsqlDbType> typeDict
+        = new ConcurrentDictionary<System.Type, NpgsqlDbType> {
+            [typeof(bool)] = NpgsqlDbType.Boolean,
+            [typeof(short)] = NpgsqlDbType.Smallint,
+            [typeof(int)] = NpgsqlDbType.Integer,
+            [typeof(long)] = NpgsqlDbType.Bigint,
+            [typeof(float)] = NpgsqlDbType.Real,
+            [typeof(double)] = NpgsqlDbType.Double,
+            [typeof(decimal)] = NpgsqlDbType.Numeric,
+            [typeof(string)] = NpgsqlDbType.Varchar,
+            [typeof(DateTime)] = NpgsqlDbType.Timestamp,
+            [typeof(DateTimeOffset)] = NpgsqlDbType.TimestampTz,
+            [typeof(TimeSpan)] = NpgsqlDbType.Time
+        };
 
-        public SqlType[] SqlTypes => new SqlType[] { GetNpgSqlType() };
+    public SqlType[] SqlTypes => new SqlType[] { GetNpgSqlType() };
 
-        public System.Type ReturnedType => typeof(T[]);
+    public System.Type ReturnedType => typeof(T[]);
 
-        public bool IsMutable => true;
+    public bool IsMutable => true;
 
-        public object Assemble(object cached, object owner) {
-            return cached;
+    public object Assemble(object cached, object owner) {
+        return cached;
+    }
+
+    public object DeepCopy(object value) {
+        if (!(value is T[] arr)) {
+            return null;
         }
+        var result = new T[arr.Length];
+        Array.Copy(arr, result, arr.Length);
+        return result;
+    }
 
-        public object DeepCopy(object value) {
+    public object Disassemble(object value) {
+        return value;
+    }
+
+    public new bool Equals(object x, object y) {
+        if (x == null && y == null) {
+            return true;
+        }
+        if (x == null || y == null) {
+            return false;
+        }
+        return ((T[])x).Equals((T[])y);
+    }
+
+    public int GetHashCode(object x) {
+        return x == null ? 0 : x.GetHashCode();
+    }
+
+    public object NullSafeGet(
+        DbDataReader rs,
+        string[] names,
+        ISessionImplementor session,
+        object owner
+    ) {
+        if (names.Length != 1) {
+            throw new InvalidOperationException(
+                "Only expecting one column..."
+            );
+        }
+        return rs[names[0]] as T[];
+    }
+
+    public void NullSafeSet(
+        DbCommand cmd,
+        object value,
+        int index,
+        ISessionImplementor session
+    ) {
+        var parameter = ((NpgsqlParameter)cmd.Parameters[index]);
+        if (value == null) {
+            parameter.Value = DBNull.Value;
+        }
+        else {
+            parameter.NpgsqlDbType = GetNpgSqlType().NpgDbType;
             if (!(value is T[] arr)) {
-                return null;
-            }
-            var result = new T[arr.Length];
-            Array.Copy(arr, result, arr.Length);
-            return result;
-        }
-
-        public object Disassemble(object value) {
-            return value;
-        }
-
-        public new bool Equals(object x, object y) {
-            if (x == null && y == null) {
-                return true;
-            }
-            if (x == null || y == null) {
-                return false;
-            }
-            return ((T[])x).Equals((T[])y);
-        }
-
-        public int GetHashCode(object x) {
-            return x == null ? 0 : x.GetHashCode();
-        }
-
-        public object NullSafeGet(
-            DbDataReader rs,
-            string[] names,
-            ISessionImplementor session,
-            object owner
-        ) {
-            if (names.Length != 1) {
                 throw new InvalidOperationException(
-                    "Only expecting one column..."
+                    $"\"{parameter.ParameterName}\" is not {typeof(T)}[]"
                 );
             }
-            return rs[names[0]] as T[];
-        }
-
-        public void NullSafeSet(
-            DbCommand cmd,
-            object value,
-            int index,
-            ISessionImplementor session
-        ) {
-            var parameter = ((NpgsqlParameter)cmd.Parameters[index]);
-            if (value == null) {
-                parameter.Value = DBNull.Value;
-            }
-            else {
-                parameter.NpgsqlDbType = GetNpgSqlType().NpgDbType;
-                if (!(value is T[] arr)) {
-                    throw new InvalidOperationException(
-                        $"\"{parameter.ParameterName}\" is not {typeof(T)}[]"
-                    );
-                }
-                parameter.Value = arr;
-            }
-        }
-
-        public object Replace(object original, object target, object owner) {
-            return original;
-        }
-
-        protected virtual NpgSqlType GetNpgSqlType() {
-            var type = typeof(T);
-            if (!typeDict.ContainsKey(type)) {
-                throw new NotSupportedException($"Unknown type {typeof(T)}");
-            }
-            return new NpgSqlType(
-                DbType.Object,
-                NpgsqlDbType.Array | typeDict[type]
-            );
+            parameter.Value = arr;
         }
     }
 
+    public object Replace(object original, object target, object owner) {
+        return original;
+    }
+
+    protected virtual NpgSqlType GetNpgSqlType() {
+        var type = typeof(T);
+        if (!typeDict.ContainsKey(type)) {
+            throw new NotSupportedException($"Unknown type {typeof(T)}");
+        }
+        return new NpgSqlType(
+            DbType.Object,
+            NpgsqlDbType.Array | typeDict[type]
+        );
+    }
 }

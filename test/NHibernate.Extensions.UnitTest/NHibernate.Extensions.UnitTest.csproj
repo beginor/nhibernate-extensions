@@ -4,6 +4,10 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
+    <Using Include="NUnit.Framework" />
+    <Using Include="NUnit.Framework.Assert" Static="true"/>
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.123" />
     <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />

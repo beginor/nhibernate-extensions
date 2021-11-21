@@ -1,10 +1,8 @@
 using Microsoft.Extensions.Configuration;
 using NHibernate.Cfg;
 
-namespace NHibernate.NetCore {
+namespace NHibernate.NetCore;
 
-    public static class ConfigurationExtensions {
-
-    }
+public static class ConfigurationExtensions {
 
 }
