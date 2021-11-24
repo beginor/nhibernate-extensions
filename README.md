@@ -118,4 +118,5 @@ public class SamplesController : Controller {
 }
 ```
 
-> `ISessionFactory`/`ISession` is registerd as scoped, do not need to dispose it by hand.
+- `ISessionFactory` is registerd as a singleton service, you should not dispose it;
+- `ISession` is registerd as a scoped service, so you do not need to dispose it by hand;
