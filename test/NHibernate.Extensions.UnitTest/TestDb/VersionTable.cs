@@ -1,5 +1,5 @@
 using NHibernate.Mapping.Attributes;
-
+using PropertyAttribute = NHibernate.Mapping.Attributes.PropertyAttribute;
 
 namespace NHibernate.Extensions.UnitTest.TestDb;
 

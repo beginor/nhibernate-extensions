@@ -1,5 +1,6 @@
 using NHibernate.Mapping.Attributes;
 using MFetchMode = NHibernate.Mapping.Attributes.FetchMode;
+using PropertyAttribute = NHibernate.Mapping.Attributes.PropertyAttribute;
 
 namespace NHibernate.Extensions.UnitTest.TestDb;
 
