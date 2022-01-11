@@ -1,10 +1,6 @@
-using System;
 using System.Data;
-using System.Linq;
 using Dapper;
 using System.Text.Json;
-using Npgsql;
-using NUnit.Framework;
 
 namespace NHibernate.Extensions.UnitTest;
 

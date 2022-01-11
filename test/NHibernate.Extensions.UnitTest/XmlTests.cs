@@ -1,8 +1,5 @@
-using System;
 using System.Xml;
-using System.Linq;
-using NHibernate;
-using NHibernate.Linq;
+
 namespace NHibernate.Extensions.UnitTest;
 
 [TestFixture]

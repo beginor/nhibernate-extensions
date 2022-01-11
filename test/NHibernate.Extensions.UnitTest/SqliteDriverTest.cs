@@ -1,14 +1,10 @@
-using System;
 using System.Data;
-using System.Linq;
 using Microsoft.Data.Sqlite;
 using NHibernate.Cfg;
 using NHibernate.Extensions.UnitTest.TestDb;
 using NHibernate.Mapping.ByCode;
 using NHibernate.Mapping.ByCode.Conformist;
 using NHibernate.Tool.hbm2ddl;
-using NHibernate.Type;
-using NUnit.Framework;
 
 namespace NHibernate.Extensions.UnitTest;
 

@@ -1,10 +1,6 @@
-using System;
-using System.IO;
 using System.Reflection;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.Json;
 using NHibernate.Cfg;
-using NUnit.Framework;
 
 namespace NHibernate.Extensions.UnitTest;
 

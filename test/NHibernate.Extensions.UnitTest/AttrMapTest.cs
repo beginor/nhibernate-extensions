@@ -1,8 +1,5 @@
-using System;
-using System.IO;
 using NHibernate.Extensions.UnitTest.TestDb;
 using NHibernate.Mapping.Attributes;
-using NUnit.Framework;
 
 namespace NHibernate.Extensions.UnitTest;
 

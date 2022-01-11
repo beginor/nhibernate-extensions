@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using NHibernate.Mapping.Attributes;
 using PropertyAttribute = NHibernate.Mapping.Attributes.PropertyAttribute;
 

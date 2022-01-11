@@ -1,7 +1,4 @@
-using System;
-using NHibernate.Extensions.NpgSql;
 using NpgsqlTypes;
-using NUnit.Framework;
 
 namespace NHibernate.Extensions.UnitTest;
 

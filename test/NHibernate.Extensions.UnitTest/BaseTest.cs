@@ -1,6 +1,3 @@
-using System;
-using System.IO;
-using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using NHibernate.Cfg;
 using NHibernate.Extensions.UnitTest.TestDb;
@@ -8,8 +5,6 @@ using NHibernate.Linq;
 using NHibernate.Mapping.Attributes;
 using NHibernate.NetCore;
 using NHibernate.Tool.hbm2ddl;
-using Npgsql;
-using NUnit.Framework;
 
 namespace NHibernate.Extensions.UnitTest;
 
