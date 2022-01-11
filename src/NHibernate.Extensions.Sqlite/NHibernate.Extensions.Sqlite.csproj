@@ -8,7 +8,7 @@
     <PackageId>NHibernate.Extensions.Sqlite</PackageId>
     <PackageVersion>$(PackageVersion)</PackageVersion>
     <PackageReleaseNotes>update references</PackageReleaseNotes>
-    <PackageTags>nhibernate, driver, sqlite, .net core, .net 5.0</PackageTags>
+    <PackageTags>nhibernate, driver, sqlite, .net core, .net 6.0</PackageTags>
     <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions/</PackageProjectUrl>
   </PropertyGroup>
 
