@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using NHibernate.Engine;
@@ -13,21 +11,6 @@ namespace NHibernate.Extensions.NpgSql;
 
 public class ArrayType<T> : IUserType {
 
-    private static readonly IDictionary<System.Type, NpgsqlDbType> typeDict
-        = new ConcurrentDictionary<System.Type, NpgsqlDbType> {
-            [typeof(bool)] = NpgsqlDbType.Boolean,
-            [typeof(short)] = NpgsqlDbType.Smallint,
-            [typeof(int)] = NpgsqlDbType.Integer,
-            [typeof(long)] = NpgsqlDbType.Bigint,
-            [typeof(float)] = NpgsqlDbType.Real,
-            [typeof(double)] = NpgsqlDbType.Double,
-            [typeof(decimal)] = NpgsqlDbType.Numeric,
-            [typeof(string)] = NpgsqlDbType.Varchar,
-            [typeof(DateTime)] = NpgsqlDbType.Timestamp,
-            [typeof(DateTimeOffset)] = NpgsqlDbType.TimestampTz,
-            [typeof(TimeSpan)] = NpgsqlDbType.Time
-        };
-
     public SqlType[] SqlTypes => new SqlType[] { GetNpgSqlType() };
 
     public System.Type ReturnedType => typeof(T[]);
@@ -38,7 +21,7 @@ public class ArrayType<T> : IUserType {
         return cached;
     }
 
-    public object DeepCopy(object value) {
+    public object? DeepCopy(object value) {
         if (!(value is T[] arr)) {
             return null;
         }
@@ -51,7 +34,7 @@ public class ArrayType<T> : IUserType {
         return value;
     }
 
-    public new bool Equals(object x, object y) {
+    public new bool Equals(object? x, object? y) {
         if (x == null && y == null) {
             return true;
         }
@@ -61,31 +44,29 @@ public class ArrayType<T> : IUserType {
         return ((T[])x).Equals((T[])y);
     }
 
-    public int GetHashCode(object x) {
+    public int GetHashCode(object? x) {
         return x == null ? 0 : x.GetHashCode();
     }
 
-    public object NullSafeGet(
+    public object? NullSafeGet(
         DbDataReader rs,
         string[] names,
         ISessionImplementor session,
         object owner
     ) {
         if (names.Length != 1) {
-            throw new InvalidOperationException(
-                "Only expecting one column..."
-            );
+            throw new InvalidOperationException("Only expecting one column...");
         }
         return rs[names[0]] as T[];
     }
 
     public void NullSafeSet(
         DbCommand cmd,
-        object value,
+        object? value,
         int index,
         ISessionImplementor session
     ) {
-        var parameter = ((NpgsqlParameter)cmd.Parameters[index]);
+        var parameter = (NpgsqlParameter)cmd.Parameters[index];
         if (value == null) {
             parameter.Value = DBNull.Value;
         }
@@ -106,12 +87,13 @@ public class ArrayType<T> : IUserType {
 
     protected virtual NpgSqlType GetNpgSqlType() {
         var type = typeof(T);
-        if (!typeDict.ContainsKey(type)) {
+        if (!ArrayTypeUtil.KnownArrayTypes.ContainsKey(type)) {
             throw new NotSupportedException($"Unknown type {typeof(T)}");
         }
         return new NpgSqlType(
             DbType.Object,
-            NpgsqlDbType.Array | typeDict[type]
+            // ReSharper disable once BitwiseOperatorOnEnumWithoutFlags
+            NpgsqlDbType.Array | ArrayTypeUtil.KnownArrayTypes[type]
         );
     }
 }

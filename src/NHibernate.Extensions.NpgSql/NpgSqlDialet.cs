@@ -3,7 +3,7 @@ using NpgsqlTypes;
 
 namespace NHibernate.Extensions.NpgSql;
 
-public class NpgSqlDialet : NHibernate.Dialect.PostgreSQL83Dialect {
+public class NpgSqlDialet : Dialect.PostgreSQL83Dialect {
 
     public override string GetTypeName(
         SqlType sqlType

@@ -7,6 +7,7 @@ public class Int64ArrayType : ArrayType<long> {
 
     protected override NpgSqlType GetNpgSqlType() => new NpgSqlType(
         DbType.Object,
+        // ReSharper disable once BitwiseOperatorOnEnumWithoutFlags
         NpgsqlDbType.Array | NpgsqlDbType.Bigint
     );
 

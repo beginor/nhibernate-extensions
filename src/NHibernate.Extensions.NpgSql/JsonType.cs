@@ -24,7 +24,7 @@ public class JsonType<T> : IUserType {
         return cached;
     }
 
-    public object DeepCopy(object value) {
+    public object? DeepCopy(object? value) {
         if (value == null) {
             return null;
         }
@@ -37,7 +37,7 @@ public class JsonType<T> : IUserType {
         return value;
     }
 
-    public new bool Equals(object x, object y) {
+    public new bool Equals(object? x, object? y) {
         if (x == null && y == null) {
             return true;
         }
@@ -47,11 +47,11 @@ public class JsonType<T> : IUserType {
         return ((T)x).Equals((T)y);
     }
 
-    public int GetHashCode(object x) {
+    public int GetHashCode(object? x) {
         return x == null ? 0 : x.GetHashCode();
     }
 
-    public object NullSafeGet(
+    public object? NullSafeGet(
         DbDataReader rs,
         string[] names,
         ISessionImplementor session,
@@ -70,7 +70,7 @@ public class JsonType<T> : IUserType {
 
     public void NullSafeSet(
         DbCommand cmd,
-        object value,
+        object? value,
         int index,
         ISessionImplementor session
     ) {

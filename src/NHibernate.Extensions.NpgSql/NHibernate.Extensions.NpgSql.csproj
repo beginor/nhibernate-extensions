@@ -5,6 +5,7 @@
     <Title>NHibernate.Extensions.NpgSql</Title>
     <Authors>beginor</Authors>
     <Description>Extended PostgreSQL driver for NHibernate, with support of json and array types.</Description>
+    <Nullable>enable</Nullable>
     <PackageId>NHibernate.Extensions.NpgSql</PackageId>
     <PackageVersion>$(PackageVersion)</PackageVersion>
     <PackageReleaseNotes>update nhibernate</PackageReleaseNotes>
