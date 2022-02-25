@@ -9,14 +9,20 @@ public static class ServiceProviderExtensions {
         this IServiceProvider serviceProvider
     ) {
         var cfg = serviceProvider.GetService<IConfigurationProvider>();
+        if (cfg == null) {
+            throw new InvalidOperationException($"Can not get service {typeof(IConfigurationProvider)} !");
+        }
         return cfg.GetSessionFactory();
     }
 
-    public static ISessionFactory GetSessionFactory(
+    public static ISessionFactory? GetSessionFactory(
         this IServiceProvider serviceProvider,
         string key
     ) {
         var cfg = serviceProvider.GetService<IConfigurationProvider>();
-        return cfg.GetSessionFactory(key);
+        if (cfg == null) {
+            throw new InvalidOperationException($"Can not get service {typeof(IConfigurationProvider)} !");
+        }
+        return cfg?.GetSessionFactory(key);
     }
 }

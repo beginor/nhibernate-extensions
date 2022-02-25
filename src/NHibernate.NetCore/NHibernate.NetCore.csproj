@@ -2,6 +2,7 @@
   <Import Project="../package-version.props" />
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
     <Title>NHibernate.NetCore</Title>
     <Authors>beginor</Authors>
     <Description>Extensions for NHibernate when used in dotnet core. For examples, visit https://github.com/beginor/nhibernate-extensions/blob/master/test/NHibernate.Extensions.UnitTest/BaseTest.cs</Description>

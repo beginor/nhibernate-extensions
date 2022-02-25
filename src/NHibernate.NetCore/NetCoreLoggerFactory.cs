@@ -6,12 +6,12 @@ namespace NHibernate.NetCore;
 
 public class NetCoreLoggerFactory : IDisposable, INHibernateLoggerFactory {
 
-    private MsILoggerFactory loggerFactory;
+    private readonly MsILoggerFactory loggerFactory;
 
     public NetCoreLoggerFactory(
         MsILoggerFactory loggerFactory
     ) {
-        this.loggerFactory = loggerFactory;
+        this.loggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
     }
 
     ~NetCoreLoggerFactory() {
@@ -24,8 +24,7 @@ public class NetCoreLoggerFactory : IDisposable, INHibernateLoggerFactory {
 
     protected virtual void Dispose(bool disposing) {
         if (disposing) {
-            loggerFactory?.Dispose();
-            loggerFactory = null;
+            loggerFactory.Dispose();
         }
     }
 

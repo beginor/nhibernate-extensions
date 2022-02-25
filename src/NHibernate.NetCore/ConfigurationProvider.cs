@@ -5,20 +5,16 @@ namespace NHibernate.NetCore;
 
 public class ConfigurationProvider : IConfigurationProvider {
 
-    private ConcurrentDictionary<string, ISessionFactory> sessionFactories
-        = new ConcurrentDictionary<string, ISessionFactory>();
-    private ConcurrentDictionary<string, Configuration> configurations
-        = new ConcurrentDictionary<string, Configuration>();
+    private ConcurrentDictionary<string, ISessionFactory> sessionFactories = new();
+    private ConcurrentDictionary<string, Configuration> configurations = new();
 
-    private static readonly string DefaultConfigurationKey
-        = typeof(Configuration).FullName;
-    private static readonly string DefaultSessionFactoryKey
-        = typeof(ISessionFactory).FullName;
+    private static readonly string DefaultConfigurationKey = typeof(Configuration).FullName!;
+    private static readonly string DefaultSessionFactoryKey = typeof(ISessionFactory).FullName!;
 
     public ISessionFactory GetSessionFactory() {
         return sessionFactories.GetOrAdd(
             DefaultSessionFactoryKey,
-            key => {
+            _ => {
                 var cfg = configurations[DefaultConfigurationKey];
                 if (cfg == null) {
                     throw new System.InvalidOperationException(
@@ -34,7 +30,7 @@ public class ConfigurationProvider : IConfigurationProvider {
     public ISessionFactory GetSessionFactory(string key) {
         return sessionFactories.GetOrAdd(
             key,
-            k => {
+            _ => {
                 var cfg = configurations[key];
                 if (cfg == null) {
                     throw new System.InvalidOperationException(

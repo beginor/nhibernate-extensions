@@ -5,11 +5,9 @@ namespace NHibernate.NetCore;
 
 public class NetCoreLogger : IDisposable, INHibernateLogger {
 
-    private ILogger logger;
+    private readonly ILogger logger;
 
-    public NetCoreLogger(
-        ILogger logger
-    ) {
+    public NetCoreLogger(ILogger logger) {
         this.logger = logger;
     }
 
@@ -22,9 +20,9 @@ public class NetCoreLogger : IDisposable, INHibernateLogger {
     }
 
     protected virtual void Dispose(bool disposing) {
-        if (disposing) {
-            logger = null;
-        }
+        // if (disposing) {
+        //     logger = null;
+        // }
     }
 
     public bool IsEnabled(NHibernateLogLevel logLevel) {

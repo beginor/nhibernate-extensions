@@ -8,7 +8,7 @@ namespace NHibernate.NetCore;
 
 public static class ServiceCollectionExtensions {
 
-    private static IConfigurationProvider configProvider;
+    private static IConfigurationProvider? configProvider;
 
     public static void AddHibernate(
         this IServiceCollection services
@@ -81,20 +81,32 @@ public static class ServiceCollectionExtensions {
             throw new ArgumentNullException(nameof(cfg));
         }
         AddConfigurationProvider(services);
+        if (configProvider == null) {
+            throw new InvalidOperationException($"{nameof(configProvider)} is not initialized!");
+        }
         configProvider.SetConfiguration(cfg);
         // Add Configuration as singleton
         services.AddSingleton(provider => {
             var cfgProvider = provider.GetService<IConfigurationProvider>();
+            if (cfgProvider == null) {
+                throw new InvalidOperationException($"Can not get service {typeof(IConfigurationProvider)}");
+            }
             return cfgProvider.GetConfiguration();
         });
         // Add ISessionFactory as singleton
         services.AddSingleton(provider => {
             var config = provider.GetService<Configuration>();
+            if (config == null) {
+                throw new InvalidOperationException($"Can not get service {typeof(Configuration)}");
+            }
             return config.BuildSessionFactory();
         });
         // Add ISession as scoped
         services.AddScoped(provider => {
             var factory = provider.GetService<ISessionFactory>();
+            if (factory == null) {
+                throw new InvalidOperationException($"Can not get service {typeof(ISessionFactory)}");
+            }
             return factory.OpenSession();
         });
     }
@@ -116,10 +128,16 @@ public static class ServiceCollectionExtensions {
         if (services == null) {
             throw new ArgumentNullException(nameof(services));
         }
+        if (key == null) {
+            throw new ArgumentNullException(nameof(key));
+        }
         if (cfg == null) {
             throw new ArgumentNullException(nameof(cfg));
         }
         AddConfigurationProvider(services);
+        if (configProvider == null) {
+            throw new InvalidOperationException($"{nameof(configProvider)} is not initialized!");
+        }
         configProvider.SetConfiguration(key, cfg);
     }
 
@@ -130,6 +148,9 @@ public static class ServiceCollectionExtensions {
     ) {
         if (services == null) {
             throw new ArgumentNullException(nameof(services));
+        }
+        if (key == null) {
+            throw new ArgumentNullException(nameof(key));
         }
         if (string.IsNullOrEmpty(path)) {
             throw new ArgumentNullException(nameof(path));
@@ -147,6 +168,9 @@ public static class ServiceCollectionExtensions {
         if (services == null) {
             throw new ArgumentNullException(nameof(services));
         }
+        if (key == null) {
+            throw new ArgumentNullException(nameof(key));
+        }
         if (xmlReader == null) {
             throw new ArgumentNullException(nameof(xmlReader));
         }
@@ -163,6 +187,9 @@ public static class ServiceCollectionExtensions {
     ) {
         if (services == null) {
             throw new ArgumentNullException(nameof(services));
+        }
+        if (key == null) {
+            throw new ArgumentNullException(nameof(key));
         }
         if (assembly == null) {
             throw new ArgumentNullException(nameof(assembly));
