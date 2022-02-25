@@ -2,6 +2,7 @@
   <Import Project="../package-version.props" />
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
     <Title>NHibernate.Extensions.Sqlite</Title>
     <Authors>beginor</Authors>
     <Description>NHibernate Sqlite Driver with Microsoft.Data.Sqlite.Core. In order to use this driver, you must have the nuget package [Microsoft.Data.Sqlite.Core](https://www.nuget.org/packages/Microsoft.Data.Sqlite.Core/) and [SQLitePCLRaw.bundle_e_sqlite3](https://www.nuget.org/packages/SQLitePCLRaw.bundle_e_sqlite3/) installed for NHibernate to load. It's a .NET Standard 2.0 Driver, Can run on any platform that dotnet core support.</Description>

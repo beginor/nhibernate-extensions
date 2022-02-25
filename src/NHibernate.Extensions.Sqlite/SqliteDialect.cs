@@ -3,7 +3,7 @@ using NHibernate.Dialect.Schema;
 
 namespace NHibernate.Extensions.Sqlite;
 
-public class SqliteDialect : NHibernate.Dialect.SQLiteDialect {
+public class SqliteDialect : Dialect.SQLiteDialect {
 
     public override IDataBaseSchema GetDataBaseSchema(DbConnection connection) {
         var schema = new SqliteDataBaseMetaData(connection, this);
