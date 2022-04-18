@@ -10,7 +10,7 @@ Some useful extensions for NHibernate used in my projects.
   - Array type of `boolean`, `double`, `float (real)`, `int`, `short (small int)`,
   `long (big int)` and `string (character)`；
 
-- Extended PostgreSQL dialet [NpgSqlDialet](https://github.com/beginor/nhibernate-extensions/blob/master/src/NHibernate.Extensions.NpgSql/NpgSqlDialet.cs) for schema export of supported types.
+- Extended PostgreSQL dialect [NpgSqlDialect](https://github.com/beginor/nhibernate-extensions/blob/master/src/NHibernate.Extensions.NpgSql/NpgSqlDialect.cs) for schema export of supported types.
 
 ## NHibernate.Extensions.Sqlite
 
