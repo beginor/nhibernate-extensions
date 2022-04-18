@@ -3,13 +3,16 @@ using NpgsqlTypes;
 
 namespace NHibernate.Extensions.NpgSql;
 
-public class NpgSqlDialet : Dialect.PostgreSQL83Dialect {
+public class NpgSqlDialect : Dialect.PostgreSQL83Dialect {
 
     public override string GetTypeName(
         SqlType sqlType
     ) {
         if (sqlType is NpgSqlType npgSqlType) {
             var npgDbType = npgSqlType.NpgDbType;
+            if (npgDbType == NpgsqlDbType.Numeric) {
+                return "numeric";
+            }
             if (npgDbType == NpgsqlDbType.Json) {
                 return "json";
             }
