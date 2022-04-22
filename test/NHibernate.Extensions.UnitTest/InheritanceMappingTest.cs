@@ -47,4 +47,18 @@ public class InheritanceMappingTest : BaseTest {
         Console.WriteLine(data.Count);
     }
 
+    [Test]
+    public void _03_CanQueryWithTypeFilter() {
+        using var session = TestDbSessionFactory.OpenSession();
+        var query = session.Query<BaseResource>()
+            .Where(e => e.Type == "slpks")
+            .Select(e => new BaseResource {
+                Id = e.Id,
+                Name = e.Name,
+                Type = e.Type
+            });
+        var data = query.ToList();
+        Console.WriteLine(data.Count);
+    }
+
 }
