@@ -8,7 +8,7 @@
     <Description>Extended PostgreSQL driver for NHibernate, with support of json and array types.</Description>
     <PackageId>NHibernate.Extensions.NpgSql</PackageId>
     <PackageVersion>$(PackageVersion)</PackageVersion>
-    <PackageReleaseNotes>update npgsql</PackageReleaseNotes>
+    <PackageReleaseNotes>add TimeStampType and TimeStampTzType, handle datetime correctly .</PackageReleaseNotes>
     <PackageTags>nhibernate postgresql npgsql</PackageTags>
     <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions</PackageProjectUrl>
   </PropertyGroup>

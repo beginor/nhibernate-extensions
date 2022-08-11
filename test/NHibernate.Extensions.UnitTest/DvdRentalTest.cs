@@ -10,10 +10,6 @@ public class DvdRentalTest : BaseTest {
         base.OneTimeSetUp();
     }
 
-    private ISession OpenSession() {
-        return TestDbSessionFactory.OpenSession();
-    }
-
     [Test]
     public void _01_CanSetupSessionFactory() {
         Assert.IsNotNull(TestDbSessionFactory);
@@ -42,7 +38,7 @@ public class DvdRentalTest : BaseTest {
 
     [Test]
     public void _03_CanInsertUpdateDeleteAuthors() {
-        using (var session = OpenSession()) {
+        using (var session = OpenTestDbSession()) {
             var author = new Actor {
                 FirstName = "Simon",
                 LastName = "Zhang",
@@ -57,4 +53,3 @@ public class DvdRentalTest : BaseTest {
     }
 
 }
-

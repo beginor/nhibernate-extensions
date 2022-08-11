@@ -1,9 +1,15 @@
+using System.Data;
 using NHibernate.SqlTypes;
 using NpgsqlTypes;
 
 namespace NHibernate.Extensions.NpgSql;
 
 public class NpgSqlDialect : Dialect.PostgreSQL83Dialect {
+
+    public NpgSqlDialect() {
+        // RegisterColumnType();
+        RegisterColumnType(DbType.DateTime2, "");
+    }
 
     public override string GetTypeName(
         SqlType sqlType

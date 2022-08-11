@@ -66,4 +66,8 @@ public class BaseTest {
         export.Execute(true, false, false);
     }
 
+    protected ISession OpenTestDbSession() {
+        return TestDbSessionFactory.OpenSession();
+    }
+
 }
