@@ -1,5 +1,5 @@
 #!/bin/bash -e
-PACKAGE_VERSION="6.0.11"
+PACKAGE_VERSION="6.0.12"
 dotnet pack src/NHibernate.NetCore/NHibernate.NetCore.csproj -c Release
 dotnet nuget push src/NHibernate.NetCore/bin/Release/NHibernate.NetCore.$PACKAGE_VERSION.nupkg -s nuget.org -k $(cat ~/.nuget/key.txt)
 rm -rf src/NHibernate.NetCore/bin/Release
