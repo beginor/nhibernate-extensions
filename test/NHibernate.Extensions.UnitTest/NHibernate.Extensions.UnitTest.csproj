@@ -11,12 +11,12 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.123" />
-    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="6.0.9" />
+    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="6.0.10" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
-    <PackageReference Include="NHibernate" Version="5.3.13" />
+    <PackageReference Include="NHibernate" Version="5.3.14" />
     <PackageReference Include="NHibernate.Mapping.Attributes" Version="5.1.0" />
     <PackageReference Include="Npgsql" Version="6.0.7" />
     <PackageReference Include="NUnit" Version="3.13.3" />
