@@ -1,21 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="../package-version.props" />
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <Title>NHibernate.Extensions.NpgSql</Title>
     <Authors>beginor</Authors>
     <Description>Extended PostgreSQL driver for NHibernate, with support of json and array types.</Description>
     <PackageId>NHibernate.Extensions.NpgSql</PackageId>
     <PackageVersion>$(PackageVersion)</PackageVersion>
-    <PackageReleaseNotes>add TimeStampType and TimeStampTzType, handle datetime correctly .</PackageReleaseNotes>
+    <PackageReleaseNotes>update to use .net 7.0.0;update nhibernate to 5.4.0;upgrade Npgsql to 7.0.0</PackageReleaseNotes>
     <PackageTags>nhibernate postgresql npgsql</PackageTags>
     <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NHibernate" Version="5.3.14" />
-    <PackageReference Include="Npgsql" Version="6.0.7" />
+    <PackageReference Include="NHibernate" Version="5.4.0" />
+    <PackageReference Include="Npgsql" Version="7.0.0" />
   </ItemGroup>
 
 </Project>
