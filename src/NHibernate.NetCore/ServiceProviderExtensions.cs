@@ -15,7 +15,7 @@ public static class ServiceProviderExtensions {
         return cfg.GetSessionFactory();
     }
 
-    public static ISessionFactory? GetSessionFactory(
+    public static ISessionFactory GetSessionFactory(
         this IServiceProvider serviceProvider,
         string key
     ) {
@@ -23,6 +23,6 @@ public static class ServiceProviderExtensions {
         if (cfg == null) {
             throw new InvalidOperationException($"Can not get service {typeof(IConfigurationProvider)} !");
         }
-        return cfg?.GetSessionFactory(key);
+        return cfg.GetSessionFactory(key);
     }
 }
