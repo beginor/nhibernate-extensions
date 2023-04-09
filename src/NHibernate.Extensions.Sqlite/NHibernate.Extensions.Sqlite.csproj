@@ -8,13 +8,13 @@
     <Description>NHibernate Sqlite Driver with Microsoft.Data.Sqlite.Core. In order to use this driver, you must have the nuget package [Microsoft.Data.Sqlite.Core](https://www.nuget.org/packages/Microsoft.Data.Sqlite.Core/) and [SQLitePCLRaw.bundle_e_sqlite3](https://www.nuget.org/packages/SQLitePCLRaw.bundle_e_sqlite3/) installed for NHibernate to load. It's a .NET Standard 2.0 Driver, Can run on any platform that dotnet core support.</Description>
     <PackageId>NHibernate.Extensions.Sqlite</PackageId>
     <PackageVersion>$(PackageVersion)</PackageVersion>
-    <PackageReleaseNotes>update to use .net 7.0.0;update nhibernate to 5.4.0</PackageReleaseNotes>
-    <PackageTags>nhibernate, driver, sqlite, .net core, .net 6.0</PackageTags>
+    <PackageReleaseNotes>Update Hibernate to 5.4.2 .</PackageReleaseNotes>
+    <PackageTags>nhibernate, driver, sqlite, .net core, .net 7.0</PackageTags>
     <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions/</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NHibernate" Version="5.4.1" />
+    <PackageReference Include="NHibernate" Version="5.4.2" />
   </ItemGroup>
 
 </Project>

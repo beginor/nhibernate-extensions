@@ -1,5 +1,10 @@
 # Changelogs for NHibernate.Extensions
 
+# 7.0.3
+
+- Update to .NET 7.0.4;
+- Update Hibernate to 5.4.2;
+
 ## 7.0.2
 
 - Update to .NET 7.0.2;

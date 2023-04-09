@@ -8,7 +8,7 @@
     <Description>Extensions for NHibernate when used in dotnet core. For examples, visit https://github.com/beginor/nhibernate-extensions/blob/master/test/NHibernate.Extensions.UnitTest/BaseTest.cs</Description>
     <PackageId>NHibernate.NetCore</PackageId>
     <PackageVersion>$(PackageVersion)</PackageVersion>
-    <PackageReleaseNotes>update to use .net 7.0.0;update nhibernate to 5.4.0</PackageReleaseNotes>
+    <PackageReleaseNotes>Update Hibernate to 5.4.2 .</PackageReleaseNotes>
     <PackageTags>nhibernate, dotnet, dotnet core</PackageTags>
     <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions</PackageProjectUrl>
   </PropertyGroup>
@@ -17,7 +17,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
-    <PackageReference Include="NHibernate" Version="5.4.1" />
+    <PackageReference Include="NHibernate" Version="5.4.2" />
   </ItemGroup>
 
 </Project>
