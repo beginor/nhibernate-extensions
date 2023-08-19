@@ -1,5 +1,13 @@
 # Changelogs for NHibernate.Extensions
 
+## 7.0.7
+
+- Update to .NET 7.0.10;
+- Update NHibernate to 5.4.5;
+- Update Dapper to 2.0.151;
+- Update Microsoft.Data.Sqlite.Core to 7.0.10;
+- Update Microsoft.NET.Test.Sdk to 17.6.3;
+
 ## 7.0.6
 
 - Update NHibernate to 5.4.4;
@@ -10,7 +18,7 @@
 - Update to .NET 7.0.8;
 - Update NHibernate to 5.4.3;
 - Update Dapper to 2.0.143;
-- Upgrade Microsoft.NET.Test.Sdk to 17.6.3;
+- Update Microsoft.NET.Test.Sdk to 17.6.3;
 
 ## 7.0.4
 
