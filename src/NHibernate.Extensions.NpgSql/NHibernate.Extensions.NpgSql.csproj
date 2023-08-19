@@ -8,9 +8,9 @@
     <Description>Extended PostgreSQL driver for NHibernate, with support of json and array types.</Description>
     <PackageId>NHibernate.Extensions.NpgSql</PackageId>
     <PackageVersion>$(PackageVersion)</PackageVersion>
-    <PackageReleaseNotes>Update to .NET 7.0.7; Update Npgsql to 7.0.4;</PackageReleaseNotes>
-    <PackageTags>nhibernate postgresql npgsql</PackageTags>
-    <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions</PackageProjectUrl>
+    <PackageReleaseNotes>$(PackageReleaseNotes)</PackageReleaseNotes>
+    <PackageTags>$(PackageTags)</PackageTags>
+    <PackageProjectUrl>$(PackageProjectUrl)</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
