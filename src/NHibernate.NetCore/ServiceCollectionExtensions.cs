@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Reflection;
+using System.Xml;
 using Microsoft.Extensions.DependencyInjection;
 using NHibernate.Cfg;
-using System.Xml;
-using System.Reflection;
 
 namespace NHibernate.NetCore;
 
