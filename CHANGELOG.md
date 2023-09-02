@@ -1,5 +1,11 @@
 # Changelogs for NHibernate.Extensions
 
+## 7.0.8
+
+- Update NHibernate to 5.4.6;
+- Update Microsoft.NET.Test.Sdk to 17.7.2;
+- Update SQLitePCLRaw.bundle_e_sqlite3 to 2.1.6;
+
 ## 7.0.7
 
 - Update to .NET 7.0.10;
