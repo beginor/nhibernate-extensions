@@ -1,5 +1,10 @@
 # Changelogs for NHibernate.Extensions
 
+## 7.0.9
+
+- Update Npgsql to 7.0.6;
+- Update Microsoft.Data.Sqlite.Core to 7.0.11;
+
 ## 7.0.8
 
 - Update NHibernate to 5.4.6;
