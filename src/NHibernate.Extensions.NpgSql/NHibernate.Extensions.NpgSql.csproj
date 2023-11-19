@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="../package-version.props" />
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <Title>NHibernate.Extensions.NpgSql</Title>
     <Authors>beginor</Authors>
@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <PackageReference Include="NHibernate" Version="5.4.6" />
-    <PackageReference Include="Npgsql" Version="7.0.6" />
+    <PackageReference Include="Npgsql" Version="8.0.0-rc.2" />
   </ItemGroup>
 
 </Project>

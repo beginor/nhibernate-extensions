@@ -1,7 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <PackageVersion>7.0.9</PackageVersion>
-    <PackageReleaseNotes>Update Npgsql to 7.0.6; Update Microsoft.Data.Sqlite.Core to 7.0.11;</PackageReleaseNotes>
+    <PackageVersion>8.0.0</PackageVersion>
+    <PackageReleaseNotes>Update to .NET 8.0.0;Update Npgsql to 8.0.0-rc.2;</PackageReleaseNotes>
     <PackageTags>nhibernate, dotnet, dotnet core</PackageTags>
     <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions</PackageProjectUrl>
   </PropertyGroup>
