@@ -3,13 +3,9 @@ using Microsoft.Extensions.Logging;
 
 namespace NHibernate.NetCore;
 
-public class NetCoreLogger : IDisposable, INHibernateLogger {
+public class NetCoreLogger(ILogger logger) : IDisposable, INHibernateLogger {
 
-    private readonly ILogger logger;
-
-    public NetCoreLogger(ILogger logger) {
-        this.logger = logger;
-    }
+    private readonly ILogger logger = logger;
 
     ~NetCoreLogger() {
         Dispose(false);

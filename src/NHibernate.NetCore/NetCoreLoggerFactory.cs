@@ -4,15 +4,11 @@ using MsILoggerFactory = Microsoft.Extensions.Logging.ILoggerFactory;
 
 namespace NHibernate.NetCore;
 
-public class NetCoreLoggerFactory : IDisposable, INHibernateLoggerFactory {
+public class NetCoreLoggerFactory(
+    MsILoggerFactory loggerFactory
+) : IDisposable, INHibernateLoggerFactory {
 
-    private readonly MsILoggerFactory loggerFactory;
-
-    public NetCoreLoggerFactory(
-        MsILoggerFactory loggerFactory
-    ) {
-        this.loggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
-    }
+    private readonly MsILoggerFactory loggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
 
     ~NetCoreLoggerFactory() {
         Dispose(false);
