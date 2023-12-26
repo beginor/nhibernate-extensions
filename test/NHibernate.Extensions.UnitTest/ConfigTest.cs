@@ -1,6 +1,7 @@
 using System.Reflection;
 using Microsoft.Extensions.Configuration;
 using NHibernate.Cfg;
+using NUnit.Framework.Legacy;
 
 namespace NHibernate.Extensions.UnitTest;
 
@@ -19,7 +20,7 @@ public class ConfigTest {
 
     [Test]
     public void _01_CanReadConfig() {
-        Assert.NotNull(configuration);
+        ClassicAssert.NotNull(configuration);
         var nhibernate = configuration
             .GetSection("nhibernate").GetChildren();
         Console.WriteLine(nhibernate);
@@ -57,7 +58,7 @@ public class ConfigTest {
                 }
             }
             var sf = cfg.BuildSessionFactory();
-            Assert.IsNotNull(sf);
+            ClassicAssert.IsNotNull(sf);
         }
     }
 

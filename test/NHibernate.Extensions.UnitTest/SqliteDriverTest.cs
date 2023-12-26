@@ -1,10 +1,11 @@
 using System.Data;
 using Microsoft.Data.Sqlite;
 using NHibernate.Cfg;
-using NHibernate.Extensions.UnitTest.TestDb;
 using NHibernate.Mapping.ByCode;
 using NHibernate.Mapping.ByCode.Conformist;
 using NHibernate.Tool.hbm2ddl;
+using NUnit.Framework.Legacy;
+using NHibernate.Extensions.UnitTest.TestDb;
 
 namespace NHibernate.Extensions.UnitTest;
 
@@ -47,14 +48,14 @@ public class SqliteDriverTest {
 
     [Test]
     public void _01_CanBuildSessionFactory() {
-        Assert.IsNotNull(sessionFactory);
+        ClassicAssert.IsNotNull(sessionFactory);
         using (var session = sessionFactory.OpenSession()) {
             var authors = session.Query<Author>()
                 .Where(a => a.AuthorId > 0)
                 .ToList();
-            Assert.IsNotEmpty(authors);
+            ClassicAssert.IsNotEmpty(authors);
             var count = session.Query<Author>().LongCount(a => a.AuthorId > 0);
-            Assert.GreaterOrEqual(count, 0);
+            ClassicAssert.GreaterOrEqual(count, 0);
         }
     }
 
@@ -66,7 +67,7 @@ public class SqliteDriverTest {
             };
             session.Save(author);
             session.Flush();
-            Assert.Greater(author.AuthorId, 0);
+            ClassicAssert.Greater(author.AuthorId, 0);
             session.Delete(author);
             session.Flush();
         }

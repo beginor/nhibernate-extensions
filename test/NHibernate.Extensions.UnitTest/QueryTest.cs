@@ -1,3 +1,4 @@
+using NUnit.Framework.Legacy;
 using NHibernate.Extensions.UnitTest.TestDb;
 
 namespace NHibernate.Extensions.UnitTest;
@@ -86,7 +87,7 @@ public class QueryTest : BaseTest {
             session.Flush();
             var query = session.Query<MoniData>();
             var data = query.ToList();
-            Assert.True(data.Count > 0);
+            ClassicAssert.True(data.Count > 0);
             session.Delete(moniData);
             session.Flush();
         }

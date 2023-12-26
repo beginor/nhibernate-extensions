@@ -1,3 +1,4 @@
+using NUnit.Framework.Legacy;
 using NHibernate.Extensions.UnitTest.TestDb;
 
 namespace NHibernate.Extensions.UnitTest;
@@ -12,7 +13,7 @@ public class DvdRentalTest : BaseTest {
 
     [Test]
     public void _01_CanSetupSessionFactory() {
-        Assert.IsNotNull(TestDbSessionFactory);
+        ClassicAssert.IsNotNull(TestDbSessionFactory);
 
         var dvdRentalSession = TestDbSessionFactory.OpenSession();
         var connStr = dvdRentalSession.Connection.ConnectionString;
@@ -24,7 +25,7 @@ public class DvdRentalTest : BaseTest {
         Console.WriteLine(connStr2);
         testDbSession.Close();
 
-        Assert.AreNotEqual(connStr, connStr2);
+        ClassicAssert.AreNotEqual(connStr, connStr2);
     }
 
     [Test]
@@ -32,7 +33,7 @@ public class DvdRentalTest : BaseTest {
         var factory = TestDbSessionFactory;
         using (var session = factory.OpenSession()) {
             var actors = session.Query<Actor>().ToList();
-            Assert.IsNotEmpty(actors);
+            ClassicAssert.IsNotEmpty(actors);
         }
     }
 
@@ -46,7 +47,7 @@ public class DvdRentalTest : BaseTest {
             };
             session.Save(author);
             session.Flush();
-            Assert.Greater(author.ActorId, 0);
+            ClassicAssert.Greater(author.ActorId, 0);
             session.Delete(author);
             session.Flush();
         }

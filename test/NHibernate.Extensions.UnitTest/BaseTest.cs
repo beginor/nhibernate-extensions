@@ -1,10 +1,11 @@
 using Microsoft.Extensions.DependencyInjection;
 using NHibernate.Cfg;
-using NHibernate.Extensions.UnitTest.TestDb;
 using NHibernate.Linq;
 using NHibernate.Mapping.Attributes;
-using NHibernate.NetCore;
 using NHibernate.Tool.hbm2ddl;
+using NUnit.Framework.Legacy;
+using NHibernate.NetCore;
+using NHibernate.Extensions.UnitTest.TestDb;
 
 namespace NHibernate.Extensions.UnitTest;
 
@@ -33,7 +34,7 @@ public class BaseTest {
         );
         // ensure serialize error is empty;
         var err = serializer.Error.ToString();
-        Assert.IsEmpty(err);
+        ClassicAssert.IsEmpty(err);
         // add to config
         using var reader = new StreamReader(xmlStream);
         var xml = reader.ReadToEnd();
@@ -46,15 +47,15 @@ public class BaseTest {
 
     [Test]
     public void _01_CanResolveSessionFactories() {
-        Assert.NotNull(ServiceProvider);
-        Assert.NotNull(TestDbSessionFactory);
+        ClassicAssert.NotNull(ServiceProvider);
+        ClassicAssert.NotNull(TestDbSessionFactory);
     }
 
     [Test]
     public async Task _02_CanQueryTestDb() {
         using (var session = TestDbSessionFactory.OpenSession()) {
             var author = await session.Query<Author>().FirstOrDefaultAsync();
-            // Assert.NotNull(author);
+            // ClassicAssert.NotNull(author);
         }
     }
 

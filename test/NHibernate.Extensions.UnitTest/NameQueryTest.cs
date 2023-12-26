@@ -1,3 +1,4 @@
+using NUnit.Framework.Legacy;
 using NHibernate.Extensions.UnitTest.TestDb;
 
 namespace NHibernate.Extensions.UnitTest;
@@ -16,7 +17,7 @@ public class NameQueryTest : BaseTest {
             var query = session.GetNamedQuery("name_test_01");
             var books = query.List<Book>();
 
-            Assert.True(books.Count > 0);
+            ClassicAssert.True(books.Count > 0);
         }
     }
 
@@ -26,7 +27,7 @@ public class NameQueryTest : BaseTest {
             var query = session.GetNamedQuery("name_test_02");
             query.SetInt32("authorid", 2);
             var books = query.List<Book>();
-            Assert.True(books.Count > 0);
+            ClassicAssert.True(books.Count > 0);
         }
     }
 
@@ -35,7 +36,7 @@ public class NameQueryTest : BaseTest {
         using (var session = TestDbSessionFactory.OpenSession()) {
             var query = session.GetNamedQuery("name_test_03");
             var booksCount = query.List<long>().First();
-            Assert.True(booksCount > 0);
+            ClassicAssert.True(booksCount > 0);
         }
     }
 
@@ -43,11 +44,11 @@ public class NameQueryTest : BaseTest {
     public void _04_CanQueryScalarWithParam() {
         using (var session = TestDbSessionFactory.OpenSession()) {
             var query = session.GetNamedQuery("name_test_04");
-            Assert.True(query.NamedParameters.Length > 0);
+            ClassicAssert.True(query.NamedParameters.Length > 0);
             query.SetInt32("authorid", 1);
-            Assert.True(query.NamedParameters.Length > 0);
+            ClassicAssert.True(query.NamedParameters.Length > 0);
             var booksCount = query.List<long>().First();
-            Assert.True(booksCount > 0);
+            ClassicAssert.True(booksCount > 0);
         }
     }
 
@@ -57,7 +58,7 @@ public class NameQueryTest : BaseTest {
             var query = session.GetNamedQuery("name_test_05");
             var books = query.List();
 
-            Assert.True(books.Count > 0);
+            ClassicAssert.True(books.Count > 0);
         }
     }
 

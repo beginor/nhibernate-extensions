@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using NUnit.Framework.Legacy;
 using NHibernate.Extensions.UnitTest.TestDb;
 
 namespace NHibernate.Extensions.UnitTest;
@@ -31,7 +32,7 @@ public class ArrayTypeTest : BaseTest {
             session.Flush();
             session.Clear();
 
-            Assert.True(entity.Id > 0);
+            ClassicAssert.True(entity.Id > 0);
 
             Console.WriteLine($"entity id: {entity.Id}");
         }
@@ -39,7 +40,7 @@ public class ArrayTypeTest : BaseTest {
         using (var session = TestDbSessionFactory.OpenSession()) {
             var query = session.Query<TestEntity>();
             var entities = query.ToList();
-            Assert.NotNull(entities);
+            ClassicAssert.NotNull(entities);
             Console.WriteLine($"Entity count: {entities.Count}");
 
             using (var tx = session.BeginTransaction()) {
@@ -66,11 +67,11 @@ public class ArrayTypeTest : BaseTest {
         };
         session.Save(json);
         session.Flush();
-        Assert.Greater(json.Id, 0);
+        ClassicAssert.Greater(json.Id, 0);
         Console.WriteLine(json.Id);
         var val = session.Get<JsonValue>(json.Id);
-        Assert.NotNull(val);
-        Assert.AreEqual(json.Id, val.Id);
+        ClassicAssert.NotNull(val);
+        ClassicAssert.AreEqual(json.Id, val.Id);
         session.Delete(json);
         session.Flush();
     }
