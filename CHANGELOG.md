@@ -1,5 +1,12 @@
 # Changelogs for NHibernate.Extensions
 
+## 8.0.1
+
+- Update NHibernate to 5.5.0;
+- Update Npgsql to 8.0.1;
+- Update NUnit to 4.0.0;
+- Other nuget package updates.
+
 ## 8.0.0
 
 - Update to .NET 8.0.0;
