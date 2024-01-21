@@ -1,4 +1,6 @@
 ﻿using System.Text.Json;
+using NHibernate.Type;
+using NHibernate.Extensions.NpgSql;
 using NUnit.Framework.Legacy;
 using NHibernate.Extensions.UnitTest.TestDb;
 
@@ -74,5 +76,28 @@ public class ArrayTypeTest : BaseTest {
         ClassicAssert.AreEqual(json.Id, val.Id);
         session.Delete(json);
         session.Flush();
+    }
+
+    [Test]
+    public void _03_CanDoSqlQuery() {
+        using var session = TestDbSessionFactory.OpenSession();
+        var sql = @" select id, str_arr, int_arr
+            from public.arr_test
+            where int_arr && :arr_param
+            order by id desc;
+        ";
+        var query = session.CreateSQLQuery(sql);
+        query.AddScalar("id", NHibernateUtil.Int64);
+        query.AddScalar("str_arr", new CustomType(typeof(StringArrayType), null));
+        query.AddScalar("int_arr", new CustomType(typeof(Int32ArrayType), null));
+        query.SetParameter("arr_param", new [] {2, 3}, new CustomType(typeof(Int32ArrayType), null));
+
+        var result = query.List();
+        foreach (Array row in result) {
+            Console.WriteLine(JsonSerializer.Serialize(row));
+            // foreach (var field in row) {
+            //     Console.WriteLine(field);
+            // }
+        }
     }
 }
