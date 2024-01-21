@@ -1,5 +1,9 @@
 # Changelogs for NHibernate.Extensions
 
+# 8.0.2
+
+- Add NumericArray, thanks to [Stephan](https://github.com/stephanstapel) !
+
 ## 8.0.1
 
 - Update NHibernate to 5.5.0;

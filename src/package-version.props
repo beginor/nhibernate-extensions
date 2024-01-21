@@ -1,7 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <PackageVersion>8.0.1</PackageVersion>
-    <PackageReleaseNotes>Update NHibernate to 5.5.0;Update Npgsql to 8.0.1;Other nuget package updates;</PackageReleaseNotes>
+    <PackageVersion>8.0.2</PackageVersion>
+    <PackageReleaseNotes>Add NumericArray, thanks to [Stephan](https://github.com/stephanstapel) !</PackageReleaseNotes>
     <PackageTags>nhibernate, dotnet, dotnet core</PackageTags>
     <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions</PackageProjectUrl>
   </PropertyGroup>
