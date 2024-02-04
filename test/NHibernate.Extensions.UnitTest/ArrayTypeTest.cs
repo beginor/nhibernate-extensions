@@ -86,11 +86,12 @@ public class ArrayTypeTest : BaseTest {
             where int_arr && :arr_param
             order by id desc;
         ";
+
         var query = session.CreateSQLQuery(sql);
         query.AddScalar("id", NHibernateUtil.Int64);
-        query.AddScalar("str_arr", new CustomType(typeof(StringArrayType), null));
-        query.AddScalar("int_arr", new CustomType(typeof(Int32ArrayType), null));
-        query.SetParameter("arr_param", new [] {2, 3}, new CustomType(typeof(Int32ArrayType), null));
+        query.AddCustomScalar<StringArrayType>("str_arr");
+        query.AddCustomScalar<Int32ArrayType>("int_arr");
+        query.SetCustomParameter<Int32ArrayType>("arr_param", new [] { 2, 3 });
 
         var result = query.List();
         foreach (Array row in result) {
