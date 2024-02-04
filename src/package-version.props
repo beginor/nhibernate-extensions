@@ -1,7 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <PackageVersion>8.0.2</PackageVersion>
-    <PackageReleaseNotes>Add NumericArray, thanks to [Stephan](https://github.com/stephanstapel) !</PackageReleaseNotes>
+    <PackageVersion>8.0.3</PackageVersion>
+    <PackageReleaseNotes>add `AddCustomScalar` and `SetCustomParameter` extension method for `ISQLQuery`;</PackageReleaseNotes>
     <PackageTags>nhibernate, dotnet, dotnet core</PackageTags>
     <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions</PackageProjectUrl>
   </PropertyGroup>
