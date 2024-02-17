@@ -1,10 +1,14 @@
 # Changelogs for NHibernate.Extensions
 
-# 8.0.3
+## 8.0.4
+
+- Update Npgsql to 8.0.2;
+
+## 8.0.3
 
 - add `AddCustomScalar` and `SetCustomParameter` extension method for `ISQLQuery`;
 
-# 8.0.2
+## 8.0.2
 
 - Add NumericArray, thanks to [Stephan](https://github.com/stephanstapel) !
 
