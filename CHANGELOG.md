@@ -1,5 +1,9 @@
 # Changelogs for NHibernate.Extensions
 
+## 8.0.5
+
+- Fix json types with Npgsql 8.x release.
+
 ## 8.0.4
 
 - Update Npgsql to 8.0.2;
