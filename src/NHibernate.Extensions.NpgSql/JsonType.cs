@@ -58,14 +58,22 @@ public class JsonType<T> : IUserType {
         object owner
     ) {
         if (names.Length != 1) {
-            throw new InvalidOperationException(
-                "Only expecting one column..."
-            );
+            throw new InvalidOperationException("Only expecting one column...");
         }
-        if (rs[names[0]] is string val) {
-            return JsonSerializer.Deserialize<T>(val);
+        var type = typeof(T);
+        var name = names[0];
+        if (rs.IsDBNull(name)) {
+            return default(T);
         }
-        return null;
+        var jsonStr = rs.GetString(name);
+        var jsonDoc = JsonDocument.Parse(jsonStr);
+        if (type == typeof(JsonDocument)) {
+            return jsonDoc;
+        }
+        if (type == typeof(JsonElement)) {
+            return jsonDoc.RootElement;
+        }
+        return JsonSerializer.Deserialize<T>(jsonStr);
     }
 
     public void NullSafeSet(
@@ -75,7 +83,21 @@ public class JsonType<T> : IUserType {
         ISessionImplementor session
     ) {
         var parameter = (NpgsqlParameter)cmd.Parameters[index];
-        parameter.Value = value ?? DBNull.Value;
+        if (value == null) {
+            parameter.Value = DBNull.Value;
+            return;
+        }
+        if (!value.GetType().IsAssignableTo(typeof(T))) {
+            throw new InvalidOperationException($"{value.GetType()} is not assignable to {typeof(T)}");
+        }
+        var type = typeof(T);
+        if (type == typeof(JsonElement) || type == typeof(JsonDocument)) {
+            parameter.Value = value;
+            return;
+        }
+        var valueType = value.GetType();
+        var json = JsonSerializer.Serialize(value, valueType);
+        parameter.Value = json;
     }
 
     public object Replace(object original, object target, object owner) {

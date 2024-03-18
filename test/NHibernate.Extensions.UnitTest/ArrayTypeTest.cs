@@ -71,7 +71,7 @@ public class ArrayTypeTest : BaseTest {
         session.Flush();
         ClassicAssert.Greater(json.Id, 0);
         Console.WriteLine(json.Id);
-        var val = session.Get<JsonValue>(json.Id);
+        var val = session.Query<JsonValue>().First(x => x.Id == json.Id);
         ClassicAssert.NotNull(val);
         ClassicAssert.AreEqual(json.Id, val.Id);
         session.Delete(json);

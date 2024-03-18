@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using NHibernate.Extensions.NpgSql;
 using NHibernate.Mapping.Attributes;
 using PropertyAttribute = NHibernate.Mapping.Attributes.PropertyAttribute;
@@ -16,14 +17,14 @@ public class JsonValue {
 }
 
 public class ConnectionString {
-    // [JsonPropertyName("server")]
+    [JsonPropertyName("server")]
     public string Server { get; set; }
-    // [JsonPropertyName("port")]
+    [JsonPropertyName("port")]
     public int Port { get; set; }
-    // [JsonPropertyName("database")]
+    [JsonPropertyName("database")]
     public string Database { get; set; }
-    // [JsonPropertyName("username")]
+    [JsonPropertyName("username")]
     public string Username { get; set; }
-    // [JsonPropertyName("password")]
+    [JsonPropertyName("password")]
     public string Password { get; set; }
 }
