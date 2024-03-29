@@ -1,5 +1,10 @@
 # Changelogs for NHibernate.Extensions
 
+## 8.0.6
+
+- Update NHibernate to 5.5.1;
+- Refactor to use keyed service;
+
 ## 8.0.5
 
 - Fix json types with Npgsql 8.x release.
