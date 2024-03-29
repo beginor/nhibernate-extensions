@@ -5,8 +5,6 @@ namespace NHibernate.NetCore;
 
 public class NetCoreLogger(ILogger logger) : IDisposable, INHibernateLogger {
 
-    private readonly ILogger logger = logger;
-
     ~NetCoreLogger() {
         Dispose(false);
     }
