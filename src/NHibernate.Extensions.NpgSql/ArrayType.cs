@@ -11,7 +11,7 @@ namespace NHibernate.Extensions.NpgSql;
 
 public class ArrayType<T> : IUserType {
 
-    public SqlType[] SqlTypes => new SqlType[] { GetNpgSqlType() };
+    public SqlType[] SqlTypes => [GetNpgSqlType()];
 
     public System.Type ReturnedType => typeof(T[]);
 

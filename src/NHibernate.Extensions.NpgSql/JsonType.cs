@@ -12,9 +12,9 @@ namespace NHibernate.Extensions.NpgSql;
 
 public class JsonType<T> : IUserType {
 
-    public virtual SqlType[] SqlTypes => new SqlType[] {
+    public virtual SqlType[] SqlTypes => [
         new NpgSqlType(DbType.Object, NpgsqlDbType.Json)
-    };
+    ];
 
     public System.Type ReturnedType => typeof(T);
 

@@ -11,9 +11,9 @@ namespace NHibernate.Extensions.NpgSql;
 
 public class TimeStampTzType : IUserType {
 
-    public virtual SqlType[] SqlTypes => new SqlType[] {
+    public virtual SqlType[] SqlTypes => [
         new NpgSqlType(DbType.DateTime, NpgsqlDbType.TimestampTz)
-    };
+    ];
 
     public System.Type ReturnedType => typeof(DateTime);
 
