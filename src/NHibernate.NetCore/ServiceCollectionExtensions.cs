@@ -8,8 +8,6 @@ namespace NHibernate.NetCore;
 
 public static class ServiceCollectionExtensions {
 
-    private static IConfigurationProvider? configProvider;
-
     public static void AddHibernate(
         this IServiceCollection services
     ) {
@@ -80,19 +78,8 @@ public static class ServiceCollectionExtensions {
         if (cfg == null) {
             throw new ArgumentNullException(nameof(cfg));
         }
-        AddConfigurationProvider(services);
-        if (configProvider == null) {
-            throw new InvalidOperationException($"{nameof(configProvider)} is not initialized!");
-        }
-        configProvider.SetConfiguration(cfg);
         // Add Configuration as singleton
-        services.AddSingleton(provider => {
-            var cfgProvider = provider.GetService<IConfigurationProvider>();
-            if (cfgProvider == null) {
-                throw new InvalidOperationException($"Can not get service {typeof(IConfigurationProvider)}");
-            }
-            return cfgProvider.GetConfiguration();
-        });
+        services.AddSingleton(cfg);
         // Add ISessionFactory as singleton
         services.AddSingleton(provider => {
             var config = provider.GetService<Configuration>();
@@ -111,15 +98,6 @@ public static class ServiceCollectionExtensions {
         });
     }
 
-    private static void AddConfigurationProvider(
-        this IServiceCollection services
-    ) {
-        if (configProvider == null) {
-            configProvider = new ConfigurationProvider();
-            services.AddSingleton(configProvider);
-        }
-    }
-
     public static void AddHibernate(
         this IServiceCollection services,
         string key,
@@ -134,11 +112,23 @@ public static class ServiceCollectionExtensions {
         if (cfg == null) {
             throw new ArgumentNullException(nameof(cfg));
         }
-        AddConfigurationProvider(services);
-        if (configProvider == null) {
-            throw new InvalidOperationException($"{nameof(configProvider)} is not initialized!");
-        }
-        configProvider.SetConfiguration(key, cfg);
+        services.AddKeyedSingleton(key, cfg);
+        // Add ISessionFactory as singleton
+        services.AddKeyedSingleton<ISessionFactory>(
+            key,
+            (provider, o) => {
+                var config = provider.GetRequiredKeyedService<Configuration>(o);
+                return config.BuildSessionFactory();
+            }
+        );
+        // Add ISession as scoped
+        services.AddKeyedScoped<ISession>(
+            key,
+            (provider, o) => {
+                var sessionFactory = provider.GetRequiredKeyedService<ISessionFactory>(o);
+                return sessionFactory.OpenSession();
+            }
+        );
     }
 
     public static void AddHibernate(
