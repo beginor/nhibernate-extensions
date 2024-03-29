@@ -3,9 +3,12 @@ using NHibernate.Cfg;
 using NHibernate.Linq;
 using NHibernate.Mapping.Attributes;
 using NHibernate.Tool.hbm2ddl;
-using NUnit.Framework.Legacy;
 using NHibernate.NetCore;
+using NHibernate.Mapping.ByCode;
+
+using NHibernate.Extensions.UnitTest.Sqlite;
 using NHibernate.Extensions.UnitTest.TestDb;
+using Author = NHibernate.Extensions.UnitTest.TestDb.Author;
 
 namespace NHibernate.Extensions.UnitTest;
 
@@ -14,19 +17,27 @@ public class BaseTest {
     protected IServiceProvider ServiceProvider { get; private set; }
 
     protected ISessionFactory TestDbSessionFactory => ServiceProvider.GetSessionFactory();
+    protected ISessionFactory SqliteSessionFactory => ServiceProvider.GetSessionFactory("sqlite");
 
     [OneTimeSetUp]
     public virtual void OneTimeSetUp() {
         // global setup
         // NpgsqlConnection.GlobalTypeMapper.UseJsonNet();
         var services = new ServiceCollection();
+        services.AddHibernate(CreateTestDbConfiguration());
+        services.AddHibernate("sqlite", CreateSqliteConfiguration());
+        // build service provider
+        ServiceProvider = services.BuildServiceProvider();
+    }
+
+    private Configuration CreateTestDbConfiguration() {
         // add default config
         var defaultConfigFile = Path.Combine(
             AppDomain.CurrentDomain.BaseDirectory,
             "hibernate.config"
         );
-        var defaultCfg = new Configuration();
-        defaultCfg.Configure(defaultConfigFile);
+        var config = new Configuration();
+        config.Configure(defaultConfigFile);
         // use default attr serializer;
         var serializer = HbmSerializer.Default;
         var xmlStream = serializer.Serialize(
@@ -34,21 +45,31 @@ public class BaseTest {
         );
         // ensure serialize error is empty;
         var err = serializer.Error.ToString();
-        ClassicAssert.IsEmpty(err);
+        Assert.That(err, Is.Empty);
         // add to config
         using var reader = new StreamReader(xmlStream);
         var xml = reader.ReadToEnd();
         Console.WriteLine(xml);
-        defaultCfg.AddXml(xml);
-        services.AddHibernate(defaultCfg);
-        // build service provider
-        ServiceProvider = services.BuildServiceProvider();
+        config.AddXml(xml);
+        return config;
+    }
+
+    private Configuration CreateSqliteConfiguration() {
+        var configuration = new Configuration();
+        configuration.Configure("hibernate.sqlite.config");
+        var mapper = new ModelMapper();
+        mapper.AddMapping<AuthorMappingSqlite>();
+        mapper.AddMapping<BookMappingSqlite>();
+        var mapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
+        configuration.AddMapping(mapping);
+        return configuration;
     }
 
     [Test]
     public void _01_CanResolveSessionFactories() {
-        ClassicAssert.NotNull(ServiceProvider);
-        ClassicAssert.NotNull(TestDbSessionFactory);
+        Assert.That(ServiceProvider, Is.Not.Null);
+        Assert.That(TestDbSessionFactory, Is.Not.Null);
+        Assert.That(SqliteSessionFactory, Is.Not.Null);
     }
 
     [Test]

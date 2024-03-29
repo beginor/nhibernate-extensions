@@ -1,34 +1,18 @@
 using System.Data;
 using Microsoft.Data.Sqlite;
+using Microsoft.Extensions.DependencyInjection;
 using NHibernate.Cfg;
-using NHibernate.Mapping.ByCode;
-using NHibernate.Mapping.ByCode.Conformist;
 using NHibernate.Tool.hbm2ddl;
 using NUnit.Framework.Legacy;
-using NHibernate.Extensions.UnitTest.TestDb;
+using NHibernate.Extensions.UnitTest.Sqlite;
+using NHibernate.NetCore;
 
 namespace NHibernate.Extensions.UnitTest;
 
 [TestFixture]
-public class SqliteDriverTest {
+public class SqliteDriverTest : BaseTest {
 
-    private ISessionFactory sessionFactory;
-
-    public SqliteDriverTest() {
-        var configuration = CreateConfiguration();
-        sessionFactory = configuration.BuildSessionFactory();
-    }
-
-    private static Configuration CreateConfiguration() {
-        var configuration = new Configuration();
-        configuration.Configure("hibernate.sqlite.config");
-        var mapper = new ModelMapper();
-        mapper.AddMapping<AuthorMappingSqlite>();
-        mapper.AddMapping<BookMappingSqlite>();
-        var mapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
-        configuration.AddMapping(mapping);
-        return configuration;
-    }
+    private ISessionFactory SessionFactory => ServiceProvider.GetSessionFactory("sqlite");
 
     [Test]
     public void _00_CanQuerySqlite() {
@@ -48,8 +32,8 @@ public class SqliteDriverTest {
 
     [Test]
     public void _01_CanBuildSessionFactory() {
-        ClassicAssert.IsNotNull(sessionFactory);
-        using (var session = sessionFactory.OpenSession()) {
+        ClassicAssert.IsNotNull(SessionFactory);
+        using (var session = SessionFactory.OpenSession()) {
             var authors = session.Query<Author>()
                 .Where(a => a.AuthorId > 0)
                 .ToList();
@@ -61,7 +45,7 @@ public class SqliteDriverTest {
 
     [Test]
     public void _02_CanSaveDelete() {
-        using (var session = sessionFactory.OpenSession()) {
+        using (var session = SessionFactory.OpenSession()) {
             var author = new Author {
                 Name = "Unit Test"
             };
@@ -75,57 +59,8 @@ public class SqliteDriverTest {
 
     [Test]
     public void _03_CanDoschemaExport() {
-        var exporter = new SchemaExport(CreateConfiguration());
+        var exporter = new SchemaExport(ServiceProvider.GetRequiredKeyedService<Configuration>("sqlite"));
         exporter.Execute(true, false, false);
-    }
-
-}
-
-public class AuthorMappingSqlite : ClassMapping<Author> {
-
-    public AuthorMappingSqlite() {
-        // Schema("main");
-        Table("authors");
-        Id(e => e.AuthorId, m => {
-            m.Column("id");
-            m.Type(NHibernateUtil.Int32);
-            m.Generator(Generators.Identity);
-        });
-        Property(e => e.Name, m => {
-            m.Column("name");
-            m.Type(NHibernateUtil.String);
-            m.Length(16);
-            m.NotNullable(true);
-        });
-        Bag(p => p.Books, map => {
-            map.Key(k => k.Column("author_id"));
-            map.Inverse(true);
-            map.Cascade(Cascade.DeleteOrphans);
-        }, c => {
-            c.OneToMany();
-        });
-    }
-
-}
-
-public class BookMappingSqlite : ClassMapping<Book> {
-
-    public BookMappingSqlite() {
-        Table("books");
-        Id(e => e.BookId, map => {
-            map.Column("id");
-            map.Type(NHibernateUtil.Int32);
-            map.Generator(Generators.Identity);
-        });
-        Property(p => p.Title, map => {
-            map.Column("title");
-            map.Type(NHibernateUtil.String);
-        });
-        ManyToOne(p => p.Author, map => {
-            map.Column("author_id");
-            map.Fetch(FetchKind.Join);
-            map.ForeignKey("fk_books_author_id");
-        });
     }
 
 }
