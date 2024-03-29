@@ -7,7 +7,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Using Include="NUnit.Framework" />
-    <Using Include="NUnit.Framework.Assert" Static="true" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.1.35" />

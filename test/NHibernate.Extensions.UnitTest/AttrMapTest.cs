@@ -1,4 +1,3 @@
-using NUnit.Framework.Legacy;
 using NHibernate.Mapping.Attributes;
 using NHibernate.Extensions.UnitTest.TestDb;
 
@@ -16,7 +15,7 @@ public class AttrMapTest {
 
         var err = serializer.Error.ToString();
 
-        ClassicAssert.IsEmpty(err);
+        Assert.That(err, Is.Empty);
 
         var reader = new StreamReader(stream);
         var xml = reader.ReadToEnd();

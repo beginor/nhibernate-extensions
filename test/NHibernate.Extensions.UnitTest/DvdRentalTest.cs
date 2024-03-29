@@ -1,4 +1,3 @@
-using NUnit.Framework.Legacy;
 using NHibernate.Extensions.UnitTest.TestDb;
 
 namespace NHibernate.Extensions.UnitTest;
@@ -13,7 +12,7 @@ public class DvdRentalTest : BaseTest {
 
     [Test]
     public void _01_CanSetupSessionFactory() {
-        ClassicAssert.IsNotNull(TestDbSessionFactory);
+        Assert.That(TestDbSessionFactory, Is.Not.Null);
 
         var dvdRentalSession = TestDbSessionFactory.OpenSession();
         var connStr = dvdRentalSession.Connection.ConnectionString;
@@ -25,32 +24,30 @@ public class DvdRentalTest : BaseTest {
         Console.WriteLine(connStr2);
         testDbSession.Close();
 
-        ClassicAssert.AreNotEqual(connStr, connStr2);
+        Assert.That(connStr, Is.Not.EqualTo(connStr2));
     }
 
     [Test]
     public void _02_CanQueryActors() {
         var factory = TestDbSessionFactory;
-        using (var session = factory.OpenSession()) {
-            var actors = session.Query<Actor>().ToList();
-            ClassicAssert.IsNotEmpty(actors);
-        }
+        using var session = factory.OpenSession();
+        var actors = session.Query<Actor>().ToList();
+        Assert.That(actors, Is.Not.Empty);
     }
 
     [Test]
     public void _03_CanInsertUpdateDeleteAuthors() {
-        using (var session = OpenTestDbSession()) {
-            var author = new Actor {
-                FirstName = "Simon",
-                LastName = "Zhang",
-                LastUpdate = DateTime.Now
-            };
-            session.Save(author);
-            session.Flush();
-            ClassicAssert.Greater(author.ActorId, 0);
-            session.Delete(author);
-            session.Flush();
-        }
+        using var session = OpenTestDbSession();
+        var author = new Actor {
+            FirstName = "Simon",
+            LastName = "Zhang",
+            LastUpdate = DateTime.Now
+        };
+        session.Save(author);
+        session.Flush();
+        Assert.That(author.ActorId, Is.GreaterThan(0));
+        session.Delete(author);
+        session.Flush();
     }
 
 }

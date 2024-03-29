@@ -3,7 +3,6 @@ using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.DependencyInjection;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
-using NUnit.Framework.Legacy;
 using NHibernate.Extensions.UnitTest.Sqlite;
 using NHibernate.NetCore;
 
@@ -32,14 +31,14 @@ public class SqliteDriverTest : BaseTest {
 
     [Test]
     public void _01_CanBuildSessionFactory() {
-        ClassicAssert.IsNotNull(SessionFactory);
+        Assert.That(SessionFactory, Is.Not.Null);
         using (var session = SessionFactory.OpenSession()) {
             var authors = session.Query<Author>()
                 .Where(a => a.AuthorId > 0)
                 .ToList();
-            ClassicAssert.IsNotEmpty(authors);
+            Assert.That(authors, Is.Not.Empty);
             var count = session.Query<Author>().LongCount(a => a.AuthorId > 0);
-            ClassicAssert.GreaterOrEqual(count, 0);
+            Assert.That(count, Is.GreaterThanOrEqualTo(0));
         }
     }
 
@@ -51,14 +50,14 @@ public class SqliteDriverTest : BaseTest {
             };
             session.Save(author);
             session.Flush();
-            ClassicAssert.Greater(author.AuthorId, 0);
+            Assert.That(author.AuthorId, Is.GreaterThan(0));
             session.Delete(author);
             session.Flush();
         }
     }
 
     [Test]
-    public void _03_CanDoschemaExport() {
+    public void _03_CanDoSchemaExport() {
         var exporter = new SchemaExport(ServiceProvider.GetRequiredKeyedService<Configuration>("sqlite"));
         exporter.Execute(true, false, false);
     }

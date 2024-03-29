@@ -1,7 +1,6 @@
 using System.Data;
 using System.Text.Json;
 using Dapper;
-using NUnit.Framework.Legacy;
 
 namespace NHibernate.Extensions.UnitTest;
 
@@ -25,7 +24,7 @@ public class DapperTest : BaseTest {
             var authors = conn.Query<AuthorEntity>(
                 "select * from public.authors"
             );
-            ClassicAssert.Greater(authors.Count(), 0);
+            Assert.That(authors.Count(), Is.GreaterThanOrEqualTo(0));
 
             authors = conn.Query<AuthorEntity>(
                 "select * from public.authors where authorid = any(@Ids)",
@@ -33,7 +32,7 @@ public class DapperTest : BaseTest {
                     Ids = new [] { 1, 2, 3 } .AsEnumerable()
                 }
             );
-            ClassicAssert.LessOrEqual(authors.Count(), 3);
+            Assert.That(authors.Count(), Is.LessThanOrEqualTo(3));
         }
     }
 
@@ -46,14 +45,13 @@ public class DapperTest : BaseTest {
             var entity = conn.Query<TestTableEntity>(
                 "select * from public.test_table order by update_time limit 1"
             ).FirstOrDefault();
-            ClassicAssert.NotNull(entity);
+            Assert.That(entity, Is.Not.Null);
 
             var updated = conn.Execute(
                 "update public.test_table set update_time = @updateTime where id = @id",
                 new { id = entity.Id, updateTime = DateTime.Now }
             );
-            ClassicAssert.AreEqual(1, updated);
-
+            Assert.That(updated, Is.EqualTo(1));
         }
     }
 

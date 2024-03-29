@@ -1,5 +1,3 @@
-using NUnit.Framework.Legacy;
-
 namespace NHibernate.Extensions.UnitTest;
 
 [TestFixture]
@@ -10,9 +8,9 @@ public class SqliteTest {
         var connStr = "Data Source=./test_db.db3;Foreign Keys=True;";
         var conn = new Microsoft.Data.Sqlite.SqliteConnection(connStr);
         conn.Open();
-        ClassicAssert.IsNotNull(conn);
+        Assert.That(conn, Is.Not.Null);
         var schema = conn.GetSchema();
-        ClassicAssert.IsNotNull(schema);
+        Assert.That(schema, Is.Not.Null);
         conn.Close();
     }
 

@@ -1,4 +1,3 @@
-using NUnit.Framework.Legacy;
 using NHibernate.Extensions.UnitTest.TestDb;
 
 namespace NHibernate.Extensions.UnitTest;
@@ -16,11 +15,10 @@ public class VersionTest : BaseTest {
 
     [Test]
     public void _01_CanQueryVersionTable() {
-        using (var session = factory.OpenSession()) {
-            var query = session.Query<VersionTable>();
-            var data = query.ToList();
-            ClassicAssert.NotNull(data);
-        }
+        using var session = factory.OpenSession();
+        var query = session.Query<VersionTable>();
+        var data = query.ToList();
+        Assert.That(data, Is.Not.Empty);
     }
 
     [Test]
@@ -31,9 +29,9 @@ public class VersionTest : BaseTest {
         using (var session = factory.OpenSession()) {
             session.Save(entity);
             session.Flush();
-            ClassicAssert.Greater(entity.Id, 0);
+            Assert.That(entity.Id, Is.GreaterThan(0));
 
-            ClassicAssert.Greater(entity.Version, 0);
+            Assert.That(entity.Version, Is.GreaterThan(0));
             var v1 = entity.Version;
 
             entity.Name = "update " + DateTime.Now;
@@ -41,7 +39,7 @@ public class VersionTest : BaseTest {
             session.Flush();
             var v2 = entity.Version;
 
-            ClassicAssert.Greater(v2, v1);
+            Assert.That(v2, Is.GreaterThan(v1));
 
             session.Delete(entity);
             session.Flush();

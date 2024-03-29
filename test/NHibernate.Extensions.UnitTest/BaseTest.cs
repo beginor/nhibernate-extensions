@@ -76,7 +76,7 @@ public class BaseTest {
     public async Task _02_CanQueryTestDb() {
         using (var session = TestDbSessionFactory.OpenSession()) {
             var author = await session.Query<Author>().FirstOrDefaultAsync();
-            // ClassicAssert.NotNull(author);
+            // Assert.That(author, Is.Not.Null);
         }
     }
 

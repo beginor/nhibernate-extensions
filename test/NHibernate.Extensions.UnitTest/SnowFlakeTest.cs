@@ -1,5 +1,4 @@
 using System.Text.Json;
-using NUnit.Framework.Legacy;
 using NHibernate.Extensions.UnitTest.TestDb;
 
 namespace NHibernate.Extensions.UnitTest;
@@ -18,7 +17,7 @@ public class SnowFlakeTest : BaseTest {
             var entities = session.Query<SnowFlakeTestEntity>()
                 .ToList();
             foreach (var entity in entities) {
-                ClassicAssert.True(entity.Id > 0);
+                Assert.That(entity.Id > 0);
                 Console.WriteLine(JsonSerializer.Serialize(entity));
             }
         }
@@ -31,7 +30,7 @@ public class SnowFlakeTest : BaseTest {
                 Name = Guid.NewGuid().ToString("N")
             };
             session.Save(entity);
-            ClassicAssert.True(entity.Id > 0);
+            Assert.That(entity.Id > 0);
             Console.WriteLine($"Id: {entity.Id}");
         }
     }
