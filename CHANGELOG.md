@@ -1,5 +1,9 @@
 # Changelogs for NHibernate.Extensions
 
+### 8.0.7
+
+- Update Npgsql to 8.0.3;
+
 ## 8.0.6
 
 - Update NHibernate to 5.5.1;
