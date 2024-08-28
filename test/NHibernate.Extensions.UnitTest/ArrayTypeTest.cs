@@ -99,4 +99,17 @@ public class ArrayTypeTest : BaseTest {
             // }
         }
     }
+
+    [Test]
+    public void _04_CanDoQueryDynamicJson() {
+        using var session = TestDbSessionFactory.OpenSession();
+        var query = session.CreateSQLQuery("select id, value from public.json_values");
+        query.AddScalar("id", NHibernateUtil.Int64);
+        query.AddCustomScalar<JsonbType>("value");
+        var list = query.List();
+        foreach (var item in list) {
+            Console.WriteLine(JsonSerializer.Serialize(item));
+        }
+    }
+
 }
