@@ -9,7 +9,7 @@ public class StringArrayType : ArrayType<string> {
         return new NpgSqlType(
             DbType.Object,
             // ReSharper disable once BitwiseOperatorOnEnumWithoutFlags
-            NpgsqlDbType.Array | NpgsqlDbType.Text
+            NpgsqlDbType.Array | NpgsqlDbType.Varchar
         );
     }
 
