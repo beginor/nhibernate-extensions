@@ -1,7 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <PackageVersion>8.0.8</PackageVersion>
-    <PackageReleaseNotes>Update NHibernate to 5.5.2;</PackageReleaseNotes>
+    <PackageVersion>8.0.9</PackageVersion>
+    <PackageReleaseNotes>Map `StringArrayType` to `NpgsqlDbType.Array | NpgsqlDbType.Varchar`;</PackageReleaseNotes>
     <PackageTags>nhibernate, dotnet, dotnet core</PackageTags>
     <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions</PackageProjectUrl>
   </PropertyGroup>
