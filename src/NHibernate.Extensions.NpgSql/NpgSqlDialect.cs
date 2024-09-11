@@ -1,14 +1,15 @@
-using System.Data;
+using NHibernate.Dialect;
+using NHibernate.Dialect.Function;
 using NHibernate.SqlTypes;
 using NpgsqlTypes;
 
 namespace NHibernate.Extensions.NpgSql;
 
-public class NpgSqlDialect : Dialect.PostgreSQL83Dialect {
+public class NpgSqlDialect : PostgreSQL83Dialect {
 
     public NpgSqlDialect() {
-        // RegisterColumnType();
-        RegisterColumnType(DbType.DateTime2, "");
+        // array_contains(arr, 3) => :num = any(arr)
+        RegisterFunction("array_contains", new SQLFunctionTemplate(NHibernateUtil.Boolean, "?2 = any(?1)"));
     }
 
     public override string GetTypeName(

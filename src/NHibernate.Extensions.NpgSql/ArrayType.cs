@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.Common;
+using System.Linq;
 using NHibernate.Engine;
 using NHibernate.SqlTypes;
 using NHibernate.UserTypes;
@@ -96,4 +97,12 @@ public class ArrayType<T> : IUserType {
             NpgsqlDbType.Array | ArrayTypeUtil.KnownArrayTypes[type]
         );
     }
+}
+
+public static class ArrayExtensions {
+
+    public static bool ArrayContains<T>(this T[] array, T element) {
+        return array.Contains(element);
+    }
+
 }
