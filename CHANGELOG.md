@@ -1,5 +1,9 @@
 # Changelogs for NHibernate.Extensions
 
+## 8.0.10
+
+- Update Npgsql to 8.0.4;
+
 ## 8.0.9
 
 - Map `StringArrayType` to `NpgsqlDbType.Array | NpgsqlDbType.Varchar`;

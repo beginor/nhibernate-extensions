@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <PackageReference Include="NHibernate" Version="5.5.2" />
-    <PackageReference Include="Npgsql" Version="8.0.3" />
+    <PackageReference Include="Npgsql" Version="8.0.4" />
   </ItemGroup>
 
 </Project>
