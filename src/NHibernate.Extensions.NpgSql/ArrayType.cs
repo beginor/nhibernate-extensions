@@ -88,13 +88,13 @@ public class ArrayType<T> : IUserType {
 
     protected virtual NpgSqlType GetNpgSqlType() {
         var type = typeof(T);
-        if (!ArrayTypeUtil.KnownArrayTypes.ContainsKey(type)) {
+        if (!ArrayTypeUtil.KnownTypes.TryGetValue(type, out var dbType)) {
             throw new NotSupportedException($"Unknown type {typeof(T)}");
         }
         return new NpgSqlType(
             DbType.Object,
             // ReSharper disable once BitwiseOperatorOnEnumWithoutFlags
-            NpgsqlDbType.Array | ArrayTypeUtil.KnownArrayTypes[type]
+            NpgsqlDbType.Array | dbType
         );
     }
 }
@@ -103,6 +103,10 @@ public static class ArrayExtensions {
 
     public static bool ArrayContains<T>(this T[] array, T element) {
         return array.Contains(element);
+    }
+
+    public static bool ArrayIntersects<T>(this T[] array, T[] other) {
+        return array.Intersect(other).Any();
     }
 
 }

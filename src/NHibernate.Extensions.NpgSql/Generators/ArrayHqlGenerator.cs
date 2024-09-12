@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
@@ -9,11 +10,12 @@ using NHibernate.Util;
 
 namespace NHibernate.Extensions.NpgSql.Generators;
 
-public class ArrayContainsGenerator : BaseHqlGeneratorForMethod {
+public class ArrayHqlGenerator : BaseHqlGeneratorForMethod {
 
-    public ArrayContainsGenerator() {
+    public ArrayHqlGenerator() {
         SupportedMethods = [
-            ReflectHelper.GetMethodDefinition<int[]>(x => x.ArrayContains(0))
+            ReflectHelper.GetMethodDefinition<int[]>(x => x.ArrayContains(0)),
+            ReflectHelper.GetMethodDefinition<int[]>(x => x.ArrayIntersects(Array.Empty<int>())),
         ];
     }
 
@@ -24,8 +26,18 @@ public class ArrayContainsGenerator : BaseHqlGeneratorForMethod {
         HqlTreeBuilder treeBuilder,
         IHqlExpressionVisitor visitor
     ) {
+        var hqlMethod = "";
+        var linqMethod = method.Name;
+        hqlMethod = linqMethod switch {
+            "ArrayContains" => "array_contains",
+            "ArrayIntersects" => "array_intersects",
+            _ => hqlMethod
+        };
+        if (string.IsNullOrEmpty(hqlMethod)) {
+            throw new HibernateException($"Method {method.Name} not found");
+        }
         return treeBuilder.BooleanMethodCall(
-            "array_contains",
+            hqlMethod,
             arguments.Select(arg => visitor.Visit(arg)).Cast<HqlExpression>()
         );
     }

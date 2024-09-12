@@ -2,6 +2,7 @@ using NHibernate.Linq;
 
 using NHibernate.Extensions.NpgSql;
 using NHibernate.Extensions.UnitTest.TestDb;
+using NHibernate.Type;
 
 namespace NHibernate.Extensions.UnitTest;
 
@@ -48,25 +49,26 @@ public class ArrTest : BaseTest {
         using var session = TestDbSessionFactory.OpenSession();
         var num = 1;
         var query1 = session.CreateQuery(
-            "from ArrTestEntity e where array_contains(e.IntArr, :num)"
+            $"from ArrTestEntity e where array_contains(e.IntArr, :{nameof(num)})"
         );
-        query1.SetParameter("num", num, NHibernateUtil.Int32);
+        query1.SetParameter(nameof(num), num, NHibernateUtil.Int32);
         var data1 = query1.List<ArrTestEntity>();
         Assert.That(data1, Is.Not.Empty);
 
         var str = "a";
         var query2 = session.CreateQuery(
-            "from ArrTestEntity e where array_contains(e.StrArr, :str)"
+            $"from ArrTestEntity e where array_contains(e.StrArr, :{nameof(str)})"
         );
-        query2.SetParameter("str", str, NHibernateUtil.String);
+        query2.SetParameter(nameof(str), str, NHibernateUtil.String);
         var data2 = query2.List<ArrTestEntity>();
         Assert.That(data2, Is.Not.Empty);
 
         var query3 = session.CreateQuery(
-            "from ArrTestEntity e where array_contains(e.StrArr, :str) and array_contains(e.IntArr, :num)"
+            $"from ArrTestEntity e where array_contains(e.StrArr, :{nameof(str)})"
+            + $" and array_contains(e.IntArr, :{nameof(num)})"
         );
-        query3.SetParameter("str", str, NHibernateUtil.String);
-        query3.SetParameter("num", num, NHibernateUtil.Int32);
+        query3.SetParameter(nameof(str), str, NHibernateUtil.String);
+        query3.SetParameter(nameof(num), num, NHibernateUtil.Int32);
         var data3 = query3.List<ArrTestEntity>();
         Assert.That(data3, Is.Not.Empty);
     }
@@ -96,17 +98,69 @@ public class ArrTest : BaseTest {
     }
 
     [Test]
-    public void _04_CanQueryArrayIntersects() {
+    public void _04_CanQueryArrayIntersectsWithHql() {
         using var session = TestDbSessionFactory.OpenSession();
 
-        int[] intArr = [2, 3];
-        var query = session.Query<ArrTestEntity>()
-        .Where(
-            e => e.IntArr.Intersect(intArr).Any()
+        string[] strArr = ["a", "c"];
+        var query1 = session.CreateQuery(
+            $"from ArrTestEntity e where array_intersects(e.StrArr, :{nameof(strArr)})"
+        );
+        query1.SetParameter(nameof(strArr), strArr, new CustomType(typeof(StringArrayType), null));
+        var data1 = query1.List<ArrTestEntity>();
+        Assert.That(data1, Is.Not.Empty);
+
+        int[] intArr = [1, 3];
+        var query2 = session.CreateQuery(
+            $"from ArrTestEntity e where array_intersects(e.IntArr, :{nameof(intArr)})"
+        );
+        query2.SetParameter(nameof(intArr), intArr, new CustomType(typeof(Int32ArrayType), null));
+        var data2 = query1.List<ArrTestEntity>();
+        Assert.That(data2, Is.Not.Empty);
+
+        var query3 = session.CreateQuery(
+            $"from ArrTestEntity e where array_intersects(e.StrArr, :{nameof(strArr)})"
+            + $" and array_intersects(e.IntArr, :{nameof(intArr)})"
+        );
+        query3.SetParameter(nameof(strArr), strArr, new CustomType(typeof(StringArrayType), null));
+        query3.SetParameter(nameof(intArr), intArr, new CustomType(typeof(Int32ArrayType), null));
+        var data3 = query3.List<ArrTestEntity>();
+        Assert.That(data3, Is.Not.Empty);
+    }
+
+    [Test]
+    public async Task _05_CanQueryArrayIntersectsWithLinq() {
+        using var session = TestDbSessionFactory.OpenSession();
+
+        string[] strArr = ["a", "c"];
+        var query1 = session.Query<ArrTestEntity>().Where(
+            x => x.StrArr.ArrayIntersects(strArr)
+        );
+        var data1 = await query1.ToListAsync();
+        Assert.That(data1, Is.Not.Empty);
+
+        int[] intArr = [1, 3];
+        var query2 = session.Query<ArrTestEntity>().Where(
+            x => x.IntArr.ArrayIntersects(intArr)
+        );
+        var data2 = await query2.ToListAsync();
+        Assert.That(data2, Is.Not.Empty);
+
+        var query3 = session.Query<ArrTestEntity>().Where(
+            x => x.StrArr.ArrayIntersects(strArr) && x.IntArr.ArrayIntersects(intArr)
+        );
+        var data3 = await query3.ToListAsync();
+        Assert.That(data3, Is.Not.Empty);
+    }
+
+    [Test]
+    public void _06_CanQueryContains() {
+        using var session = TestDbSessionFactory.OpenSession();
+        var idArr = new List<long> { 1L, 2L, 3L };
+        var query = session.Query<ArrTestEntity>().Where(
+            x => idArr.Contains(x.Id)
         );
         var data = query.ToList();
-        Assert.That(data, Is.Not.Null);
-        Assert.That(data.Count, Is.GreaterThan(0));
+        Assert.That(data, Is.Empty);
     }
 
 }

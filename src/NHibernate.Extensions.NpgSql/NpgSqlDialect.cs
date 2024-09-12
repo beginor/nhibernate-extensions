@@ -10,6 +10,7 @@ public class NpgSqlDialect : PostgreSQL83Dialect {
     public NpgSqlDialect() {
         // array_contains(arr, 3) => :num = any(arr)
         RegisterFunction("array_contains", new SQLFunctionTemplate(NHibernateUtil.Boolean, "?2 = any(?1)"));
+        RegisterFunction("array_intersects", new SQLFunctionTemplate(NHibernateUtil.Boolean, "?1 && ?2"));
     }
 
     public override string GetTypeName(

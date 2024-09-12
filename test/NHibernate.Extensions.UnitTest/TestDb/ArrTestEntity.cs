@@ -8,8 +8,8 @@ namespace NHibernate.Extensions.UnitTest.TestDb;
 public class ArrTestEntity {
     [Id(Name = nameof(Id), Column = "id", Type = "long", Generator = "trigger-identity")]
     public virtual long Id { get; set; }
-    [Property(Column = "int_arr", TypeType = typeof(ArrayType<int>))]
+    [Property(Column = "int_arr", TypeType = typeof(Int32ArrayType))]
     public virtual int[] IntArr { get; set; }
-    [Property(Column = "str_arr", TypeType = typeof(ArrayType<string>))]
+    [Property(Column = "str_arr", TypeType = typeof(StringArrayType))]
     public virtual string[] StrArr { get; set; }
 }

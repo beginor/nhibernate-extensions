@@ -7,7 +7,7 @@ namespace NHibernate.Extensions.NpgSql;
 public class LinqToHqlGeneratorsRegistry : DefaultLinqToHqlGeneratorsRegistry {
 
     public LinqToHqlGeneratorsRegistry() {
-        this.Merge(new ArrayContainsGenerator());
+        this.Merge(new ArrayHqlGenerator());
     }
 
 }
