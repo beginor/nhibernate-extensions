@@ -9,6 +9,8 @@ namespace NHibernate.Extensions.UnitTest;
 [TestFixture]
 public class ArrTest : BaseTest {
 
+    private readonly IList<long> entityIdList = new List<long>();
+
     [OneTimeSetUp]
     public override void OneTimeSetUp() {
         base.OneTimeSetUp();
@@ -18,13 +20,18 @@ public class ArrTest : BaseTest {
             StrArr = ["a", "b", "c"]
         };
         session.Save(entity);
+        Assert.That(entity.Id, Is.GreaterThan(0));
+        entityIdList.Add(entity.Id);
         entity = new ArrTestEntity {
             IntArr = [4, 5, 6],
             StrArr = ["d", "e", "f"]
         };
         session.Save(entity);
+        Assert.That(entity.Id, Is.GreaterThan(0));
+        entityIdList.Add(entity.Id);
         session.Flush();
         session.Clear();
+        Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(entityIdList));
     }
 
     [OneTimeTearDown]
@@ -32,6 +39,7 @@ public class ArrTest : BaseTest {
         using var session = OpenTestDbSession();
         var query = session.CreateSQLQuery("truncate table public.arr_test");
         query.ExecuteUpdate();
+        entityIdList.Clear();
     }
 
     [Test]
@@ -155,12 +163,19 @@ public class ArrTest : BaseTest {
     [Test]
     public void _06_CanQueryContains() {
         using var session = TestDbSessionFactory.OpenSession();
-        var idArr = new List<long> { 1L, 2L, 3L };
+        var idList = entityIdList.ToList();
         var query = session.Query<ArrTestEntity>().Where(
-            x => idArr.Contains(x.Id)
+            x => idList.Contains(x.Id)
         );
         var data = query.ToList();
-        Assert.That(data, Is.Empty);
+        Assert.That(data, Is.Not.Empty);
+
+        var idArr = idList.ToArray();
+        var query2 = session.Query<ArrTestEntity>().Where(
+            x => idArr.ArrayContains(x.Id)
+        );
+        var data2 = query2.ToList();
+        Assert.That(data2, Is.Not.Empty);
     }
 
 }
