@@ -1,7 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <PackageVersion>8.0.10</PackageVersion>
-    <PackageReleaseNotes>Update Npgsql to 8.0.4;</PackageReleaseNotes>
+    <PackageVersion>8.0.11</PackageVersion>
+    <PackageReleaseNotes>Add `array_contains` and `array_intersects` to hql query;Add `ArrayContains` and `ArrayIntersects` to linq query;</PackageReleaseNotes>
     <PackageTags>nhibernate, dotnet, dotnet core</PackageTags>
     <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions</PackageProjectUrl>
   </PropertyGroup>

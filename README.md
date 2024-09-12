@@ -7,8 +7,9 @@ Some useful extensions for NHibernate used in my projects.
 - Extended PostgreSQL driver [NpgSqlDriver](https://github.com/beginor/nhibernate-extensions/blob/master/src/NHibernate.Extensions.NpgSql/NpgSqlDriver.cs) for NHibernate, with support of:
 
   - Type of `json` and `jsonb`
-  - Array type of `boolean`, `double`, `float (real)`, `int`, `short (small int)`,
-  `long (big int)` and `string (character)`；
+  - Array type of `boolean`, `double`, `float (real)`, `int`, `short (small int)`, `long (big int)` and `string (character)`；
+  - Add `array_contains` and `array_intersects` function to hql query;
+  - Add `ArrayContains` and `ArrayIntersects` extension to linq query;
 
 - Extended PostgreSQL dialect [NpgSqlDialect](https://github.com/beginor/nhibernate-extensions/blob/master/src/NHibernate.Extensions.NpgSql/NpgSqlDialect.cs) for schema export of supported types.
 
