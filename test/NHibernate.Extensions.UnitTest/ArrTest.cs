@@ -44,35 +44,55 @@ public class ArrTest : BaseTest {
     }
 
     [Test]
-    public void _01_CanQueryWithHql() {
+    public void _01_CanQueryArayContainsWithHql() {
         using var session = TestDbSessionFactory.OpenSession();
-        var num = 3;
-        var hql = "from ArrTestEntity e where array_contains(e.IntArr, :num)";
-        var query = session.CreateQuery(hql);
-        query.SetParameter("num", num, NHibernateUtil.Int32);
-        var data = query.List<ArrTestEntity>();
-        Assert.That(data, Is.Not.Null);
-        Assert.That(data.Count, Is.GreaterThan(0));
+        var num = 1;
+        var query1 = session.CreateQuery(
+            "from ArrTestEntity e where array_contains(e.IntArr, :num)"
+        );
+        query1.SetParameter("num", num, NHibernateUtil.Int32);
+        var data1 = query1.List<ArrTestEntity>();
+        Assert.That(data1, Is.Not.Empty);
+
+        var str = "a";
+        var query2 = session.CreateQuery(
+            "from ArrTestEntity e where array_contains(e.StrArr, :str)"
+        );
+        query2.SetParameter("str", str, NHibernateUtil.String);
+        var data2 = query2.List<ArrTestEntity>();
+        Assert.That(data2, Is.Not.Empty);
+
+        var query3 = session.CreateQuery(
+            "from ArrTestEntity e where array_contains(e.StrArr, :str) and array_contains(e.IntArr, :num)"
+        );
+        query3.SetParameter("str", str, NHibernateUtil.String);
+        query3.SetParameter("num", num, NHibernateUtil.Int32);
+        var data3 = query3.List<ArrTestEntity>();
+        Assert.That(data3, Is.Not.Empty);
     }
 
     [Test]
-    public void _03_CanQueryArrayContains() {
+    public void _03_CanQueryArrayContainsWithLinq() {
         using var session = TestDbSessionFactory.OpenSession();
-        var num = 6;
-        var query = session.Query<ArrTestEntity>().Where(
+        var num = 1;
+        var query1 = session.Query<ArrTestEntity>().Where(
             x => x.IntArr.ArrayContains(num)
         );
-        var data = query.ToList();
-        Assert.That(data, Is.Not.Null);
-        Assert.That(data.Count, Is.GreaterThan(0));
+        var data1 = query1.ToList();
+        Assert.That(data1, Is.Not.Empty);
 
         var str = "a";
-        query = session.Query<ArrTestEntity>().Where(
+        var query2 = session.Query<ArrTestEntity>().Where(
             x => x.StrArr.ArrayContains(str)
         );
-        data = query.ToList();
-        Assert.That(data, Is.Not.Null);
-        Assert.That(data.Count, Is.GreaterThan(0));
+        var data2 = query2.ToList();
+        Assert.That(data2, Is.Not.Empty);
+
+        var query3 = session.Query<ArrTestEntity>().Where(
+            x => x.IntArr.ArrayContains(num) && x.StrArr.ArrayContains(str)
+        );
+        var data3 = query3.ToList();
+        Assert.That(data3, Is.Not.Empty);
     }
 
     [Test]
