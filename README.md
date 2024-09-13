@@ -11,6 +11,9 @@ Some useful extensions for NHibernate used in my projects.
   - Add `array_contains` and `array_intersects` function to hql query;
   - Add `ArrayContains` and `ArrayIntersects` extension to linq query;
 
+  > Refer [ArrTestEntity](./test/NHibernate.Extensions.UnitTest/TestDb/ArrTestEntity.cs) for mapping;
+  > And [ArrTest](./test/NHibernate.Extensions.UnitTest/ArrTest.cs) for sample query usage;
+
 - Extended PostgreSQL dialect [NpgSqlDialect](https://github.com/beginor/nhibernate-extensions/blob/master/src/NHibernate.Extensions.NpgSql/NpgSqlDialect.cs) for schema export of supported types.
 
 ## NHibernate.Extensions.Sqlite

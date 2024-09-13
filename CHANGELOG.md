@@ -1,9 +1,14 @@
 # Changelogs for NHibernate.Extensions
 
+## 8.0.12
+
+- Optimize array extension methods;
+- Add user type aliases;
+
 ## 8.0.11
 
-- Add `array_contains` and `array_intersects` extension methods to hql query.
-- Add `ArrayContains` and `ArrayIntersects` extension method to linq query.
+- Add `array_contains` and `array_intersects` extension methods to hql query;
+- Add `ArrayContains` and `ArrayIntersects` extension method to linq query;
 
 Please refer [ArrTest](https://github.com/beginor/nhibernate-extensions/blob/master/test/NHibernate.Extensions.UnitTest/ArrTest.cs) for more details.
 
