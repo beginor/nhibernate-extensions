@@ -113,7 +113,7 @@ public class ArrTest : BaseTest {
         var query1 = session.CreateQuery(
             $"from ArrTestEntity e where array_intersects(e.StrArr, :{nameof(strArr)})"
         );
-        query1.SetParameter(nameof(strArr), strArr, new CustomType(typeof(StringArrayType), null));
+        query1.SetParameter(nameof(strArr), strArr, NHibernateUtil.Custom(typeof(StringArrayType)));
         var data1 = query1.List<ArrTestEntity>();
         Assert.That(data1, Is.Not.Empty);
 
@@ -121,7 +121,7 @@ public class ArrTest : BaseTest {
         var query2 = session.CreateQuery(
             $"from ArrTestEntity e where array_intersects(e.IntArr, :{nameof(intArr)})"
         );
-        query2.SetParameter(nameof(intArr), intArr, new CustomType(typeof(Int32ArrayType), null));
+        query2.SetParameter(nameof(intArr), intArr, NHibernateUtil.Custom(typeof(Int32ArrayType)));
         var data2 = query1.List<ArrTestEntity>();
         Assert.That(data2, Is.Not.Empty);
 
@@ -129,8 +129,8 @@ public class ArrTest : BaseTest {
             $"from ArrTestEntity e where array_intersects(e.StrArr, :{nameof(strArr)})"
             + $" and array_intersects(e.IntArr, :{nameof(intArr)})"
         );
-        query3.SetParameter(nameof(strArr), strArr, new CustomType(typeof(StringArrayType), null));
-        query3.SetParameter(nameof(intArr), intArr, new CustomType(typeof(Int32ArrayType), null));
+        query3.SetParameter(nameof(strArr), strArr, NHibernateUtil.Custom(typeof(StringArrayType)));
+        query3.SetParameter(nameof(intArr), intArr, NHibernateUtil.Custom(typeof(Int32ArrayType)));
         var data3 = query3.List<ArrTestEntity>();
         Assert.That(data3, Is.Not.Empty);
     }
@@ -163,7 +163,7 @@ public class ArrTest : BaseTest {
     [Test]
     public void _06_CanQueryContains() {
         using var session = TestDbSessionFactory.OpenSession();
-        var idList = entityIdList.ToList();
+        var idList = entityIdList.ToArray();
         var query = session.Query<ArrTestEntity>().Where(
             x => idList.Contains(x.Id)
         );

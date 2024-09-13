@@ -1,7 +1,4 @@
-using System;
-using NHibernate;
 using NHibernate.UserTypes;
-using NHibernate.Type;
 
 namespace NHibernate.Extensions.NpgSql;
 
@@ -13,7 +10,7 @@ public static class SqlQueryExtensions {
     ) where TUserType : IUserType {
         query.AddScalar(
             columnAlias,
-            new CustomType(typeof(TUserType), null)
+            NHibernateUtil.Custom(typeof(TUserType))
         );
         return query;
     }
@@ -26,7 +23,7 @@ public static class SqlQueryExtensions {
         query.SetParameter(
             name,
             val,
-            new CustomType(typeof(TUserType), null)
+            NHibernateUtil.Custom(typeof(TUserType))
         );
         return query;
     }
@@ -39,7 +36,7 @@ public static class SqlQueryExtensions {
         query.SetParameter(
             position,
             val,
-            new CustomType(typeof(TUserType), null)
+            NHibernateUtil.Custom(typeof(TUserType))
         );
         return query;
     }
