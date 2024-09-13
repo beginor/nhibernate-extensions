@@ -1,7 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <PackageVersion>8.0.12</PackageVersion>
-    <PackageReleaseNotes>Optimize extension methods add in 8.0.11.</PackageReleaseNotes>
+    <PackageReleaseNotes>Optimize array extension methods;Add user type aliases;</PackageReleaseNotes>
     <PackageTags>nhibernate, dotnet, dotnet core</PackageTags>
     <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions</PackageProjectUrl>
   </PropertyGroup>
