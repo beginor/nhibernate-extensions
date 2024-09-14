@@ -67,8 +67,8 @@ public class NpgSqlDialect : PostgreSQL83Dialect {
         TypeFactory.RegisterType(typeof(double[]), NHibernateUtil.Custom(typeof(ArrayType<double>)), ["double[]"]);
         TypeFactory.RegisterType(typeof(decimal[]), NHibernateUtil.Custom(typeof(ArrayType<decimal>)), ["decimal[]"]);
         TypeFactory.RegisterType(typeof(string[]), NHibernateUtil.Custom(typeof(ArrayType<string>)), ["string[]"]);
-        TypeFactory.RegisterType(typeof(DateTime[]), NHibernateUtil.Custom(typeof(ArrayType<DateTime>)), ["datetime[]"]);
-        TypeFactory.RegisterType(typeof(DateTimeOffset[]), NHibernateUtil.Custom(typeof(ArrayType<DateTimeOffset>)), ["datetimeoffset[]"]);
+        TypeFactory.RegisterType(typeof(DateTime[]), NHibernateUtil.Custom(typeof(ArrayType<DateTime>)), ["datetime[]", "timestamp[]"]);
+        TypeFactory.RegisterType(typeof(DateTimeOffset[]), NHibernateUtil.Custom(typeof(ArrayType<DateTimeOffset>)), ["datetimeoffset[]", "timestamptz[]"]);
 
         TypeFactory.RegisterType(typeof(JsonElement), NHibernateUtil.Custom(typeof(JsonbType)), ["jsonb"]);
         TypeFactory.RegisterType(typeof(JsonElement), NHibernateUtil.Custom(typeof(JsonType)), ["json"]);
