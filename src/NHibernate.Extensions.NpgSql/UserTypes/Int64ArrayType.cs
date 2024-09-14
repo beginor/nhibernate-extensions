@@ -1,8 +1,10 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using NpgsqlTypes;
 
 namespace NHibernate.Extensions.NpgSql;
 
+[Obsolete("Please use ArrayType<long> instead.")]
 public class Int64ArrayType : ArrayType<long> {
 
     protected override NpgSqlType GetNpgSqlType() => new(

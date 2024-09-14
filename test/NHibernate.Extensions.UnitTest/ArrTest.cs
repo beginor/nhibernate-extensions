@@ -11,6 +11,10 @@ public class ArrTest : BaseTest {
 
     private readonly IList<long> entityIdList = new List<long>();
 
+    public ArrTest() {
+        Console.WriteLine("ArrTest::Constructor");
+    }
+
     [OneTimeSetUp]
     public override void OneTimeSetUp() {
         base.OneTimeSetUp();

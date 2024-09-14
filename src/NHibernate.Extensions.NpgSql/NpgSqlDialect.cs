@@ -32,27 +32,20 @@ public class NpgSqlDialect : PostgreSQL83Dialect {
             // array type
             if (npgDbType < 0) {
                 var arrayDbType = (NpgsqlDbType) (npgDbType - NpgsqlDbType.Array);
-                if (arrayDbType == NpgsqlDbType.Boolean) {
-                    return "boolean[]";
-                }
-                if (arrayDbType == NpgsqlDbType.Double) {
-                    return "double precision[]";
-                }
-                if (arrayDbType == NpgsqlDbType.Real) {
-                    return "real[]";
-                }
-                if (arrayDbType == NpgsqlDbType.Smallint) {
-                    return "smallint[]";
-                }
-                if (arrayDbType == NpgsqlDbType.Integer) {
-                    return "integer[]";
-                }
-                if (arrayDbType == NpgsqlDbType.Bigint) {
-                    return "bigint[]";
-                }
-                if (arrayDbType == NpgsqlDbType.Varchar) {
-                    return "character varying[]";
-                }
+                string type = arrayDbType switch {
+                    NpgsqlDbType.Boolean => "boolean[]",
+                    NpgsqlDbType.Smallint => "smallint[]",
+                    NpgsqlDbType.Integer => "integer[]",
+                    NpgsqlDbType.Bigint => "bigint[]",
+                    NpgsqlDbType.Real => "real[]",
+                    NpgsqlDbType.Double => "double precision[]",
+                    NpgsqlDbType.Numeric => "numeric[]",
+                    NpgsqlDbType.Varchar => "character varying[]",
+                    NpgsqlDbType.Timestamp => "timestamp[]",
+                    NpgsqlDbType.TimestampTz => "timestamptz[]",
+                    _ => ""
+                };
+                return type;
             }
         }
         return base.GetTypeName(sqlType);
@@ -76,8 +69,10 @@ public class NpgSqlDialect : PostgreSQL83Dialect {
         TypeFactory.RegisterType(typeof(string[]), NHibernateUtil.Custom(typeof(ArrayType<string>)), ["string[]"]);
         TypeFactory.RegisterType(typeof(DateTime[]), NHibernateUtil.Custom(typeof(ArrayType<DateTime>)), ["datetime[]"]);
         TypeFactory.RegisterType(typeof(DateTimeOffset[]), NHibernateUtil.Custom(typeof(ArrayType<DateTimeOffset>)), ["datetimeoffset[]"]);
-        TypeFactory.RegisterType(typeof(TimeSpan[]), NHibernateUtil.Custom(typeof(ArrayType<TimeSpan>)), ["timespan[]"]);
 
         TypeFactory.RegisterType(typeof(JsonElement), NHibernateUtil.Custom(typeof(JsonbType)), ["jsonb"]);
+        TypeFactory.RegisterType(typeof(JsonElement), NHibernateUtil.Custom(typeof(JsonType)), ["json"]);
+        TypeFactory.RegisterType(typeof(DateTime), NHibernateUtil.Custom(typeof(TimeStampType)), ["timestamp"]);
+        TypeFactory.RegisterType(typeof(DateTimeOffset), NHibernateUtil.Custom(typeof(TimeStampTzType)), ["timestamptz"]);
     }
 }

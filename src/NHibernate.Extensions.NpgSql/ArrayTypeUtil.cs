@@ -19,16 +19,6 @@ public static class ArrayTypeUtil {
             [typeof(string)] = NpgsqlDbType.Varchar,
             [typeof(DateTime)] = NpgsqlDbType.Timestamp,
             [typeof(DateTimeOffset)] = NpgsqlDbType.TimestampTz,
-            [typeof(TimeSpan)] = NpgsqlDbType.Time
         };
-
-    public static System.Type GetArrayType(System.Type type) {
-        if (!KnownTypes.ContainsKey(type)) {
-            throw new HibernateException($"The ArrayType of '{type.Name}' is not supported.");
-        }
-        var arrayType = typeof(ArrayType<>);
-        var genericArrayType = arrayType.MakeGenericType(type);
-        return genericArrayType;
-    }
 
 }

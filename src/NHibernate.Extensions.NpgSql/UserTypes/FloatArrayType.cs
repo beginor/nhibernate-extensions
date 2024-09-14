@@ -1,8 +1,10 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using NpgsqlTypes;
 
 namespace NHibernate.Extensions.NpgSql;
 
+[Obsolete("Please use ArrayType<float> instead.")]
 public class FloatArrayType : ArrayType<float> {
 
     protected override NpgSqlType GetNpgSqlType() => new (

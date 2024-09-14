@@ -7,9 +7,9 @@ using PropertyAttribute = NHibernate.Mapping.Attributes.PropertyAttribute;
 public class NpgTime {
     [Id(Name = nameof(Id), Column = "id", Type = "long", Generator = "trigger-identity")]
     public virtual long Id { get; set; }
-    [Property(Name = nameof(LocalTime), Column = "local_time", TypeType = typeof(NHibernate.Extensions.NpgSql.TimeStampType), NotNull = false)]
+    [Property(Name = nameof(LocalTime), Column = "local_time", Type = "timestamp", NotNull = false)]
     public virtual DateTime? LocalTime { get; set; }
-    [Property(Name = nameof(UtcTime), Column = "utc_time", TypeType = typeof(NHibernate.Extensions.NpgSql.TimeStampTzType), NotNull = false)]
+    [Property(Name = nameof(UtcTime), Column = "utc_time", Type = "timestamptz", NotNull = false)]
     public virtual DateTime? UtcTime { get; set; }
 
     public override string ToString() {

@@ -1,8 +1,10 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using NpgsqlTypes;
 
 namespace NHibernate.Extensions.NpgSql;
 
+[Obsolete("Please use ArrayType<string> instead.")]
 public class StringArrayType : ArrayType<string> {
 
     protected override NpgSqlType GetNpgSqlType() {

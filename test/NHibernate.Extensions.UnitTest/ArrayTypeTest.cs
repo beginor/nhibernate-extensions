@@ -77,35 +77,11 @@ public class ArrayTypeTest : BaseTest {
     }
 
     [Test]
-    public void _03_CanDoSqlQuery() {
-        using var session = TestDbSessionFactory.OpenSession();
-        var sql = @" select id, str_arr, int_arr
-            from public.arr_test
-            where int_arr && :arr_param
-            order by id desc;
-        ";
-
-        var query = session.CreateSQLQuery(sql);
-        query.AddScalar("id", NHibernateUtil.Int64);
-        query.AddCustomScalar<StringArrayType>("str_arr");
-        query.AddCustomScalar<Int32ArrayType>("int_arr");
-        query.SetCustomParameter<Int32ArrayType>("arr_param", new [] { 2, 3 });
-
-        var result = query.List();
-        foreach (Array row in result) {
-            Console.WriteLine(JsonSerializer.Serialize(row));
-            // foreach (var field in row) {
-            //     Console.WriteLine(field);
-            // }
-        }
-    }
-
-    [Test]
     public void _04_CanDoQueryDynamicJson() {
         using var session = TestDbSessionFactory.OpenSession();
         var query = session.CreateSQLQuery("select id, value from public.json_values");
         query.AddScalar("id", NHibernateUtil.Int64);
-        query.AddCustomScalar<JsonbType>("value");
+        query.AddScalar("value", NHibernateUtil.Custom(typeof(JsonbType)));
         var list = query.List();
         foreach (var item in list) {
             Console.WriteLine(JsonSerializer.Serialize(item));

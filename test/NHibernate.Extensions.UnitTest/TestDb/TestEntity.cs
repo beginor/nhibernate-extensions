@@ -17,13 +17,13 @@ public class TestEntity {
     [Property(Column = "tags", Type = "string[]")]
     public virtual string[] Tags { get; set; }
 
-    [Property(Column = "json_field", TypeType = typeof(JsonType))]
+    [Property(Column = "json_field", Type = "json")]
     public virtual JsonElement JsonField { get; set; }
 
     [Property(Column = "jsonb_field", Type = "jsonb")]
     public virtual JsonElement JsonbField { get; set; }
 
-    [Property(Column = "update_time", Type = "datetime")]
+    [Property(Column = "update_time", Type = "timestamp")]
     public virtual DateTime? UpdateTime { get; set; }
 
     [Property(Column = "int16_arr", Type = "short[]")]
