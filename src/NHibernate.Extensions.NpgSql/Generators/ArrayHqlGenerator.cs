@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
@@ -37,23 +36,9 @@ public class ArrayHqlGenerator : BaseHqlGeneratorForMethod {
         if (string.IsNullOrEmpty(hqlMethod)) {
             throw new HibernateException($"Method {method.Name} not found");
         }
-        var args = new List<HqlExpression>();
-
-        foreach (var argument in arguments) {
-            var node = visitor.Visit(argument) as HqlExpression;
-            args.Add(node!);
-        //     if (argument is ConstantExpression { Type.IsArray: true } constant) {
-        //         var elementType = constant.Type.GetElementType();
-        //         var constExpr = Expression.Constant()
-        //         args.Add(constExpr);
-        //     }
-        //     else {
-        //         args.Add(argument);
-        //     }
-        }
         return treeBuilder.BooleanMethodCall(
             hqlMethod,
-            args
+            arguments.Select(visitor.Visit).Cast<HqlExpression>()
         );
     }
 
