@@ -1,5 +1,5 @@
 ﻿using System.Text.Json;
-using NHibernate.Extensions.NpgSql;
+using NHibernate.Extensions.Npgsql;
 using NHibernate.Extensions.UnitTest.TestDb;
 
 namespace NHibernate.Extensions.UnitTest;

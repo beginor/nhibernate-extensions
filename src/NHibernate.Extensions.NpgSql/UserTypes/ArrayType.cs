@@ -8,11 +8,11 @@ using NHibernate.UserTypes;
 using Npgsql;
 using NpgsqlTypes;
 
-namespace NHibernate.Extensions.NpgSql;
+namespace NHibernate.Extensions.Npgsql;
 
 public class ArrayType<T> : IUserType {
 
-    public SqlType[] SqlTypes => [GetNpgSqlType()];
+    public SqlType[] SqlTypes => [GetNpgsqlType()];
 
     public System.Type ReturnedType => typeof(T[]);
 
@@ -72,7 +72,7 @@ public class ArrayType<T> : IUserType {
             parameter.Value = DBNull.Value;
         }
         else {
-            parameter.NpgsqlDbType = GetNpgSqlType().NpgDbType;
+            parameter.NpgsqlDbType = GetNpgsqlType().NpgDbType;
             if (!(value is T[] arr)) {
                 throw new InvalidOperationException(
                     $"\"{parameter.ParameterName}\" is not {typeof(T)}[]"
@@ -86,12 +86,12 @@ public class ArrayType<T> : IUserType {
         return original;
     }
 
-    protected virtual NpgSqlType GetNpgSqlType() {
+    protected virtual NpgsqlType GetNpgsqlType() {
         var type = typeof(T);
         if (!ArrayTypeUtil.KnownTypes.TryGetValue(type, out var dbType)) {
             throw new NotSupportedException($"Unknown type {typeof(T)}");
         }
-        return new NpgSqlType(
+        return new NpgsqlType(
             DbType.Object,
             // ReSharper disable once BitwiseOperatorOnEnumWithoutFlags
             NpgsqlDbType.Array | dbType

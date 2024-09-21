@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Data.Common;
 using NHibernate.Cfg;
-using NHibernate.Driver;
 using NHibernate.SqlTypes;
 using Npgsql;
 
-namespace NHibernate.Extensions.NpgSql;
+namespace NHibernate.Extensions.Npgsql;
 
-public class NpgSqlDriver : NpgsqlDriver {
+public class NpgsqlDriver : NHibernate.Driver.NpgsqlDriver {
 
     private NpgsqlDataSource? dataSource;
 
@@ -25,7 +24,7 @@ public class NpgSqlDriver : NpgsqlDriver {
     }
 
     protected override void InitializeParameter(DbParameter dbParam, string name, SqlType sqlType) {
-        if (sqlType is NpgSqlType type && dbParam is NpgsqlParameter parameter) {
+        if (sqlType is NpgsqlType type && dbParam is NpgsqlParameter parameter) {
             InitializeParameter(parameter, name, type);
         }
         else {
@@ -33,7 +32,7 @@ public class NpgSqlDriver : NpgsqlDriver {
         }
     }
 
-    protected virtual void InitializeParameter(NpgsqlParameter dbParam, string name, NpgSqlType sqlType) {
+    protected virtual void InitializeParameter(NpgsqlParameter dbParam, string name, NpgsqlType sqlType) {
         if (sqlType == null) {
             throw new QueryException($"No type assigned to parameter '{name}'");
         }

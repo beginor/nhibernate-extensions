@@ -2,23 +2,23 @@
 using NHibernate.SqlTypes;
 using NpgsqlTypes;
 
-namespace NHibernate.Extensions.NpgSql;
+namespace NHibernate.Extensions.Npgsql;
 
-public class NpgSqlType : SqlType {
+public class NpgsqlType : SqlType {
 
     public NpgsqlDbType NpgDbType { get; }
 
-    public NpgSqlType(DbType dbType, NpgsqlDbType npgDbType)
+    public NpgsqlType(DbType dbType, NpgsqlDbType npgDbType)
         : base(dbType) {
         NpgDbType = npgDbType;
     }
 
-    public NpgSqlType(DbType dbType, NpgsqlDbType npgDbType, int length)
+    public NpgsqlType(DbType dbType, NpgsqlDbType npgDbType, int length)
         : base(dbType, length) {
         NpgDbType = npgDbType;
     }
 
-    public NpgSqlType(DbType dbType, NpgsqlDbType npgDbType, byte precision, byte scale)
+    public NpgsqlType(DbType dbType, NpgsqlDbType npgDbType, byte precision, byte scale)
         : base(dbType, precision, scale) {
         NpgDbType = npgDbType;
     }

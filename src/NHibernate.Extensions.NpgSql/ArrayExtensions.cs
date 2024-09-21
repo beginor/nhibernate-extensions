@@ -1,6 +1,6 @@
 using System.Linq;
 
-namespace NHibernate.Extensions.NpgSql;
+namespace NHibernate.Extensions.Npgsql;
 
 public static class ArrayExtensions {
 

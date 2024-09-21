@@ -1,16 +1,15 @@
 using System;
 using System.Text.Json;
-using NHibernate.Dialect;
 using NHibernate.Dialect.Function;
 using NHibernate.SqlTypes;
 using NHibernate.Type;
 using NpgsqlTypes;
 
-namespace NHibernate.Extensions.NpgSql;
+namespace NHibernate.Extensions.Npgsql;
 
-public class NpgSqlDialect : PostgreSQL83Dialect {
+public class NpgsqlDialect : NHibernate.Dialect.PostgreSQL83Dialect {
 
-    public NpgSqlDialect() {
+    public NpgsqlDialect() {
         RegisterFunctions();
         RegisterUserTypes();
     }
@@ -18,7 +17,7 @@ public class NpgSqlDialect : PostgreSQL83Dialect {
     public override string GetTypeName(
         SqlType sqlType
     ) {
-        if (sqlType is NpgSqlType npgSqlType) {
+        if (sqlType is NpgsqlType npgSqlType) {
             var npgDbType = npgSqlType.NpgDbType;
             if (npgDbType == NpgsqlDbType.Numeric) {
                 return "numeric";

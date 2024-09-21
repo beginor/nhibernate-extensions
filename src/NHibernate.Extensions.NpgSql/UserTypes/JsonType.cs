@@ -8,12 +8,12 @@ using NHibernate.UserTypes;
 using Npgsql;
 using NpgsqlTypes;
 
-namespace NHibernate.Extensions.NpgSql;
+namespace NHibernate.Extensions.Npgsql;
 
 public class JsonType<T> : IUserType {
 
     public virtual SqlType[] SqlTypes => [
-        new NpgSqlType(DbType.Object, NpgsqlDbType.Json)
+        new NpgsqlType(DbType.Object, NpgsqlDbType.Json)
     ];
 
     public System.Type ReturnedType => typeof(T);
@@ -109,7 +109,7 @@ public class JsonType<T> : IUserType {
 public class JsonbType<T> : JsonType<T> {
 
     public override SqlType[] SqlTypes => new SqlType[] {
-        new NpgSqlType(DbType.Binary, NpgsqlDbType.Jsonb)
+        new NpgsqlType(DbType.Binary, NpgsqlDbType.Jsonb)
     };
 
 }

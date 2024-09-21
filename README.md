@@ -2,16 +2,16 @@
 
 Some useful extensions for NHibernate used in my projects.
 
-## NHibernate.Extensions.NpgSql
+## NHibernate.Extensions.Npgsql
 
-- Extended PostgreSQL driver [NpgSqlDriver](https://github.com/beginor/nhibernate-extensions/blob/master/src/NHibernate.Extensions.NpgSql/NpgSqlDriver.cs) for NHibernate, with support of:
+- Extended PostgreSQL driver [NpgsqlDriver](https://github.com/beginor/nhibernate-extensions/blob/master/src/NHibernate.Extensions.Npgsql/NpgsqlDriver.cs) for NHibernate, with support of:
 
   - Type of `json` and `jsonb`
   - Array type of `boolean`, `double`, `float (real)`, `int`, `short (small int)`, `long (big int)` and `string (character)`；
   - Add `array_contains` and `array_intersects` function to hql query;
   - Add `ArrayContains` and `ArrayIntersects` extension to linq query;
 
-- Extended PostgreSQL dialect [NpgSqlDialect](https://github.com/beginor/nhibernate-extensions/blob/master/src/NHibernate.Extensions.NpgSql/NpgSqlDialect.cs) for schema export of supported types.
+- Extended PostgreSQL dialect [NpgsqlDialect](https://github.com/beginor/nhibernate-extensions/blob/master/src/NHibernate.Extensions.Npgsql/NpgsqlDialect.cs) for schema export of supported types.
 
 Refer [ArrTestEntity](./test/NHibernate.Extensions.UnitTest/TestDb/ArrTestEntity.cs) for mapping, and [ArrTest](./test/NHibernate.Extensions.UnitTest/ArrTest.cs) for sample query usage;
 

@@ -1,5 +1,5 @@
 using System.Text.Json.Serialization;
-using NHibernate.Extensions.NpgSql;
+using NHibernate.Extensions.Npgsql;
 using NHibernate.Mapping.Attributes;
 using PropertyAttribute = NHibernate.Mapping.Attributes.PropertyAttribute;
 

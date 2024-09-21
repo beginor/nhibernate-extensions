@@ -3,14 +3,16 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <Title>NHibernate.Extensions.NpgSql</Title>
+    <Title>NHibernate.Extensions.Npgsql</Title>
     <Authors>beginor</Authors>
     <Description>Extended PostgreSQL driver for NHibernate, with support of json and array types.</Description>
-    <PackageId>NHibernate.Extensions.NpgSql</PackageId>
+    <PackageId>NHibernate.Extensions.Npgsql</PackageId>
     <PackageVersion>$(PackageVersion)</PackageVersion>
     <PackageReleaseNotes>$(PackageReleaseNotes)</PackageReleaseNotes>
     <PackageTags>$(PackageTags)</PackageTags>
     <PackageProjectUrl>$(PackageProjectUrl)</PackageProjectUrl>
+    <AssemblyName>NHibernate.Extensions.Npgsql</AssemblyName>
+    <RootNamespace>NHibernate.Extensions.Npgsql</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

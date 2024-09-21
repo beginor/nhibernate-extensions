@@ -2,13 +2,13 @@
 using System.Data;
 using NpgsqlTypes;
 
-namespace NHibernate.Extensions.NpgSql;
+namespace NHibernate.Extensions.Npgsql;
 
 [Obsolete("Please use ArrayType<decimal> instead.")]
 public class NumericArrayType : ArrayType<decimal> {
 
-    protected override NpgSqlType GetNpgSqlType() {
-        return new NpgSqlType(
+    protected override NpgsqlType GetNpgsqlType() {
+        return new NpgsqlType(
             DbType.Object,
             // ReSharper disable once BitwiseOperatorOnEnumWithoutFlags
             NpgsqlDbType.Array | NpgsqlDbType.Numeric

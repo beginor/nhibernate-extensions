@@ -1,8 +1,8 @@
 using NHibernate.Linq.Functions;
 
-using NHibernate.Extensions.NpgSql.Generators;
+using NHibernate.Extensions.Npgsql.Generators;
 
-namespace NHibernate.Extensions.NpgSql;
+namespace NHibernate.Extensions.Npgsql;
 
 public class LinqToHqlGeneratorsRegistry : DefaultLinqToHqlGeneratorsRegistry {
 

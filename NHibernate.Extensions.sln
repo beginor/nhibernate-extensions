@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B30E6FFF-6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHibernate.Extensions.UnitTest", "test\NHibernate.Extensions.UnitTest\NHibernate.Extensions.UnitTest.csproj", "{72569E3D-D5E0-499A-A651-1A78FE974C29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHibernate.Extensions.NpgSql", "src\NHibernate.Extensions.NpgSql\NHibernate.Extensions.NpgSql.csproj", "{C430CBEB-91D2-4545-9E15-7B30AD813C55}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHibernate.Extensions.Npgsql", "src\NHibernate.Extensions.Npgsql\NHibernate.Extensions.Npgsql.csproj", "{C430CBEB-91D2-4545-9E15-7B30AD813C55}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHibernate.NetCore", "src\NHibernate.NetCore\NHibernate.NetCore.csproj", "{1E7730FE-B3DE-43FF-B1CC-586FEF398DDC}"
 EndProject

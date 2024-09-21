@@ -7,12 +7,12 @@ using NHibernate.UserTypes;
 using Npgsql;
 using NpgsqlTypes;
 
-namespace NHibernate.Extensions.NpgSql;
+namespace NHibernate.Extensions.Npgsql;
 
 public class TimeStampTzType : IUserType {
 
     public virtual SqlType[] SqlTypes => [
-        new NpgSqlType(DbType.DateTime, NpgsqlDbType.TimestampTz)
+        new NpgsqlType(DbType.DateTime, NpgsqlDbType.TimestampTz)
     ];
 
     public System.Type ReturnedType => typeof(DateTime);

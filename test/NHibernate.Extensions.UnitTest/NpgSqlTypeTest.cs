@@ -3,10 +3,10 @@ using NpgsqlTypes;
 namespace NHibernate.Extensions.UnitTest;
 
 [TestFixture]
-public class NpgSqlTypeTest {
+public class NpgsqlTypeTest {
 
     [Test]
-    public void _01_CanReadArrayNpgSqlType() {
+    public void _01_CanReadArrayNpgsqlType() {
         // ReSharper disable once BitwiseOperatorOnEnumWithoutFlags
         var type = NpgsqlDbType.Array | NpgsqlDbType.Bigint;
         var res = (NpgsqlDbType)((int)type - (int)NpgsqlDbType.Array);

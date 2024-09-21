@@ -8,7 +8,7 @@ using NHibernate.Linq.Functions;
 using NHibernate.Linq.Visitors;
 using NHibernate.Util;
 
-namespace NHibernate.Extensions.NpgSql.Generators;
+namespace NHibernate.Extensions.Npgsql.Generators;
 
 public class ArrayHqlGenerator : BaseHqlGeneratorForMethod {
 

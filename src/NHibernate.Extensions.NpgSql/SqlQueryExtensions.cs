@@ -1,6 +1,6 @@
 using NHibernate.UserTypes;
 
-namespace NHibernate.Extensions.NpgSql;
+namespace NHibernate.Extensions.Npgsql;
 
 public static class SqlQueryExtensions {
 
