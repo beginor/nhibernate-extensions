@@ -117,7 +117,7 @@ public class ArrTest : BaseTest {
         var query1 = session.CreateQuery(
             $"from ArrTestEntity e where array_intersects(e.StrArr, :{nameof(strArr)})"
         );
-        query1.SetParameter(nameof(strArr), strArr, NHibernateUtil.Custom(typeof(StringArrayType)));
+        query1.SetParameter(nameof(strArr), strArr, NHibernateUtil.Custom(typeof(ArrayType<string>)));
         var data1 = query1.List<ArrTestEntity>();
         Assert.That(data1, Is.Not.Empty);
 
@@ -125,7 +125,7 @@ public class ArrTest : BaseTest {
         var query2 = session.CreateQuery(
             $"from ArrTestEntity e where array_intersects(e.IntArr, :{nameof(intArr)})"
         );
-        query2.SetParameter(nameof(intArr), intArr, NHibernateUtil.Custom(typeof(Int32ArrayType)));
+        query2.SetParameter(nameof(intArr), intArr, NHibernateUtil.Custom(typeof(ArrayType<int>)));
         var data2 = query1.List<ArrTestEntity>();
         Assert.That(data2, Is.Not.Empty);
 
@@ -133,8 +133,8 @@ public class ArrTest : BaseTest {
             $"from ArrTestEntity e where array_intersects(e.StrArr, :{nameof(strArr)})"
             + $" and array_intersects(e.IntArr, :{nameof(intArr)})"
         );
-        query3.SetParameter(nameof(strArr), strArr, NHibernateUtil.Custom(typeof(StringArrayType)));
-        query3.SetParameter(nameof(intArr), intArr, NHibernateUtil.Custom(typeof(Int32ArrayType)));
+        query3.SetParameter(nameof(strArr), strArr, NHibernateUtil.Custom(typeof(ArrayType<string>)));
+        query3.SetParameter(nameof(intArr), intArr, NHibernateUtil.Custom(typeof(ArrayType<int>)));
         var data3 = query3.List<ArrTestEntity>();
         Assert.That(data3, Is.Not.Empty);
     }
