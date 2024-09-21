@@ -16,7 +16,7 @@ public class ArrayType<T> : IUserType {
 
     public System.Type ReturnedType => typeof(T[]);
 
-    public bool IsMutable => true;
+    public bool IsMutable => false;
 
     public object Assemble(object cached, object owner) {
         return cached;
