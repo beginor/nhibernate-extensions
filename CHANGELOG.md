@@ -1,5 +1,12 @@
 # Changelogs for NHibernate.Extensions
 
+## 8.0.13
+
+- Rename `NpgSql` to `Npgsql`;
+- Mark array types inherits from `ArrayType<T>` as obsolete, please use `ArrayType<T>`;
+- Mark `SetCustomParameter` `AddCustomScalar` as obsolete, no need to call these methods;
+- Obsoleted types and methods will be remove from `9.0.x` .
+
 ## 8.0.12
 
 - Optimize array extension methods;
