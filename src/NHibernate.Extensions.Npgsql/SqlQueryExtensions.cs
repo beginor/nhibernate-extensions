@@ -1,10 +1,11 @@
+using System;
 using NHibernate.UserTypes;
 
 namespace NHibernate.Extensions.Npgsql;
 
 public static class SqlQueryExtensions {
 
-    [System.Obsolete()]
+    [Obsolete]
     public static ISQLQuery AddCustomScalar<TUserType>(
         this ISQLQuery query,
         string columnAlias
@@ -16,7 +17,7 @@ public static class SqlQueryExtensions {
         return query;
     }
 
-    [System.Obsolete()]
+    [Obsolete]
     public static ISQLQuery SetCustomParameter<TUserType>(
         this ISQLQuery query,
         string name,
@@ -30,7 +31,7 @@ public static class SqlQueryExtensions {
         return query;
     }
 
-    [System.Obsolete()]
+    [Obsolete]
     public static ISQLQuery SetCustomParameter<TUserType>(
         this ISQLQuery query,
         int position,
