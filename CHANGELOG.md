@@ -1,5 +1,9 @@
 # Changelogs for NHibernate.Extensions
 
+## 8.0.14
+
+- Update to .NET 8.0.10;
+
 ## 8.0.13
 
 - Rename `NpgSql` to `Npgsql`;
