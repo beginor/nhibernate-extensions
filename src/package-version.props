@@ -1,7 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <PackageVersion>8.0.13</PackageVersion>
-    <PackageReleaseNotes>Rename `NpgSql` to `Npgsql`;Mark array types inherits from `ArrayType&lt;T>` as obsolete, please use `ArrayType&lt;T>`;Mark `SetCustomParameter` `AddCustomScalar` as obsolete, no need to call these methods;Obsoleted types and methods will be remove from `9.0.x` .</PackageReleaseNotes>
+    <PackageVersion>8.0.14</PackageVersion>
+    <PackageReleaseNotes>Update to .NET 8.0.10;</PackageReleaseNotes>
     <PackageTags>nhibernate, dotnet, dotnet core</PackageTags>
     <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions</PackageProjectUrl>
   </PropertyGroup>
