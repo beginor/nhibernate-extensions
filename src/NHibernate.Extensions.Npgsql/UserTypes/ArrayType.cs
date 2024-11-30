@@ -8,7 +8,7 @@ using NHibernate.UserTypes;
 using Npgsql;
 using NpgsqlTypes;
 
-namespace NHibernate.Extensions.Npgsql;
+namespace NHibernate.Extensions.Npgsql.UserTypes;
 
 public class ArrayType<T> : IUserType {
 

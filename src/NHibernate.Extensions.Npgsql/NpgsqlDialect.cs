@@ -4,6 +4,7 @@ using NHibernate.Dialect.Function;
 using NHibernate.SqlTypes;
 using NHibernate.Type;
 using NpgsqlTypes;
+using NHibernate.Extensions.Npgsql.UserTypes;
 
 namespace NHibernate.Extensions.Npgsql;
 

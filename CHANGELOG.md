@@ -1,5 +1,12 @@
 # Changelogs for NHibernate.Extensions
 
+## 9.0.0
+
+- Update to .NET 9.0.0;
+- Update packages;
+- Remove obsoleted types;
+- Move custom types to namespace `NHibernate.Extensions.Npgsql.UserTypes`;
+
 ## 8.0.14
 
 - Update to .NET 8.0.10;

@@ -1,8 +1,8 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <PackageVersion>8.0.14</PackageVersion>
-    <PackageReleaseNotes>Update to .NET 8.0.10;</PackageReleaseNotes>
-    <PackageTags>nhibernate, dotnet, dotnet core</PackageTags>
+    <PackageVersion>9.0.0</PackageVersion>
+    <PackageReleaseNotes>- Update to .NET 9.0.0; - Update packages; - Remove obsoleted types; - Move custom types to namespace `NHibernate.Extensions.Npgsql.UserTypes`;</PackageReleaseNotes>
+    <PackageTags>nhibernate, npgsql, dotnet, dotnet core, array type, json type</PackageTags>
     <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions</PackageProjectUrl>
   </PropertyGroup>
 </Project>

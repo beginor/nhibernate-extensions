@@ -1,6 +1,7 @@
 using NHibernate.Linq;
 
 using NHibernate.Extensions.Npgsql;
+using NHibernate.Extensions.Npgsql.UserTypes;
 using NHibernate.Extensions.UnitTest.TestDb;
 using NHibernate.Type;
 
