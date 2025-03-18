@@ -1,7 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <PackageVersion>9.0.1</PackageVersion>
-    <PackageReleaseNotes>- Update to .NET 9.0.2; - Update packages;</PackageReleaseNotes>
+    <PackageVersion>9.0.2</PackageVersion>
+    <PackageReleaseNotes>Update to .NET 9.0.3; Update Npgsql to 9.0.3; Update other packages; New solution format (slnx);</PackageReleaseNotes>
     <PackageTags>nhibernate, npgsql, dotnet, dotnet core, array type, json type</PackageTags>
     <PackageProjectUrl>https://github.com/beginor/nhibernate-extensions</PackageProjectUrl>
   </PropertyGroup>

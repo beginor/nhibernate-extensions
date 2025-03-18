@@ -1,5 +1,12 @@
 # Changelogs for NHibernate.Extensions
 
+## 9.0.2
+
+- Update to .NET 9.0.3;
+- Update Npgsql to 9.0.3;
+- Update other packages;
+- New solution format (slnx);
+
 ## 9.0.1
 
 - Update to .NET 9.0.2;
