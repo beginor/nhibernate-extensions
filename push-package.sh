@@ -1,5 +1,5 @@
 #!/bin/bash -e
-export PACKAGE_VERSION="9.0.3"
+export PACKAGE_VERSION="9.0.4"
 dotnet pack src/NHibernate.NetCore/NHibernate.NetCore.csproj -c Release
 dotnet nuget push src/NHibernate.NetCore/bin/Release/NHibernate.NetCore.$PACKAGE_VERSION.nupkg -s nuget.org -k $(cat ~/.nuget/key.txt)
 rm -rf src/NHibernate.NetCore/bin/Release

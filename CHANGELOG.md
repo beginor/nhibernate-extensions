@@ -1,5 +1,11 @@
 # Changelogs for NHibernate.Extensions
 
+## 9.0.4
+
+- Update to .NET 9.0.7;
+- Update packages;
+- manage package versions centrally.
+
 ## 9.0.3
 
 - Update to .NET 9.0.5;
