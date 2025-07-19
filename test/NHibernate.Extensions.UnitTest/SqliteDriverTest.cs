@@ -2,9 +2,9 @@ using System.Data;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.DependencyInjection;
 using NHibernate.Cfg;
+using NHibernate.Extensions.NetCore;
 using NHibernate.Tool.hbm2ddl;
 using NHibernate.Extensions.UnitTest.Sqlite;
-using NHibernate.NetCore;
 
 namespace NHibernate.Extensions.UnitTest;
 

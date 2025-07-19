@@ -4,7 +4,7 @@ using System.Xml;
 using Microsoft.Extensions.DependencyInjection;
 using NHibernate.Cfg;
 
-namespace NHibernate.NetCore;
+namespace NHibernate.Extensions.NetCore;
 
 public static class ServiceCollectionExtensions {
 

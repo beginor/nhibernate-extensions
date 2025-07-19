@@ -23,7 +23,7 @@ In order to use this driver, you must have the nuget package [Microsoft.Data.Sql
 
 It's a .NET Standard 2.0 Driver, Can run on any platform that dotnet core support.
 
-## NHibernate.NetCore
+## NHibernate.Extensions.NetCore
 
 Extensions for NHibernate when used in dotnet core:
 

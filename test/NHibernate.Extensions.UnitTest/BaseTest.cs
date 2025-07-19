@@ -1,9 +1,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using NHibernate.Cfg;
+using NHibernate.Extensions.NetCore;
 using NHibernate.Linq;
 using NHibernate.Mapping.Attributes;
 using NHibernate.Tool.hbm2ddl;
-using NHibernate.NetCore;
 using NHibernate.Mapping.ByCode;
 
 using NHibernate.Extensions.UnitTest.Sqlite;

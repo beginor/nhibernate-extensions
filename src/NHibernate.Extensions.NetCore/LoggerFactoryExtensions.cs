@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NHibernate.NetCore;
+﻿namespace NHibernate.Extensions.NetCore;
 
 public static class LoggerFactoryExtensions {
 

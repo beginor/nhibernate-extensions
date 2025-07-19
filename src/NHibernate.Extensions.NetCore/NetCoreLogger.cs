@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.Logging;
 
-namespace NHibernate.NetCore;
+namespace NHibernate.Extensions.NetCore;
 
 public class NetCoreLogger(ILogger logger) : IDisposable, INHibernateLogger {
 

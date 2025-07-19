@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace NHibernate.NetCore;
+namespace NHibernate.Extensions.NetCore;
 
 public static class ServiceProviderExtensions {
 

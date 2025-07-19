@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using MsILoggerFactory = Microsoft.Extensions.Logging.ILoggerFactory;
 
-namespace NHibernate.NetCore;
+namespace NHibernate.Extensions.NetCore;
 
 public class NetCoreLoggerFactory(
     MsILoggerFactory loggerFactory
