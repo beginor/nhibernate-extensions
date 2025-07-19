@@ -13,7 +13,7 @@
   <Folder Name="/src/">
     <Project Path="src\NHibernate.Extensions.Npgsql\NHibernate.Extensions.Npgsql.csproj" />
     <Project Path="src\NHibernate.Extensions.Sqlite\NHibernate.Extensions.Sqlite.csproj" />
-    <Project Path="src\NHibernate.NetCore\NHibernate.NetCore.csproj" />
+    <Project Path="src\NHibernate.Extensions.NetCore\NHibernate.Extensions.NetCore.csproj" />
     <File Path="src\package-version.props" />
   </Folder>
   <Folder Name="/test/">
