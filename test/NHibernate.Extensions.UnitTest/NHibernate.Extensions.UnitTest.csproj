@@ -9,21 +9,21 @@
     <Using Include="NUnit.Framework" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.1.66" />
-    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="9.0.5" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.5" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.5" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.5" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.0" />
-    <PackageReference Include="NHibernate" Version="5.5.2" />
-    <PackageReference Include="NHibernate.Mapping.Attributes" Version="5.1.0" />
-    <PackageReference Include="Npgsql" Version="9.0.3" />
-    <PackageReference Include="NUnit" Version="4.3.2" />
-    <PackageReference Include="NUnit3TestAdapter" Version="5.0.0">
+    <PackageReference Include="Dapper" />
+    <PackageReference Include="Microsoft.Data.Sqlite.Core"/>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json"/>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection"/>
+    <PackageReference Include="Microsoft.Extensions.Logging.Console"/>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="NHibernate"/>
+    <PackageReference Include="NHibernate.Mapping.Attributes"/>
+    <PackageReference Include="Npgsql"/>
+    <PackageReference Include="NUnit"/>
+    <PackageReference Include="NUnit3TestAdapter">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.11" />
+    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\NHibernate.Extensions.Sqlite\NHibernate.Extensions.Sqlite.csproj" />

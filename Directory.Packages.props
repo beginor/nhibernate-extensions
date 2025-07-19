@@ -1,0 +1,29 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <!--
+  <ItemDefinitionGroup>
+    <PackageReference>
+      <PrivateAssets>Compile</PrivateAssets>
+    </PackageReference>
+  </ItemDefinitionGroup>
+  -->
+  <ItemGroup>
+    <PackageVersion Include="System.Text.Json" Version="9.0.5" />
+    <PackageVersion Include="Microsoft.Data.Sqlite.Core" Version="9.0.5" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="9.0.5" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="9.0.5" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.5" />
+    <PackageVersion Include="Microsoft.Extensions.Logging" Version="9.0.5" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="9.0.5" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.0" />
+    <PackageVersion Include="Dapper" Version="2.1.66" />
+    <PackageVersion Include="NHibernate" Version="5.5.2" />
+    <PackageVersion Include="NHibernate.Mapping.Attributes" Version="5.1.0" />
+    <PackageVersion Include="Npgsql" Version="9.0.3" />
+    <PackageVersion Include="NUnit" Version="4.3.2" />
+    <PackageVersion Include="NUnit3TestAdapter" Version="5.0.0" />
+    <PackageVersion Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.11" />
+  </ItemGroup>
+</Project>
