@@ -1,16 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="../package-version.props" />
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <Title>NHibernate.NetCore</Title>
     <Authors>beginor</Authors>
     <Description>Extensions for NHibernate when used in dotnet core. For examples, visit https://github.com/beginor/nhibernate-extensions/blob/master/test/NHibernate.Extensions.UnitTest/BaseTest.cs</Description>
-    <PackageId>NHibernate.NetCore</PackageId>
-    <PackageVersion>$(PackageVersion)</PackageVersion>
-    <PackageReleaseNotes>$(PackageReleaseNotes)</PackageReleaseNotes>
-    <PackageTags>$(PackageTags)</PackageTags>
-    <PackageProjectUrl>$(PackageProjectUrl)</PackageProjectUrl>
+    <PackageId>NHibernate.Extensions.NetCore</PackageId>
+    <PackageVersion>$(PACKAGE_VERSION)</PackageVersion>
+    <PackageReleaseNotes>$(PACKAGE_RELEASE_NOTES)</PackageReleaseNotes>
+    <PackageTags>$(PACKAGE_TAGS)</PackageTags>
+    <PackageProjectUrl>$(PACKAGE_PROJECT_URL)</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>

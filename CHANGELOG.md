@@ -1,5 +1,9 @@
 # Changelogs for NHibernate.Extensions
 
+## 9.0.5
+
+- Rename `NHibernate.NetCore` to `NHibernate.Extensions.NetCore`;
+
 ## 9.0.4
 
 - Update to .NET 9.0.7;

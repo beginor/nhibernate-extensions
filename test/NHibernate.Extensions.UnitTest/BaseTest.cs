@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using NHibernate.Cfg;
 using NHibernate.Extensions.NetCore;
 using NHibernate.Linq;
@@ -9,6 +10,7 @@ using NHibernate.Mapping.ByCode;
 using NHibernate.Extensions.UnitTest.Sqlite;
 using NHibernate.Extensions.UnitTest.TestDb;
 using Author = NHibernate.Extensions.UnitTest.TestDb.Author;
+using MsILoggerFactory = Microsoft.Extensions.Logging.ILoggerFactory;
 
 namespace NHibernate.Extensions.UnitTest;
 
@@ -26,8 +28,13 @@ public class BaseTest {
         var services = new ServiceCollection();
         services.AddHibernate(CreateTestDbConfiguration());
         services.AddHibernate("sqlite", CreateSqliteConfiguration());
+        services.AddLogging(builder => {
+            builder.AddConsole();
+        });
         // build service provider
         ServiceProvider = services.BuildServiceProvider();
+        var loggerFactory = ServiceProvider.GetRequiredService<MsILoggerFactory>();
+        loggerFactory.UseAsHibernateLoggerFactory();
     }
 
     private Configuration CreateTestDbConfiguration() {
