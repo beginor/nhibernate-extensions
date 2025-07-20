@@ -1,3 +1,5 @@
+using System.Linq;
+using System.Linq.Expressions;
 using NHibernate.Linq;
 
 using NHibernate.Extensions.Npgsql;
@@ -181,6 +183,19 @@ public class ArrTest : BaseTest {
         );
         var data2 = query2.ToList();
         Assert.That(data2, Is.Not.Empty);
+    }
+
+    [Test]
+    public void _07_CanQueryWithExpression() {
+        using var session = TestDbSessionFactory.OpenSession();
+        var query = session.Query<ArrTestEntity>();
+        Expression<Func<ArrTestEntity, bool>> expr1 = x => x.Id == 0;
+        Expression<Func<ArrTestEntity, bool>> expr2 = x => x.Id == 2;
+        var invokedExpr = Expression.Invoke (expr2, expr1.Parameters);
+        var pred = Expression.Lambda<Func<ArrTestEntity, bool>>(Expression.OrElse (expr1.Body, invokedExpr), expr1.Parameters);
+        query = query.Where(pred);
+        var data = query.ToList();
+        Assert.That(data, Is.Empty);
     }
 
 }
