@@ -1,3 +1,4 @@
+using NHibernate.Linq;
 using NHibernate.Extensions.UnitTest.TestDb;
 
 namespace NHibernate.Extensions.UnitTest;
@@ -48,6 +49,30 @@ public class DvdRentalTest : BaseTest {
         Assert.That(author.ActorId, Is.GreaterThan(0));
         session.Delete(author);
         session.Flush();
+    }
+
+    [Test]
+    public void _04_FutureTest() {
+        using var session = OpenTestDbSession();
+        var actors = session.Query<Actor>().Where(act => act.LastName == "zhang").ToFuture();
+        foreach (var actor in actors.GetEnumerable()) {
+            Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(actor));
+        }
+        var actorCount = session.QueryOver<Actor>().ToRowCountQuery().FutureValue<int>();
+        if (actorCount.Value > 0) {
+            Console.WriteLine($"Actor count: {actorCount.Value}");
+        }
+    }
+
+    [Test]
+    public void _06_UpdateTest() {
+        using var session = OpenTestDbSession();
+        session.Query<Actor>().Where(
+            a => a.LastName == "zhang"
+        ).Update(c => new Actor {
+            LastName = "zhimin",
+            LastUpdate = DateTime.Now
+        });
     }
 
 }
