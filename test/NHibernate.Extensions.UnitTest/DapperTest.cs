@@ -1,4 +1,5 @@
 using System.Data;
+using System.Data.Common;
 using System.Text.Json;
 using Dapper;
 
@@ -9,8 +10,8 @@ public class DapperTest : BaseTest {
 
     [OneTimeSetUp]
     public override void OneTimeSetUp() {
-        base.OneTimeSetUp();
         Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
+        base.OneTimeSetUp();
     }
 
     [OneTimeTearDown]
@@ -27,7 +28,7 @@ public class DapperTest : BaseTest {
             Assert.That(authors.Count(), Is.GreaterThanOrEqualTo(0));
 
             authors = conn.Query<AuthorEntity>(
-                "select * from public.authors where authorid = any(@Ids)",
+                "select * from public.authors where authors.id = any(@Ids)",
                 new {
                     Ids = new [] { 1, 2, 3 } .AsEnumerable()
                 }
@@ -55,11 +56,28 @@ public class DapperTest : BaseTest {
         }
     }
 
+    [Test]
+    public void CanQueryActor() {
+        using var session = TestDbSessionFactory.OpenSession();
+        var conn = session.Connection;
+        var sql = "select actor_id, first_name, last_name, last_update from public.actor where last_name = @lastName";
+        var reader = (DbDataReader)conn.ExecuteReader(sql, new { lastName = "zhang" });
+        while (reader.Read()) {
+            var id = reader.GetInt64("actor_id");
+            var firstName = reader.GetString("first_name");
+            var lastName = reader.GetString("last_name");
+            var lastUpdate = reader.GetDateTime("last_update");
+            Console.WriteLine($"id: {id}, first_name: {firstName}, last_name: {lastName}, last_update: {lastUpdate}");
+        }
+    }
+
 }
 
 public class AuthorEntity {
     public int AuthorId { get; set; }
-    public string Name { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public DateTime LastUpdate { get; set; }
 }
 
 public class BookEntity {
