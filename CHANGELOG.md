@@ -1,5 +1,9 @@
 # Changelogs for NHibernate.Extensions
 
+## 9.0.6
+
+- Fix polymorphic save/load with json (not jsonb)
+
 ## 9.0.5
 
 - Rename `NHibernate.NetCore` to `NHibernate.Extensions.NetCore`;
