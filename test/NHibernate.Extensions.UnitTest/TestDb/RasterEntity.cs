@@ -9,7 +9,7 @@ namespace NHibernate.Extensions.UnitTest.TestDb;
 public class RasterEntity {
     [Id(Name = nameof(Id), Column = "id", Type = "long", Generator = "assigned")]
     public virtual long Id { get; set; }
-    [Property(Name = nameof(Render), Column = "render", TypeType = typeof(JsonbType<RasterRender>))]
+    [Property(Name = nameof(Render), Column = "render", TypeType = typeof(JsonType<RasterRender>))]
     public virtual RasterRender Render { get; set; }
 }
 

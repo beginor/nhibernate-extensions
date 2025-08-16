@@ -87,17 +87,17 @@ public class JsonType<T> : IUserType {
             parameter.Value = DBNull.Value;
             return;
         }
-        if (!value.GetType().IsAssignableTo(typeof(T))) {
-            throw new InvalidOperationException($"{value.GetType()} is not assignable to {typeof(T)}");
-        }
         var type = typeof(T);
         if (type == typeof(JsonElement) || type == typeof(JsonDocument)) {
             parameter.Value = value;
-            return;
         }
-        var valueType = value.GetType();
-        var json = JsonSerializer.Serialize(value, valueType);
-        parameter.Value = json;
+        else {
+            if (!value.GetType().IsAssignableTo(typeof(T))) {
+                throw new InvalidOperationException($"{value.GetType()} is not assignable to {typeof(T)}");
+            }
+            var json = JsonSerializer.Serialize(value, typeof(T));
+            parameter.Value = json;
+        }
     }
 
     public object Replace(object original, object target, object owner) {
