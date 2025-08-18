@@ -1,5 +1,9 @@
 # Changelogs for NHibernate.Extensions
 
+## 9.0.7
+
+- Update to .NET 9.0.8; Upgrade packages;
+
 ## 9.0.6
 
 - Fix polymorphic save/load with json (not jsonb)
