@@ -1,6 +1,6 @@
 #!/bin/bash -e
-export PACKAGE_VERSION="9.0.6"
-export PACKAGE_RELEASE_NOTES="Fix polymorphic save/load with json (not jsonb)"
+export PACKAGE_VERSION="9.0.7"
+export PACKAGE_RELEASE_NOTES="Update to .NET 9.0.8; Upgrade packages;"
 export PACKAGE_TAGS="nhibernate, npgsql, dotnet, dotnet core, array type, json type"
 export PACKAGE_PROJECT_URL="https://github.com/beginor/nhibernate-extensions"
 
