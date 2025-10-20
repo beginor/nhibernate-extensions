@@ -1,6 +1,6 @@
 #!/bin/bash -e
-export PACKAGE_VERSION="9.0.8"
-export PACKAGE_RELEASE_NOTES="Update NHibernate to 5.5.3;"
+export PACKAGE_VERSION="9.0.9"
+export PACKAGE_RELEASE_NOTES="Update Update to .NET 9.0.10;Update NHibernate to 5.6.0;Update other nuget packages;"
 export PACKAGE_TAGS="nhibernate, npgsql, dotnet, dotnet core, array type, json type"
 export PACKAGE_PROJECT_URL="https://github.com/beginor/nhibernate-extensions"
 
