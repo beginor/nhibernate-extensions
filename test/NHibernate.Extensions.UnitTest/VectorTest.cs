@@ -30,9 +30,29 @@ public class VectorTest : BaseTest {
             x.Text,
             x.Embedding,
             x.CreateTime
-        }).OrderBy(x => x.Embedding.L1Distance(target)).Take(2);
+        }).OrderBy(x => x.Embedding.L1Distance(target)).Take(3);
         var data = query.ToList();
-        Assert.That(data.Count, Is.GreaterThanOrEqualTo(2));
+        Assert.That(data.Count, Is.GreaterThanOrEqualTo(3));
+    }
+
+    [Test]
+    public void _03_CanQueryDistanceWithNpgsql() {
+        var target = new Vector(new float[] { 1, 2, 0 });
+        using var session = OpenTestDbSession();
+        var conn = session.Connection as NpgsqlConnection;
+        var sql = """
+                  select text, (embedding <=> @target) as distance
+                  from public.chunk_embeddings
+                  order by distance
+                  limit 3;
+                  """;
+        using var cmd = conn.CreateCommand();
+        cmd.CommandText = sql;
+        cmd.Parameters.AddWithValue("target", target);
+        var reader = cmd.ExecuteReader();
+        while (reader.Read()) {
+            Console.WriteLine(reader["text"]);
+        }
     }
 
     [Test]
