@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <Title>NHibernate.Extensions.Pgvector</Title>
+    <Authors>beginor</Authors>
+    <Description>Extended PostgreSQL driver for NHibernate, with support of json, array and vector types.</Description>
+    <PackageId>NHibernate.Extensions.Pgvector</PackageId>
+    <PackageVersion>$(PACKAGE_VERSION)</PackageVersion>
+    <PackageReleaseNotes>$(PACKAGE_RELEASE_NOTES)</PackageReleaseNotes>
+    <PackageTags>$(PACKAGE_TAGS)</PackageTags>
+    <PackageProjectUrl>$(PACKAGE_PROJECT_URL)</PackageProjectUrl>
+    <AssemblyName>NHibernate.Extensions.Pgvector</AssemblyName>
+    <RootNamespace>NHibernate.Extensions.Pgvector</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Pgvector" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NHibernate.Extensions.Npgsql\NHibernate.Extensions.Npgsql.csproj" />
+  </ItemGroup>
+
+</Project>

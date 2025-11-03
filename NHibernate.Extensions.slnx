@@ -13,9 +13,11 @@
   <Folder Name="/src/">
     <Project Path="src\NHibernate.Extensions.NetCore\NHibernate.Extensions.NetCore.csproj" />
     <Project Path="src\NHibernate.Extensions.Npgsql\NHibernate.Extensions.Npgsql.csproj" />
+    <Project Path="src\NHibernate.Extensions.Pgvector\NHibernate.Extensions.Pgvector.csproj" />
     <Project Path="src\NHibernate.Extensions.Sqlite\NHibernate.Extensions.Sqlite.csproj" />
   </Folder>
   <Folder Name="/test/">
     <Project Path="test\NHibernate.Extensions.UnitTest\NHibernate.Extensions.UnitTest.csproj" />
   </Folder>
+
 </Solution>

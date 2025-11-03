@@ -8,19 +8,13 @@ namespace NHibernate.Extensions.Npgsql;
 
 public class NpgsqlDriver : NHibernate.Driver.NpgsqlDriver {
 
-    private NpgsqlDataSource? dataSource;
+    protected NpgsqlDataSource DataSource { get; private set; } = null!;
 
     public override void Configure(
         IDictionary<string, string> settings
     ) {
         base.Configure(settings);
-        var connectionString = settings["connection.connection_string"];
-        if (string.IsNullOrEmpty(connectionString)) {
-            throw new HibernateConfigException("connection.connection_string is not set!");
-        }
-        var builder = new NpgsqlDataSourceBuilder(connectionString);
-        builder.EnableDynamicJson();
-        dataSource = NpgsqlDataSource.Create(connectionString);
+        DataSource = SetupDataSourceBuilder(settings).Build();
     }
 
     protected override void InitializeParameter(DbParameter dbParam, string name, SqlType sqlType) {
@@ -42,10 +36,22 @@ public class NpgsqlDriver : NHibernate.Driver.NpgsqlDriver {
     }
 
     public override DbConnection CreateConnection() {
-        if (dataSource == null) {
+        if (DataSource == null) {
             throw new HibernateException("dataSource is not created!");
         }
-        return dataSource.CreateConnection();
+        return DataSource.CreateConnection();
+    }
+
+    protected virtual NpgsqlDataSourceBuilder SetupDataSourceBuilder(
+        IDictionary<string, string> settings
+    ) {
+        var connectionString = settings["connection.connection_string"];
+        if (string.IsNullOrEmpty(connectionString)) {
+            throw new HibernateConfigException("connection.connection_string is not set!");
+        }
+        var builder = new NpgsqlDataSourceBuilder(connectionString);
+        builder.EnableDynamicJson();
+        return builder;
     }
 
 }

@@ -11,6 +11,7 @@ using NHibernate.Extensions.UnitTest.Sqlite;
 using NHibernate.Extensions.UnitTest.TestDb;
 using Author = NHibernate.Extensions.UnitTest.TestDb.Author;
 using MsILoggerFactory = Microsoft.Extensions.Logging.ILoggerFactory;
+using Npgsql;
 
 namespace NHibernate.Extensions.UnitTest;
 
@@ -38,6 +39,10 @@ public class BaseTest {
     }
 
     private Configuration CreateTestDbConfiguration() {
+        #pragma warning disable CS0618
+        //Vector type workaround
+        NpgsqlConnection.GlobalTypeMapper.UseVector();
+        #pragma warning restore CS0618
         // add default config
         var defaultConfigFile = Path.Combine(
             AppDomain.CurrentDomain.BaseDirectory,

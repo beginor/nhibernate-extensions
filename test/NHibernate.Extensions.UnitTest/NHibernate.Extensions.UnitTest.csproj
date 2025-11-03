@@ -26,6 +26,7 @@
     <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\NHibernate.Extensions.Pgvector\NHibernate.Extensions.Pgvector.csproj" />
     <ProjectReference Include="..\..\src\NHibernate.Extensions.Sqlite\NHibernate.Extensions.Sqlite.csproj" />
     <ProjectReference Include="..\..\src\NHibernate.Extensions.Npgsql\NHibernate.Extensions.Npgsql.csproj" />
     <ProjectReference Include="..\..\src\NHibernate.Extensions.NetCore\NHibernate.Extensions.NetCore.csproj" />
