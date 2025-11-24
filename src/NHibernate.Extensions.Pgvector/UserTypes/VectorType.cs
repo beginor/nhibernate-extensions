@@ -36,9 +36,8 @@ public class VectorType : IUserType {
         }
         else {
             var vector = (Vector)value;
-            parameter.Value = vector.ToArray();
-            // parameter.DataTypeName = "real[]";
-            parameter.NpgsqlDbType = NpgsqlDbType.Array | NpgsqlDbType.Real;
+            parameter.Value = vector;
+            parameter.DataTypeName = "vector";
         }
     }
 

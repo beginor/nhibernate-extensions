@@ -22,17 +22,19 @@ public class VectorTest : BaseTest {
     }
 
     [Test]
-    public void _02_Can_QueryVector_distance() {
-        var target = new Vector(new float[] { 1, 2, 0 });
+    public async Task _02_Can_SaveVector() {
+        var input = "hello, world!";
+        var embedding = new float[3] { 1.0F, 2.0F, 3.0F };
+
+        var entity = new ChunkEmbeddingEntity {
+            Text = input,
+            CreateTime = DateTime.Now,
+            Embedding = new Vector(embedding)
+        };
         using var session = OpenTestDbSession();
-        var query = session.Query<ChunkEmbeddingEntity>().Select(x => new {
-            x.Id,
-            x.Text,
-            x.Embedding,
-            x.CreateTime
-        }).OrderBy(x => x.Embedding.L1Distance(target)).Take(3);
-        var data = query.ToList();
-        Assert.That(data.Count, Is.GreaterThanOrEqualTo(3));
+        await session.SaveAsync(entity);
+        await session.FlushAsync();
+        session.Clear();
     }
 
     [Test]
@@ -55,21 +57,42 @@ public class VectorTest : BaseTest {
         }
     }
 
-    [Test]
-    public async Task _02_Can_SaveVector() {
-        // using var session = OpenTestDbSession();
-        var input = "hello, world!";
-        var embedding = new float[3] { 1.0F, 2.0F, 3.0F };
-
-        var entity = new ChunkEmbeddingEntity {
-            Text = input,
-            CreateTime = DateTime.Now,
-            Embedding = new Vector(embedding)
-        };
+    [Test, Ignore("Is anyone who use hql with NHibernate?")]
+    public void _04_CanQueryDistanceWithHql() {
+        var target = new Vector(new float[] { 1, 2, 0 });
         using var session = OpenTestDbSession();
-        await session.SaveAsync(entity);
-        await session.FlushAsync();
-        session.Clear();
+        var query = session.CreateQuery("from ChunkEmbeddingEntity e order by cosine_distance(e.Embedding, :target")
+            .SetParameter("target", target)
+            .SetFirstResult(0)
+            .SetMaxResults(3);
+        var data = query.List<ChunkEmbeddingEntity>();
+        Assert.That(data.Count, Is.GreaterThanOrEqualTo(3));
+    }
+
+    [Test]
+    public void _05_CanQueryDistanceWithLinq() {
+        var target = new Vector(new float[] { 1, 2, 0 });
+        using var session = OpenTestDbSession();
+        var query = session.Query<ChunkEmbeddingEntity>().Select(x => new {
+            x.Id,
+            x.Text,
+            x.Embedding,
+            x.CreateTime,
+            Distance = x.Embedding.L1Distance(target)
+        }).Skip(0).Take(3);
+        var data = query.ToList();
+        Assert.That(data.Count, Is.GreaterThanOrEqualTo(3));
+
+        var query2 = session.Query<ChunkEmbeddingEntity>()
+            .OrderBy(x => x.Embedding.CosineDistance(target))
+            .Select(x => new {
+                x.Id,
+                x.Text,
+                x.Embedding,
+                x.CreateTime
+            }).Skip(0).Take(3);
+        var data2 = query2.ToList();
+        Assert.That(data2.Count, Is.GreaterThanOrEqualTo(3));
     }
 
 }

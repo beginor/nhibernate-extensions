@@ -38,7 +38,7 @@ public class PgvectorHqlGenerator : BaseHqlGeneratorForMethod {
         if (string.IsNullOrEmpty(hqlMethod)) {
             throw new HibernateException($"Method {method.Name} not found");
         }
-        return treeBuilder.BooleanMethodCall(
+        return treeBuilder.MethodCall(
             hqlMethod,
             arguments.Select(visitor.Visit).Cast<HqlExpression>()
         );

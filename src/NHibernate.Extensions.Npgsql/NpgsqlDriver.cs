@@ -19,17 +19,14 @@ public class NpgsqlDriver : NHibernate.Driver.NpgsqlDriver {
 
     protected override void InitializeParameter(DbParameter dbParam, string name, SqlType sqlType) {
         if (sqlType is NpgsqlType type && dbParam is NpgsqlParameter parameter) {
-            InitializeParameter(parameter, name, type);
+            InitializeNpgsqlParameter(parameter, name, type);
         }
         else {
             base.InitializeParameter(dbParam, name, sqlType);
         }
     }
 
-    protected virtual void InitializeParameter(NpgsqlParameter dbParam, string name, NpgsqlType sqlType) {
-        if (sqlType == null) {
-            throw new QueryException($"No type assigned to parameter '{name}'");
-        }
+    private void InitializeNpgsqlParameter(NpgsqlParameter dbParam, string name, NpgsqlType sqlType) {
         dbParam.ParameterName = FormatNameForParameter(name);
         dbParam.DbType = sqlType.DbType;
         dbParam.NpgsqlDbType = sqlType.NpgDbType;
