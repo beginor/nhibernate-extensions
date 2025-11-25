@@ -9,23 +9,23 @@ using Pgvector;
 
 namespace NHibernate.Extensions.Pgvector.UserTypes;
 
-public class VectorType : IUserType {
+public class SparseVectorType  : IUserType {
 
-    bool IUserType.Equals(object x, object y) {
-        var vx = (Vector)x;
-        var vy = (Vector)y;
+       bool IUserType.Equals(object x, object y) {
+        var vx = (SparseVector)x;
+        var vy = (SparseVector)y;
         return vx.Equals(vy);
     }
 
     int IUserType.GetHashCode(object x) {
-        return ((Vector)x).GetHashCode();
+        return ((SparseVector)x).GetHashCode();
     }
 
     object IUserType.NullSafeGet(DbDataReader rs, string[] names, ISessionImplementor session, object owner) {
         if (names.Length != 1) {
             throw new InvalidOperationException("Only expecting one column...");
         }
-        return (Vector)rs[names[0]];
+        return (SparseVector)rs[names[0]];
     }
 
     void IUserType.NullSafeSet(DbCommand cmd, object? value, int index, ISessionImplementor session) {
@@ -34,17 +34,17 @@ public class VectorType : IUserType {
             parameter.Value = DBNull.Value;
         }
         else {
-            var vector = (Vector)value;
+            var vector = (SparseVector)value;
             parameter.Value = vector;
-            parameter.DataTypeName = "vector";
+            parameter.DataTypeName = "sparsevec";
         }
     }
 
     object IUserType.DeepCopy(object value) {
-        var vector = (Vector)value;
-        var dest = new Memory<float>(new float[vector.Memory.Length]);
-        vector.Memory.CopyTo(dest);
-        var result = new Vector(dest);
+        var vector = (SparseVector)value;
+        var dest = new Memory<float>(new float[vector.Values.Length]);
+        vector.Values.CopyTo(dest);
+        var result = new SparseVector(dest);
         return result;
     }
 
@@ -60,9 +60,9 @@ public class VectorType : IUserType {
         return value;
     }
 
-    SqlType[] IUserType.SqlTypes => [new PgvectorSqlType(DbType.Object, PgvectorType.Vector)];
+    SqlType[] IUserType.SqlTypes => [new PgvectorSqlType(DbType.Object, PgvectorType.SparseVector)];
 
-    System.Type IUserType.ReturnedType => typeof(Vector);
+    System.Type IUserType.ReturnedType => typeof(SparseVector);
 
     bool IUserType.IsMutable => false;
 

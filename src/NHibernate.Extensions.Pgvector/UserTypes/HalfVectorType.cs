@@ -9,23 +9,23 @@ using Pgvector;
 
 namespace NHibernate.Extensions.Pgvector.UserTypes;
 
-public class VectorType : IUserType {
+public class HalfVectorType : IUserType {
 
     bool IUserType.Equals(object x, object y) {
-        var vx = (Vector)x;
-        var vy = (Vector)y;
+        var vx = (HalfVector)x;
+        var vy = (HalfVector)y;
         return vx.Equals(vy);
     }
 
     int IUserType.GetHashCode(object x) {
-        return ((Vector)x).GetHashCode();
+        return ((HalfVector)x).GetHashCode();
     }
 
     object IUserType.NullSafeGet(DbDataReader rs, string[] names, ISessionImplementor session, object owner) {
         if (names.Length != 1) {
             throw new InvalidOperationException("Only expecting one column...");
         }
-        return (Vector)rs[names[0]];
+        return (HalfVector)rs[names[0]];
     }
 
     void IUserType.NullSafeSet(DbCommand cmd, object? value, int index, ISessionImplementor session) {
@@ -34,17 +34,17 @@ public class VectorType : IUserType {
             parameter.Value = DBNull.Value;
         }
         else {
-            var vector = (Vector)value;
+            var vector = (HalfVector)value;
             parameter.Value = vector;
-            parameter.DataTypeName = "vector";
+            parameter.DataTypeName = "halfvec";
         }
     }
 
     object IUserType.DeepCopy(object value) {
-        var vector = (Vector)value;
-        var dest = new Memory<float>(new float[vector.Memory.Length]);
+        var vector = (HalfVector)value;
+        var dest = new Memory<Half>(new Half[vector.Memory.Length]);
         vector.Memory.CopyTo(dest);
-        var result = new Vector(dest);
+        var result = new HalfVector(dest);
         return result;
     }
 
@@ -60,9 +60,9 @@ public class VectorType : IUserType {
         return value;
     }
 
-    SqlType[] IUserType.SqlTypes => [new PgvectorSqlType(DbType.Object, PgvectorType.Vector)];
+    SqlType[] IUserType.SqlTypes => [new PgvectorSqlType(DbType.Object, PgvectorType.HalfVector)];
 
-    System.Type IUserType.ReturnedType => typeof(Vector);
+    System.Type IUserType.ReturnedType => typeof(HalfVector);
 
     bool IUserType.IsMutable => false;
 

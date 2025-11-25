@@ -13,9 +13,7 @@ public class PgvectorDialect : NHibernate.Extensions.Npgsql.NpgsqlDialect {
         RegisterUserTypes();
     }
 
-    public override string GetTypeName(
-        SqlType sqlType
-    ) {
+    public override string GetTypeName(SqlType sqlType) {
         if (sqlType is PgvectorSqlType pgvectorSqlType) {
             var vectorType = pgvectorSqlType.PgvectorType;
             switch (vectorType) {
@@ -47,6 +45,8 @@ public class PgvectorDialect : NHibernate.Extensions.Npgsql.NpgsqlDialect {
 
     private void RegisterUserTypes() {
         TypeFactory.RegisterType(typeof(Vector), NHibernateUtil.Custom(typeof(VectorType)), ["vector"]);
+        TypeFactory.RegisterType(typeof(HalfVector), NHibernateUtil.Custom(typeof(HalfVectorType)), ["halfvec"]);
+        TypeFactory.RegisterType(typeof(SparseVector), NHibernateUtil.Custom(typeof(SparseVectorType)), ["sparsevec"]);
     }
 
 }
