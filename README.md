@@ -15,6 +15,53 @@ Some useful extensions for NHibernate used in my projects.
 
 Refer [ArrTestEntity](./test/NHibernate.Extensions.UnitTest/TestDb/ArrTestEntity.cs) for mapping, and [ArrTest](./test/NHibernate.Extensions.UnitTest/ArrTest.cs) for sample query usage;
 
+## NHibernate.Extensions.Pgvector
+
+- Extended PostgreSQL driver [PgvectorDriver](https://github.com/beginor/nhibernate-extensions/blob/master/src/NHibernate.Extensions.Pgvector/PgvectorDialect.cs) for NHibernate, with support for:
+  - Add support of [pgvector](https://github.com/pgvector/pgvector/) with [pgvector-dotnet](https://github.com/pgvector/pgvector-dotnet) driver;
+  - Add custom user types of `vector` `halfvec` and `sparsevec` ;
+  - Sql and Linq query with distances of Pgvector;
+
+Linq sample usages:
+
+```c#
+var query = session.Query<ChunkEmbeddingEntity>().Select(x => new {
+    x.Id,
+    x.Text,
+    x.Embedding,
+    x.CreateTime,
+    Distance = x.Embedding.L1Distance(target)
+}).Skip(0).Take(3);
+```
+
+Query with Order: 
+
+```c#
+var query2 = session.Query<ChunkEmbeddingEntity>()
+    .OrderBy(x => x.Embedding.CosineDistance(target))
+    .Select(x => new {
+        x.Id,
+        x.Text,
+        x.CreateTime
+    }).Skip(0).Take(3);
+```
+
+And sql query is also supported:
+
+```c#
+using var session = OpenTestDbSession();
+var sql = """
+    select id, text, created_at, embedding
+    from public.chunk_embeddings
+    order by (embedding <=> :target)
+    limit 3;
+""";
+var query = session.CreateSQLQuery(sql);
+query.AddEntity(typeof(ChunkEmbeddingEntity));
+query.SetParameter("target", target);
+var data = query.List<ChunkEmbeddingEntity>();
+```
+
 ## NHibernate.Extensions.Sqlite
 
 NHibernate driver for the Microsoft.Data.Sqlite.Core data provider for .NET.

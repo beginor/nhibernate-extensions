@@ -1,6 +1,6 @@
 #!/bin/bash -e
-export PACKAGE_VERSION="9.0.10"
-export PACKAGE_RELEASE_NOTES="Update Update to .NET 9.0.10;Update NHibernate to 5.6.0;Update other nuget packages;"
+export PACKAGE_VERSION="9.0.11"
+export PACKAGE_RELEASE_NOTES="New **NHibernate.Extensions.Pgvector** package, add with pgvector support!;"
 export PACKAGE_TAGS="nhibernate, npgsql, dotnet, dotnet core, array type, json type"
 export PACKAGE_PROJECT_URL="https://github.com/beginor/nhibernate-extensions"
 
