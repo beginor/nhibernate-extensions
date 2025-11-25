@@ -6,6 +6,7 @@ using Npgsql;
 using Pgvector;
 
 using NHibernate.Extensions.Pgvector;
+using NHibernate.Extensions.Pgvector.UserTypes;
 using NHibernate.Extensions.UnitTest.TestDb;
 
 namespace NHibernate.Extensions.UnitTest;
@@ -38,23 +39,20 @@ public class VectorTest : BaseTest {
     }
 
     [Test]
-    public void _03_CanQueryDistanceWithNpgsql() {
+    public void _03_CanQueryDistanceWithSql() {
         var target = new Vector(new float[] { 1, 2, 0 });
         using var session = OpenTestDbSession();
-        var conn = session.Connection as NpgsqlConnection;
         var sql = """
-                  select text, (embedding <=> @target) as distance
-                  from public.chunk_embeddings
-                  order by distance
-                  limit 3;
-                  """;
-        using var cmd = conn.CreateCommand();
-        cmd.CommandText = sql;
-        cmd.Parameters.AddWithValue("target", target);
-        var reader = cmd.ExecuteReader();
-        while (reader.Read()) {
-            Console.WriteLine(reader["text"]);
-        }
+            select id, text, created_at, embedding
+            from public.chunk_embeddings
+            order by (embedding <=> :target)
+            limit 3;
+        """;
+        var query = session.CreateSQLQuery(sql);
+        query.AddEntity(typeof(ChunkEmbeddingEntity));
+        query.SetParameter("target", target);
+        var data = query.List<ChunkEmbeddingEntity>();
+        Assert.That(data.Count, Is.GreaterThanOrEqualTo(3));
     }
 
     [Test, Ignore("Is anyone who use hql with NHibernate?")]
@@ -88,7 +86,6 @@ public class VectorTest : BaseTest {
             .Select(x => new {
                 x.Id,
                 x.Text,
-                x.Embedding,
                 x.CreateTime
             }).Skip(0).Take(3);
         var data2 = query2.ToList();
