@@ -2,6 +2,7 @@ using System.Linq;
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using NHibernate.Extensions.Npgsql.UserTypes;
 using Npgsql;
 using Pgvector;
 
@@ -49,9 +50,13 @@ public class VectorTest : BaseTest {
             limit 3;
         """;
         var query = session.CreateSQLQuery(sql);
-        query.AddEntity(typeof(ChunkEmbeddingEntity));
-        query.SetParameter("target", target);
+        query.AddEntity(typeof(ChunkEmbeddingEntity))
+             .SetParameter("target", target);
         var data = query.List<ChunkEmbeddingEntity>();
+        foreach (var item in data) {
+            // Console.WriteLine($"{item.Id}, {item.Text}, {item.CreateTime}, {item.Embedding}");
+            Console.WriteLine($"{item.GetType()}");
+        }
         Assert.That(data.Count, Is.GreaterThanOrEqualTo(3));
     }
 

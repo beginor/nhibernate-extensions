@@ -33,13 +33,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="hibernate.config">
+    <None Update="config/hibernate.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="hibernate.sqlite.config">
+    <None Update="config/hibernate.sqlite.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="test_db.db3">

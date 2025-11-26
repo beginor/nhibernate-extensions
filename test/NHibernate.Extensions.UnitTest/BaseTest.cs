@@ -39,17 +39,18 @@ public class BaseTest {
     }
 
     private Configuration CreateTestDbConfiguration() {
+        // Vector type workaround
         #pragma warning disable CS0618
-        //Vector type workaround
         NpgsqlConnection.GlobalTypeMapper.UseVector();
         #pragma warning restore CS0618
         // add default config
-        var defaultConfigFile = Path.Combine(
+        var configFile = Path.Combine(
             AppDomain.CurrentDomain.BaseDirectory,
+            "config",
             "hibernate.config"
         );
         var config = new Configuration();
-        config.Configure(defaultConfigFile);
+        config.Configure(configFile);
         // use default attr serializer;
         var serializer = HbmSerializer.Default;
         var xmlStream = serializer.Serialize(
@@ -68,7 +69,12 @@ public class BaseTest {
 
     private Configuration CreateSqliteConfiguration() {
         var configuration = new Configuration();
-        configuration.Configure("hibernate.sqlite.config");
+        var configFile = Path.Combine(
+            AppDomain.CurrentDomain.BaseDirectory,
+            "config",
+            "hibernate.sqlite.config"
+        );
+        configuration.Configure(configFile);
         var mapper = new ModelMapper();
         mapper.AddMapping<AuthorMappingSqlite>();
         mapper.AddMapping<BookMappingSqlite>();
