@@ -21,12 +21,12 @@ public class ArrayTypeTest : BaseTest {
                 JsonField = JsonSerializer.Deserialize<JsonElement>("{ \"val\": 1 }"),
                 JsonbField = JsonSerializer.Deserialize<JsonElement>("{ \"val\": 1 }"),
                 UpdateTime = DateTime.Now,
-                Int16Arr = new short[] { 1, 2, 3 },
-                Int32Arr = new [] { 1, 2, 3 },
-                Int64Arr = new [] { 1L, 2L, 3L },
-                FloatArr = new [] { 1.1F, 2.2F, 3.3F },
-                DoubleArr = new [] { 1.1, 2.2, 3.3 },
-                BooleanArr = new [] { true, false }
+                Int16Arr = [1, 2, 3],
+                Int32Arr = [1, 2, 3],
+                Int64Arr = [1L, 2L, 3L],
+                FloatArr = [1.1F, 2.2F, 3.3F],
+                DoubleArr = [1.1, 2.2, 3.3],
+                BooleanArr = [true, false]
             };
             session.Save(entity);
             session.Flush();
