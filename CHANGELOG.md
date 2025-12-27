@@ -1,5 +1,11 @@
 # Changelogs for NHibernate.Extensions
 
+## 10.0.0
+
+- Update to .NET 10.0.0;
+- Update Npgsql to 10.0.1;
+- Update other nuget packages;
+
 ## 9.0.10
 
 - New **NHibernate.Extensions.Pgvector** package, add with pgvector support!
