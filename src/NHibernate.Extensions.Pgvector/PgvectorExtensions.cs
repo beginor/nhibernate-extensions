@@ -4,40 +4,34 @@ namespace NHibernate.Extensions.Pgvector;
 
 public static class PgvectorExtensions {
 
-    public static double L1Distance(this Vector v1, Vector v2) {
-        return double.NaN;
+    extension(Vector v1) {
+
+        public double L1Distance(Vector v2) { return double.NaN; }
+
+        public double L2Distance(Vector v2) { return double.NaN; }
+
+        public double CosineDistance(Vector v2) { return double.NaN; }
+
     }
 
-    public static double L1Distance(this HalfVector v1, HalfVector v2) {
-        return double.NaN;
+    extension(HalfVector v1) {
+
+        public double L1Distance(HalfVector v2) { return double.NaN; }
+
+        public double L2Distance(HalfVector v2) { return double.NaN; }
+
+        public double CosineDistance(HalfVector v2) { return double.NaN; }
+
     }
 
-    public static double L1Distance(this SparseVector v1, SparseVector v2) {
-        return double.NaN;
-    }
+    extension(SparseVector v1) {
 
-    public static double L2Distance(this Vector v1, Vector v2) {
-        return double.NaN;
-    }
+        public double L1Distance(SparseVector v2) { return double.NaN; }
 
-    public static double L2Distance(this HalfVector v1, HalfVector v2) {
-        return double.NaN;
-    }
+        public double L2Distance(SparseVector v2) { return double.NaN; }
 
-    public static double L2Distance(this SparseVector v1, SparseVector v2) {
-        return double.NaN;
-    }
+        public double CosineDistance(SparseVector v2) { return double.NaN; }
 
-    public static double CosineDistance(this Vector v1, Vector v2) {
-        return double.NaN;
-    }
-
-    public static double CosineDistance(this HalfVector v1, HalfVector v2) {
-        return double.NaN;
-    }
-
-    public static double CosineDistance(this SparseVector v1, SparseVector v2) {
-        return double.NaN;
     }
 
 }
