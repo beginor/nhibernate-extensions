@@ -1,5 +1,11 @@
 # Changelogs for NHibernate.Extensions
 
+## 10.0.1
+
+- Update to .NET 10.0.5;
+- Update Npgsql to 10.0.2;
+- Update other nuget packages;
+
 ## 10.0.0
 
 - Update to .NET 10.0.0;

@@ -1,6 +1,6 @@
 #!/bin/bash -e
-export PACKAGE_VERSION="10.0.0"
-export PACKAGE_RELEASE_NOTES="Update to .NET 10.0.0;"
+export PACKAGE_VERSION="10.0.1"
+export PACKAGE_RELEASE_NOTES="Update to .NET 10.0.5; Update nuget packages;"
 export PACKAGE_TAGS="nhibernate, npgsql, dotnet, dotnet core, array type, json type, pgvector"
 export PACKAGE_PROJECT_URL="https://github.com/beginor/nhibernate-extensions"
 
