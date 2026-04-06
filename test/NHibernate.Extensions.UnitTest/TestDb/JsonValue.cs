@@ -5,7 +5,6 @@ using PropertyAttribute = NHibernate.Mapping.Attributes.PropertyAttribute;
 
 namespace NHibernate.Extensions.UnitTest.TestDb;
 
-
 [Class(Schema = "public", Table = "json_values")]
 public class JsonValue {
 
