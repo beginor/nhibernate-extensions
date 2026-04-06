@@ -41,10 +41,14 @@ public class JsonElementTest : BaseTest {
             .ToListAsync()
             .ConfigureAwait(false);
         Console.WriteLine($"Entity count: {data.Count}");
+        foreach (var item in data) {
+            Console.WriteLine($"id: {item.Id}");
+            Console.WriteLine($"json: {item.JsonField}");
+            Console.WriteLine($"jsonb: {item.JsonbField}");
+        }
         Assert.That(data.Count, Is.GreaterThan(0));
         //
         await session.DeleteAsync(entity);
-        await session.SaveAsync(entity);
         await session.FlushAsync();
         session.Clear();
     }
