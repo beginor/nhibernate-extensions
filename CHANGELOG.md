@@ -1,5 +1,11 @@
 # Changelogs for NHibernate.Extensions
 
+## 10.0.2
+
+- Add JSON element user type test;
+- Remove package version of System.Text.Json;
+- Update other nuget packages;
+
 ## 10.0.1
 
 - Update to .NET 10.0.5;
