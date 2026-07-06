@@ -52,7 +52,7 @@ public class QueryTest : BaseTest {
             using (var tx = session.BeginTransaction()) {
                 try {
                     var author = new Author();
-                    author.Name = "beginor";
+                    author.FirstName = "beginor";
                     session.Save(author);
                     var book = new Book();
                     book.Title = "learning nhibernate";

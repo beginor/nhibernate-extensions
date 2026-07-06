@@ -6,11 +6,14 @@ namespace NHibernate.Extensions.UnitTest.TestDb;
 [Class(Table = "authors", Schema = "public")]
 public class Author {
 
-    [Id(Column = "author_id", Type = "long", Name = "AuthorId", Generator = "trigger-identity")]
+    [Id(Column = "id", Type = "long", Name = "AuthorId", Generator = "trigger-identity")]
     public virtual long AuthorId { get; set; }
 
-    [Property(Column = "name", Type = "string")]
-    public virtual string Name { get; set; }
+    [Property(Column = "first_name", Type = "string")]
+    public virtual string FirstName { get; set; }
+
+    [Property(Column = "last_name", Type = "string")]
+    public virtual string LastName { get; set; }
 
     [Bag(Table = "books", Inverse = true)]
     [Key(Column = "author_id")]
