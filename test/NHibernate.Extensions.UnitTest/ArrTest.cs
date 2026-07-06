@@ -172,7 +172,7 @@ public class ArrTest : BaseTest {
         using var session = TestDbSessionFactory.OpenSession();
         var idList = entityIdList.ToArray();
         var query = session.Query<ArrTestEntity>().Where(
-            x => idList.Contains(x.Id)
+            x => idList.ArrayContains(x.Id)
         );
         var data = query.ToList();
         Assert.That(data, Is.Not.Empty);
