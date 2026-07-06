@@ -17,7 +17,7 @@ public class ArrayTypeTest : BaseTest {
         using (var session = TestDbSessionFactory.OpenSession()) {
             var entity = new TestEntity {
                 Name = "Test 1",
-                Tags = new [] { "hello", "world" },
+                Tags = ["hello", "world"],
                 JsonField = JsonSerializer.Deserialize<JsonElement>("{ \"val\": 1 }"),
                 JsonbField = JsonSerializer.Deserialize<JsonElement>("{ \"val\": 1 }"),
                 UpdateTime = DateTime.Now,
@@ -43,13 +43,12 @@ public class ArrayTypeTest : BaseTest {
             Assert.That(entities, Is.Not.Null);
             Console.WriteLine($"Entity count: {entities.Count}");
 
-            using (var tx = session.BeginTransaction()) {
-                foreach (var e in entities) {
-                    Console.WriteLine(JsonSerializer.Serialize(e));
-                    session.Delete(e);
-                }
-                tx.Commit();
+            using var tx = session.BeginTransaction();
+            foreach (var e in entities) {
+                Console.WriteLine(JsonSerializer.Serialize(e));
+                session.Delete(e);
             }
+            tx.Commit();
         }
     }
 
@@ -79,7 +78,9 @@ public class ArrayTypeTest : BaseTest {
     [Test]
     public void _04_CanDoQueryDynamicJson() {
         using var session = TestDbSessionFactory.OpenSession();
-        var query = session.CreateSQLQuery("select id, value from public.json_values");
+        // language=none
+        var sql = "select id, value from public.json_values";
+        var query = session.CreateSQLQuery(sql);
         query.AddScalar("id", NHibernateUtil.Int64);
         query.AddScalar("value", NHibernateUtil.Custom(typeof(JsonbType)));
         var list = query.List();
