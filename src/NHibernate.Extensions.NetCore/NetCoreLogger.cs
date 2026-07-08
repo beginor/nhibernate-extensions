@@ -3,27 +3,23 @@ using Microsoft.Extensions.Logging;
 
 namespace NHibernate.Extensions.NetCore;
 
-public class NetCoreLogger(ILogger logger) : IDisposable, INHibernateLogger {
-
-    ~NetCoreLogger() {
-        Dispose(false);
-    }
-
-    public void Dispose() {
-        Dispose(true);
-    }
-
-    protected virtual void Dispose(bool disposing) {
-        // if (disposing) {
-        //     logger = null;
-        // }
-    }
+public class NetCoreLogger(ILogger logger) : INHibernateLogger {
 
     public bool IsEnabled(NHibernateLogLevel logLevel) {
-        var level = (int)logLevel;
-        var msLogLevel = (LogLevel)level;
-        return logger.IsEnabled(msLogLevel);
+        return logger.IsEnabled(MapLogLevel(logLevel));
     }
+
+    private static LogLevel MapLogLevel(NHibernateLogLevel logLevel) {
+      return logLevel switch {
+          NHibernateLogLevel.Trace => LogLevel.Trace,
+          NHibernateLogLevel.Debug => LogLevel.Debug,
+          NHibernateLogLevel.Info => LogLevel.Information,
+          NHibernateLogLevel.Warn => LogLevel.Warning,
+          NHibernateLogLevel.Error => LogLevel.Error,
+          NHibernateLogLevel.Fatal => LogLevel.Critical,
+          _ => LogLevel.None
+      };
+  }
 
     public void Log(
         NHibernateLogLevel logLevel,
@@ -37,13 +33,7 @@ public class NetCoreLogger(ILogger logger) : IDisposable, INHibernateLogger {
             default(EventId),
             state,
             exception,
-            (s, ex) => {
-                var message = s.ToString();
-                if (ex != null) {
-                    message += ex.ToString();
-                }
-                return message;
-            }
+            (s, _) => s.ToString()
         );
     }
 }

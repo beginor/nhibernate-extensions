@@ -16,19 +16,22 @@ public static class ServiceCollectionExtensions {
             }
             var cfg = new Configuration();
             cfg.Configure();
-            services.AddHibernate(cfg);
+            services.AddHibernate(cfg, true);
         }
 
         public void AddHibernate(string path) {
             if (services == null) {
                 throw new ArgumentNullException(nameof(services));
             }
-            if (string.IsNullOrEmpty(path)) {
+            if (path == null) {
                 throw new ArgumentNullException(nameof(path));
+            }
+            if (path.Length == 0) {
+                throw new ArgumentException("Path cannot be empty.", nameof(path));
             }
             var cfg = new Configuration();
             cfg.Configure(path);
-            services.AddHibernate(cfg);
+            services.AddHibernate(cfg, true);
         }
 
         public void AddHibernate(XmlReader xmlReader) {
@@ -40,7 +43,7 @@ public static class ServiceCollectionExtensions {
             }
             var cfg = new Configuration();
             cfg.Configure(xmlReader);
-            services.AddHibernate(cfg);
+            services.AddHibernate(cfg, true);
         }
 
         public void AddHibernate(Assembly assembly, string resourceName) {
@@ -55,26 +58,23 @@ public static class ServiceCollectionExtensions {
             }
             var cfg = new Configuration();
             cfg.Configure(assembly, resourceName);
-            services.AddHibernate(cfg);
+            services.AddHibernate(cfg, true);
         }
 
-        public void AddHibernate(Configuration cfg) {
+        public void AddHibernate(Configuration cfg, bool buildSessionFactoryOnRegister = false) {
             if (services == null) {
                 throw new ArgumentNullException(nameof(services));
             }
             if (cfg == null) {
                 throw new ArgumentNullException(nameof(cfg));
             }
-            // Add Configuration as singleton
             services.AddSingleton(cfg);
-            // Add ISessionFactory as singleton
-            services.AddSingleton(provider => {
-                var config = provider.GetService<Configuration>();
-                if (config == null) {
-                    throw new InvalidOperationException($"Can not get service {typeof(Configuration)}");
-                }
-                return config.BuildSessionFactory();
-            });
+            if (buildSessionFactoryOnRegister) {
+                services.AddSingleton(cfg.BuildSessionFactory());
+            }
+            else {
+                services.AddSingleton(_ => cfg.BuildSessionFactory());
+            }
             // Add ISession as scoped
             services.AddScoped(provider => {
                 var factory = provider.GetService<ISessionFactory>();
@@ -85,7 +85,7 @@ public static class ServiceCollectionExtensions {
             });
         }
 
-        public void AddHibernate(string key, Configuration cfg) {
+        public void AddHibernate(string key, Configuration cfg, bool buildSessionFactoryOnRegister = false) {
             if (services == null) {
                 throw new ArgumentNullException(nameof(services));
             }
@@ -97,13 +97,18 @@ public static class ServiceCollectionExtensions {
             }
             services.AddKeyedSingleton(key, cfg);
             // Add ISessionFactory as singleton
-            services.AddKeyedSingleton<ISessionFactory>(
-                key,
-                (provider, o) => {
-                    var config = provider.GetRequiredKeyedService<Configuration>(o);
-                    return config.BuildSessionFactory();
-                }
-            );
+            if (buildSessionFactoryOnRegister) {
+                services.AddKeyedSingleton(key, cfg.BuildSessionFactory());
+            }
+            else {
+                services.AddKeyedSingleton<ISessionFactory>(
+                    key,
+                    (provider, k) => {
+                        var config = provider.GetRequiredKeyedService<Configuration>(k);
+                        return config.BuildSessionFactory();
+                    }
+                );
+            }
             // Add ISession as scoped
             services.AddKeyedScoped<ISession>(
                 key,
@@ -121,12 +126,12 @@ public static class ServiceCollectionExtensions {
             if (key == null) {
                 throw new ArgumentNullException(nameof(key));
             }
-            if (string.IsNullOrEmpty(path)) {
-                throw new ArgumentNullException(nameof(path));
+            if (key.Length == 0) {
+                throw new ArgumentException("Key cannot be empty.", nameof(key));
             }
             var cfg = new Configuration();
             cfg.Configure(path);
-            services.AddHibernate(key, cfg);
+            services.AddHibernate(key, cfg, true);
         }
 
         public void AddHibernate(string key, XmlReader xmlReader) {
@@ -141,7 +146,7 @@ public static class ServiceCollectionExtensions {
             }
             var cfg = new Configuration();
             cfg.Configure(xmlReader);
-            services.AddHibernate(key, cfg);
+            services.AddHibernate(key, cfg, true);
         }
 
         public void AddHibernate(string key, Assembly assembly, string resourceName) {
@@ -159,9 +164,20 @@ public static class ServiceCollectionExtensions {
             }
             var cfg = new Configuration();
             cfg.Configure(assembly, resourceName);
-            services.AddHibernate(key, cfg);
+            services.AddHibernate(key, cfg, true);
         }
 
+        public void AddHibernate(Action<Configuration> configure) {
+            var cfg = new Configuration();
+            configure(cfg);
+            services.AddHibernate(cfg, true);
+        }
+
+        public void AddHibernate(string key, Action<Configuration> configure) {
+            var cfg = new Configuration();
+            configure(cfg);
+            services.AddHibernate(key, cfg, true);
+        }
     }
 
 }
