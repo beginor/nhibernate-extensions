@@ -11,17 +11,13 @@ namespace NHibernate.Extensions.Npgsql.UserTypes;
 
 public class TimeStampType : IUserType {
 
-    public virtual SqlType[] SqlTypes => [
-        new NpgsqlType(DbType.DateTime, NpgsqlDbType.Timestamp)
-    ];
+    public virtual SqlType[] SqlTypes => [new NpgsqlType(DbType.DateTime, NpgsqlDbType.Timestamp)];
 
     public System.Type ReturnedType => typeof(DateTime);
 
     public bool IsMutable => true;
 
-    public object Assemble(object cached, object owner) {
-        return cached;
-    }
+    public object Assemble(object cached, object owner) => DeepCopy(cached)!;
 
     public object? DeepCopy(object? value) {
         if (value == null) {
@@ -32,9 +28,7 @@ public class TimeStampType : IUserType {
         return result;
     }
 
-    public object Disassemble(object value) {
-        return value;
-    }
+    public object Disassemble(object value) => DeepCopy(value)!;
 
     public new bool Equals(object? x, object? y) {
         if (x == null && y == null) {
@@ -46,9 +40,7 @@ public class TimeStampType : IUserType {
         return ((DateTime)x).Equals((DateTime)y);
     }
 
-    public int GetHashCode(object? x) {
-        return x == null ? 0 : x.GetHashCode();
-    }
+    public int GetHashCode(object? x) => x == null ? 0 : x.GetHashCode();
 
     public object? NullSafeGet(DbDataReader rs, string[] names, ISessionImplementor session, object owner) {
         if (names.Length != 1) {
@@ -67,7 +59,6 @@ public class TimeStampType : IUserType {
         parameter.NpgsqlDbType = NpgsqlDbType.Timestamp;
     }
 
-    public object Replace(object original, object target, object owner) {
-        return original;
-    }
+    public object Replace(object original, object target, object owner) => DeepCopy(original)!;
+
 }

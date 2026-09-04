@@ -12,30 +12,26 @@ namespace NHibernate.Extensions.Npgsql.UserTypes;
 
 public class JsonType<T> : IUserType {
 
-    public virtual SqlType[] SqlTypes => [
-        new NpgsqlType(DbType.Object, NpgsqlDbType.Json)
-    ];
+    private readonly JsonSerializerOptions serializerOptions = JsonSerializerOptions.Default;
+
+    public virtual SqlType[] SqlTypes => [new NpgsqlType(DbType.Object, NpgsqlDbType.Json)];
 
     public System.Type ReturnedType => typeof(T);
 
     public bool IsMutable => true;
 
-    public object Assemble(object cached, object owner) {
-        return cached;
-    }
+    public object Assemble(object cached, object owner) => DeepCopy(cached)!;
 
     public object? DeepCopy(object? value) {
         if (value == null) {
             return null;
         }
-        var json = JsonSerializer.Serialize(value);
-        var obj = JsonSerializer.Deserialize(json, value.GetType());
-        return obj;
+        var type = value.GetType();
+        var json = JsonSerializer.Serialize(value, type, serializerOptions);
+        return JsonSerializer.Deserialize(json, type, serializerOptions);
     }
 
-    public object Disassemble(object value) {
-        return value;
-    }
+    public object Disassemble(object value) => DeepCopy(value)!;
 
     public new bool Equals(object? x, object? y) {
         if (x == null && y == null) {
@@ -48,7 +44,7 @@ public class JsonType<T> : IUserType {
     }
 
     public int GetHashCode(object? x) {
-        return x == null ? 0 : x.GetHashCode();
+        return x == null ? 0 : JsonSerializer.Serialize(x, serializerOptions).GetHashCode();
     }
 
     public object? NullSafeGet(
@@ -65,15 +61,15 @@ public class JsonType<T> : IUserType {
         if (rs.IsDBNull(name)) {
             return default(T);
         }
-        var jsonStr = rs.GetString(name);
-        var jsonDoc = JsonDocument.Parse(jsonStr);
+        var str = rs.GetString(name);
+        var jsonDoc = JsonDocument.Parse(str);
         if (type == typeof(JsonDocument)) {
             return jsonDoc;
         }
         if (type == typeof(JsonElement)) {
             return jsonDoc.RootElement;
         }
-        return JsonSerializer.Deserialize<T>(jsonStr);
+        return JsonSerializer.Deserialize<T>(str, serializerOptions);
     }
 
     public void NullSafeSet(
@@ -100,17 +96,13 @@ public class JsonType<T> : IUserType {
         }
     }
 
-    public object Replace(object original, object target, object owner) {
-        return original;
-    }
+    public object Replace(object original, object target, object owner) => DeepCopy(original)!;
 
 }
 
 public class JsonbType<T> : JsonType<T> {
 
-    public override SqlType[] SqlTypes => new SqlType[] {
-        new NpgsqlType(DbType.Binary, NpgsqlDbType.Jsonb)
-    };
+    public override SqlType[] SqlTypes => [new NpgsqlType(DbType.Binary, NpgsqlDbType.Jsonb)];
 
 }
 

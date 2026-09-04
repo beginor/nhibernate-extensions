@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using System.Linq;
 using NHibernate.Engine;
 using NHibernate.SqlTypes;
 using NHibernate.UserTypes;
@@ -16,37 +17,25 @@ public class ArrayType<T> : IUserType {
 
     public System.Type ReturnedType => typeof(T[]);
 
-    public bool IsMutable => false;
+    public bool IsMutable => true;
 
-    public object Assemble(object cached, object owner) {
-        return cached;
-    }
+    public object Assemble(object cached, object owner) => DeepCopy(cached)!;
 
     public object? DeepCopy(object value) {
-        if (!(value is T[] arr)) {
+        if (value is not T[] arr) {
             return null;
         }
-        var result = new T[arr.Length];
-        Array.Copy(arr, result, arr.Length);
-        return result;
+        return arr.Clone();
     }
 
-    public object Disassemble(object value) {
-        return value;
-    }
+    public object Disassemble(object value) => DeepCopy(value)!;
 
     public new bool Equals(object? x, object? y) {
-        if (x == null && y == null) {
-            return true;
-        }
-        if (x == null || y == null) {
-            return false;
-        }
-        return ((T[])x).Equals((T[])y);
+        return ReferenceEquals(x, y) || (x is T[] a && y is T[] b && a.SequenceEqual(b));
     }
 
     public int GetHashCode(object? x) {
-        return x == null ? 0 : x.GetHashCode();
+        return x == null ? 0 : ((IStructuralEquatable)x).GetHashCode(EqualityComparer<T>.Default);
     }
 
     public object? NullSafeGet(
@@ -73,18 +62,16 @@ public class ArrayType<T> : IUserType {
         }
         else {
             parameter.NpgsqlDbType = GetNpgsqlType().NpgDbType;
-            if (!(value is T[] arr)) {
+            if (value is not T[] arr) {
                 throw new InvalidOperationException(
-                    $"\"{parameter.ParameterName}\" is not {typeof(T)}[]"
+                    $"[{parameter.ParameterName}] is not {typeof(T)}[]"
                 );
             }
             parameter.Value = arr;
         }
     }
 
-    public object Replace(object original, object target, object owner) {
-        return original;
-    }
+    public object Replace(object original, object target, object owner) => DeepCopy(original)!;
 
     protected virtual NpgsqlType GetNpgsqlType() {
         var type = typeof(T);
