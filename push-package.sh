@@ -1,6 +1,6 @@
 #!/bin/bash -e
-export PACKAGE_VERSION="10.0.2"
-export PACKAGE_RELEASE_NOTES="Update to .NET 10.0.9; Update nuget packages; Add CLAUDE.md"
+export PACKAGE_VERSION="10.0.3"
+export PACKAGE_RELEASE_NOTES="Fix Npgsql user types to deep-copy values (Assemble/Disassemble/Replace); fix ArrayType value equality and hash code"
 export PACKAGE_TAGS="nhibernate, npgsql, dotnet, dotnet core, array type, json type, pgvector"
 export PACKAGE_PROJECT_URL="https://github.com/beginor/nhibernate-extensions"
 

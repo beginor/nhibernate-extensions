@@ -1,5 +1,11 @@
 # Changelogs for NHibernate.Extensions
 
+## 10.0.3
+
+- Fix Npgsql user types to deep-copy values in Assemble/Disassemble/Replace;
+- Fix ArrayType to use element-wise value equality and hash code;
+- Set ArrayType to mutable;
+
 ## 10.0.2
 
 - Add JSON element user type test;
