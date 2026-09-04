@@ -1,5 +1,11 @@
 # Changelogs for NHibernate.Extensions
 
+## 10.0.4
+
+- Update Microsoft.* packages to 10.0.11;
+- Update Microsoft.NET.Test.Sdk to 18.9.0, NUnit3TestAdapter to 6.3.0;
+- Update SQLitePCLRaw.bundle_e_sqlite3 to 3.0.5;
+
 ## 10.0.3
 
 - Fix Npgsql user types to deep-copy values in Assemble/Disassemble/Replace;
