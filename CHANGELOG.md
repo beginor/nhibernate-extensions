@@ -1,5 +1,11 @@
 # Changelogs for NHibernate.Extensions
 
+## 10.0.5
+
+- Update Microsoft.* packages to 10.0.12;
+- Update Microsoft.NET.Test.Sdk to 18.10.1;
+- Update Dapper to 2.1.86;
+
 ## 10.0.4
 
 - Update Microsoft.* packages to 10.0.11;

@@ -1,6 +1,6 @@
 #!/bin/bash -e
-export PACKAGE_VERSION="10.0.4"
-export PACKAGE_RELEASE_NOTES="Update Microsoft packages to 10.0.11; update test and sqlite packages"
+export PACKAGE_VERSION="10.0.5"
+export PACKAGE_RELEASE_NOTES="Update Microsoft packages to 10.0.12; update test sdk to 18.10.1; update Dapper to 2.1.86"
 export PACKAGE_TAGS="nhibernate, npgsql, dotnet, dotnet core, array type, json type, pgvector"
 export PACKAGE_PROJECT_URL="https://github.com/beginor/nhibernate-extensions"
 
