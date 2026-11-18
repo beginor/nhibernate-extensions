@@ -26,25 +26,23 @@ public class VersionTest : BaseTest {
         var entity = new VersionTable {
             Name = "test " + DateTime.Now
         };
-        using (var session = factory.OpenSession()) {
-            session.Save(entity);
-            session.Flush();
-            Assert.That(entity.Id, Is.GreaterThan(0));
+        using var session = factory.OpenSession();
+        session.Save(entity);
+        session.Flush();
+        Assert.That(entity.Id, Is.GreaterThan(0));
 
-            Assert.That(entity.Version, Is.GreaterThan(0));
-            var v1 = entity.Version;
+        Assert.That(entity.Version, Is.GreaterThan(0));
+        var v1 = entity.Version;
 
-            entity.Name = "update " + DateTime.Now;
-            session.Update(entity);
-            session.Flush();
-            var v2 = entity.Version;
+        entity.Name = "update " + DateTime.Now;
+        session.Update(entity);
+        session.Flush();
+        var v2 = entity.Version;
 
-            Assert.That(v2, Is.GreaterThan(v1));
+        Assert.That(v2, Is.GreaterThan(v1));
 
-            session.Delete(entity);
-            session.Flush();
-        }
-
+        session.Delete(entity);
+        session.Flush();
     }
 
 }

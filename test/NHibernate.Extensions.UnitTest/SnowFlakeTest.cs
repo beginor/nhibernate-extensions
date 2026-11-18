@@ -13,25 +13,23 @@ public class SnowFlakeTest : BaseTest {
 
     [Test]
     public void _01_CanQuerySnowFlakeId() {
-        using (var session = TestDbSessionFactory.OpenSession()) {
-            var entities = session.Query<SnowFlakeTestEntity>()
-                .ToList();
-            foreach (var entity in entities) {
-                Assert.That(entity.Id > 0);
-                Console.WriteLine(JsonSerializer.Serialize(entity));
-            }
+        using var session = TestDbSessionFactory.OpenSession();
+        var entities = session.Query<SnowFlakeTestEntity>()
+            .ToList();
+        foreach (var entity in entities) {
+            Assert.That(entity.Id > 0);
+            Console.WriteLine(JsonSerializer.Serialize(entity));
         }
     }
 
     [Test]
     public void _02_CanInsertSnowFlakeId() {
-        using (var session = TestDbSessionFactory.OpenSession()) {
-            var entity = new SnowFlakeTestEntity {
-                Name = Guid.NewGuid().ToString("N")
-            };
-            session.Save(entity);
-            Assert.That(entity.Id > 0);
-            Console.WriteLine($"Id: {entity.Id}");
-        }
+        using var session = TestDbSessionFactory.OpenSession();
+        var entity = new SnowFlakeTestEntity {
+            Name = Guid.NewGuid().ToString("N")
+        };
+        session.Save(entity);
+        Assert.That(entity.Id > 0);
+        Console.WriteLine($"Id: {entity.Id}");
     }
 }

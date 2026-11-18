@@ -32,28 +32,26 @@ public class SqliteDriverTest : BaseTest {
     [Test]
     public void _01_CanBuildSessionFactory() {
         Assert.That(SessionFactory, Is.Not.Null);
-        using (var session = SessionFactory.OpenSession()) {
-            var authors = session.Query<Author>()
-                .Where(a => a.AuthorId > 0)
-                .ToList();
-            Assert.That(authors, Is.Not.Empty);
-            var count = session.Query<Author>().LongCount(a => a.AuthorId > 0);
-            Assert.That(count, Is.GreaterThanOrEqualTo(0));
-        }
+        using var session = SessionFactory.OpenSession();
+        var authors = session.Query<Author>()
+            .Where(a => a.AuthorId > 0)
+            .ToList();
+        Assert.That(authors, Is.Not.Empty);
+        var count = session.Query<Author>().LongCount(a => a.AuthorId > 0);
+        Assert.That(count, Is.GreaterThanOrEqualTo(0));
     }
 
     [Test]
     public void _02_CanSaveDelete() {
-        using (var session = SessionFactory.OpenSession()) {
-            var author = new Author {
-                Name = "Unit Test"
-            };
-            session.Save(author);
-            session.Flush();
-            Assert.That(author.AuthorId, Is.GreaterThan(0));
-            session.Delete(author);
-            session.Flush();
-        }
+        using var session = SessionFactory.OpenSession();
+        var author = new Author {
+            Name = "Unit Test"
+        };
+        session.Save(author);
+        session.Flush();
+        Assert.That(author.AuthorId, Is.GreaterThan(0));
+        session.Delete(author);
+        session.Flush();
     }
 
     [Test]

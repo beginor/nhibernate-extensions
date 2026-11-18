@@ -20,40 +20,38 @@ public class DapperTest : BaseTest {
 
     [Test]
     public void CanQueryAuthors() {
-        using (var session = TestDbSessionFactory.OpenSession()) {
-            var conn = session.Connection;
-            var authors = conn.Query<AuthorEntity>(
-                "select * from public.authors"
-            );
-            Assert.That(authors.Count(), Is.GreaterThanOrEqualTo(0));
+        using var session = TestDbSessionFactory.OpenSession();
+        var conn = session.Connection;
+        var authors = conn.Query<AuthorEntity>(
+            "select * from public.authors"
+        );
+        Assert.That(authors.Count(), Is.GreaterThanOrEqualTo(0));
 
-            authors = conn.Query<AuthorEntity>(
-                "select * from public.authors where authors.id = any(@Ids)",
-                new {
-                    Ids = new [] { 1, 2, 3 } .AsEnumerable()
-                }
-            );
-            Assert.That(authors.Count(), Is.LessThanOrEqualTo(3));
-        }
+        authors = conn.Query<AuthorEntity>(
+            "select * from public.authors where authors.id = any(@Ids)",
+            new {
+                Ids = new [] { 1, 2, 3 } .AsEnumerable()
+            }
+        );
+        Assert.That(authors.Count(), Is.LessThanOrEqualTo(3));
     }
 
     [Test]
     public void CanUseTypeHandler() {
-        using (var session = TestDbSessionFactory.OpenSession()) {
-            var conn = session.Connection;
-            Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
-            SqlMapper.AddTypeHandler(new DateTimeHandler());
-            var entity = conn.Query<TestTableEntity>(
-                "select * from public.test_table order by update_time limit 1"
-            ).FirstOrDefault();
-            Assert.That(entity, Is.Not.Null);
+        using var session = TestDbSessionFactory.OpenSession();
+        var conn = session.Connection;
+        Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
+        SqlMapper.AddTypeHandler(new DateTimeHandler());
+        var entity = conn.Query<TestTableEntity>(
+            "select * from public.test_table order by update_time limit 1"
+        ).FirstOrDefault();
+        Assert.That(entity, Is.Not.Null);
 
-            var updated = conn.Execute(
-                "update public.test_table set update_time = @updateTime where id = @id",
-                new { id = entity.Id, updateTime = DateTime.Now }
-            );
-            Assert.That(updated, Is.EqualTo(1));
-        }
+        var updated = conn.Execute(
+            "update public.test_table set update_time = @updateTime where id = @id",
+            new { id = entity.Id, updateTime = DateTime.Now }
+        );
+        Assert.That(updated, Is.EqualTo(1));
     }
 
     [Test]
