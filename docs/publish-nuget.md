@@ -113,7 +113,13 @@ jobs:
 
 1. 更新 `CHANGELOG.md`；
 2. 修改 `release.env` 的 `PACKAGE_VERSION` 和 `PACKAGE_RELEASE_NOTES`；
-3. `./push-package.sh` 本地打包验证（产物在 `nupkgs/`，不推送）；
+3. 本地打包验证（产物在 `nupkgs/`，不推送）：
+
+```bash
+source ./release.env
+dotnet pack src/Your.Package -c Release --output ./nupkgs/
+```
+
 4. 提交后打标签并推送，标签触发工作流：
 
 ```bash

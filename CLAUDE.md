@@ -61,7 +61,11 @@ dotnet test --filter "FullyQualifiedName~SqliteDriverTest._01_CanBuildSessionFac
 
 1. 更新 CHANGELOG.md , 在文件前面加入添加说明更新的内容；
 2. 按照 **版本说明** 修改 `release.env` 中的 `PACKAGE_VERSION`， 根据实际改动的内容修改 `PACKAGE_RELEASE_NOTES`；
-3. 执行 `./push-package.sh` 在本地打包验证（产物在 `nupkgs/`，不会推送）；
+3. 本地打包验证（产物在 `nupkgs/`，不会推送）：
+   ```bash
+   source ./release.env
+   dotnet pack src/NHibernate.Extensions.Npgsql -c Release --output ./nupkgs/
+   ```
 4. 提交改动后打上对应的标签并推送，标签会触发 `.github/workflows/publish-nuget.yml` 自动发布；示例：
    ```bash
    git tag 10.0.6
