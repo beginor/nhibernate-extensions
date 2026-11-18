@@ -9,6 +9,7 @@ using Pgvector;
 using NHibernate.Extensions.Pgvector;
 using NHibernate.Extensions.Pgvector.UserTypes;
 using NHibernate.Extensions.UnitTest.TestDb;
+using NHibernate.Type;
 
 namespace NHibernate.Extensions.UnitTest;
 
@@ -60,12 +61,15 @@ public class VectorTest : BaseTest {
         Assert.That(data.Count, Is.GreaterThanOrEqualTo(3));
     }
 
-    [Test, Ignore("Is anyone who use hql with NHibernate?")]
+    [Test]
     public void _04_CanQueryDistanceWithHql() {
         var target = new Vector(new float[] { 1, 2, 0 });
         using var session = OpenTestDbSession();
-        var query = session.CreateQuery("from ChunkEmbeddingEntity e order by cosine_distance(e.Embedding, :target")
-            .SetParameter("target", target)
+        var query = session.CreateQuery(
+            "from ChunkEmbeddingEntity e order by cosine_distance(e.Embedding, :target)"
+        )
+            // the sql function template gives no expected type, so bind the vector type explicitly
+            .SetParameter("target", target, NHibernateUtil.Custom(typeof(VectorType)))
             .SetFirstResult(0)
             .SetMaxResults(3);
         var data = query.List<ChunkEmbeddingEntity>();
