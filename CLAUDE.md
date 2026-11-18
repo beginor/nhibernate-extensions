@@ -68,7 +68,7 @@ dotnet test --filter "FullyQualifiedName~SqliteDriverTest._01_CanBuildSessionFac
    git push origin master 10.0.6
    ```
 
-发布使用 nuget.org 的 Trusted Publishing（OIDC），不再使用长期 API key：
+发布使用 nuget.org 的 Trusted Publishing（OIDC），不再使用长期 API key，完整步骤见 [docs/publish-nuget.md](docs/publish-nuget.md)：
 
 - nuget.org 上需要有一条 Trusted Publishing 策略：Repository Owner `beginor`、Repository `nhibernate-extensions`、Workflow File `publish-nuget.yml`；
 - 仓库变量 `NUGET_USER` 为策略所属的 nuget.org 用户名（不是邮箱）；
