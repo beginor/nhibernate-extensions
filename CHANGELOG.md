@@ -1,5 +1,13 @@
 # Changelogs for NHibernate.Extensions
 
+## 10.0.6
+
+- Update Microsoft.* packages to 10.0.15;
+- Update Microsoft.NET.Test.Sdk to 18.12.0, NUnit to 5.0.0, NUnit3TestAdapter to 6.3.1;
+- Update NHibernate to 5.7.1, Dapper to 2.1.89;
+- Rewrite README with package table, configuration sample and supported types;
+- Enable hql distance test and bind the vector parameter type explicitly;
+
 ## 10.0.5
 
 - Update Microsoft.* packages to 10.0.12;

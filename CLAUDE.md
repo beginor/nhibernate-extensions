@@ -60,10 +60,16 @@ dotnet test --filter "FullyQualifiedName~SqliteDriverTest._01_CanBuildSessionFac
 采用下面的步骤进行发布：
 
 1. 更新 CHANGELOG.md , 在文件前面加入添加说明更新的内容；
-2. 按照 **版本说明** 修改 `push-package.sh` 中版本号变量 `PACKAGE_VERSION`， 根据实际改动的内容修改发布说明变量 `PACKAGE_RELEASE_NOTES`;
-3. 执行修改过的脚本 `push-package.sh` ；
-4. 对代码打上对应的标签，并推送到远程服务器；示例：
+2. 按照 **版本说明** 修改 `release.env` 中的 `PACKAGE_VERSION`， 根据实际改动的内容修改 `PACKAGE_RELEASE_NOTES`；
+3. 执行 `./push-package.sh` 在本地打包验证（产物在 `nupkgs/`，不会推送）；
+4. 提交改动后打上对应的标签并推送，标签会触发 `.github/workflows/publish-nuget.yml` 自动发布；示例：
    ```bash
-   git tag 10.0.2
-   git push origin 10.0.2
+   git tag 10.0.6
+   git push origin master 10.0.6
    ```
+
+发布使用 nuget.org 的 Trusted Publishing（OIDC），不再使用长期 API key：
+
+- nuget.org 上需要有一条 Trusted Publishing 策略：Repository Owner `beginor`、Repository `nhibernate-extensions`、Workflow File `publish-nuget.yml`；
+- 仓库变量 `NUGET_USER` 为策略所属的 nuget.org 用户名（不是邮箱）；
+- 工作流中的 `NuGet/login@v1` 用 GitHub OIDC token 换取 1 小时有效的临时 key，再执行 `dotnet nuget push`。

@@ -1,8 +1,8 @@
 #!/bin/bash -e
-export PACKAGE_VERSION="10.0.5"
-export PACKAGE_RELEASE_NOTES="Update Microsoft packages to 10.0.12; update test sdk to 18.10.1; update Dapper to 2.1.86"
-export PACKAGE_TAGS="nhibernate, npgsql, dotnet, dotnet core, array type, json type, pgvector"
-export PACKAGE_PROJECT_URL="https://github.com/beginor/nhibernate-extensions"
+# Local packing helper. Publishing is done by .github/workflows/publish-nuget.yml
+# through nuget.org Trusted Publishing (OIDC), so no API key is needed here.
+cd "$(dirname "$0")"
+source ./release.env
 
 PROJECTS=( \
   "src/NHibernate.Extensions.NetCore/NHibernate.Extensions.NetCore.csproj" \
@@ -17,7 +17,5 @@ do
   dotnet pack $PROJ -c Release --output ./nupkgs/
 done
 
-dotnet nuget push ./nupkgs/*.nupkg -s nuget.org -k $(cat ~/.nuget/github.txt) \
-  --skip-duplicate
-
-rm -rf ./nupkgs
+echo "packages are in ./nupkgs/, push a tag to publish them:"
+echo "  git tag $PACKAGE_VERSION && git push origin $PACKAGE_VERSION"
